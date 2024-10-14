@@ -2,18 +2,17 @@
 	import Header from './Header.svelte';
 	import '../app.css';
 	import 'tailwindcss/tailwind.css';
+	import Nav from '../comps/Nav.svelte';
 </script>
 
 <div class="app">
 	<Header />
-
+	<Nav title="Hello" />
 	<main>
 		<slot />
 	</main>
 
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
+
 </div>
 
 <style>
