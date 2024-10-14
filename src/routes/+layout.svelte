@@ -1,18 +1,12 @@
 <script>
-	import Header from './Header.svelte';
 	import '../app.css';
 	import 'tailwindcss/tailwind.css';
-	import Nav from '../comps/Nav.svelte';
 </script>
 
 <div class="app">
-	<Header />
-	<Nav title="Hello" />
 	<main>
 		<slot />
 	</main>
-
-
 </div>
 
 <style>
@@ -31,23 +25,5 @@
 		max-width: 64rem;
 		margin: 0 auto;
 		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
 	}
 </style>

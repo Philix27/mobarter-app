@@ -1,19 +1,16 @@
 <script>
 	import Nav from '../../comps/Nav.svelte';
-	import QuickActions from './QuickActions.svelte';
-	import Transactions from './Transactions.svelte';
 </script>
 
 <svelte:head>
-	<title>About</title>
+	<title>Receive Funds</title>
 	<meta name="description" content="About this app" />
 </svelte:head>
 
 <div>
-	<Nav title="Mobarter" />
+	<Nav title="Support" isBack />
 	<div class="mt-[50px]">
-		<QuickActions />
-		<Transactions />
+		<div>Send Money</div>
 	</div>
 </div>
 
