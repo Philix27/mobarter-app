@@ -2,6 +2,7 @@
 	import P from '../components/P.svelte';
 	import 'iconify-icon';
 	import { goto } from '$app/navigation';
+	import { drawerState } from '../store/settings';
 
 	export let title;
 	export let isBack = false;
@@ -25,6 +26,13 @@
 			goto('/dashboard');
 		}
 	}
+
+	function onShowDrawer() {
+		$drawerState = true;
+	}
+	function onCloseDrawer() {
+		$drawerState = false;
+	}
 </script>
 
 <div
@@ -44,7 +52,12 @@
 				role="button"
 			/>
 		{:else}
-			<iconify-icon class="text-xl mb-2 text-foreground" icon="mdi:menu" />
+			<iconify-icon
+				class="text-xl mb-2 text-foreground"
+				icon="mdi:menu"
+				on:click={onShowDrawer}
+				role="button"
+			/>
 		{/if}
 	</div>
 

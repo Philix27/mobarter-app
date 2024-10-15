@@ -1,10 +1,15 @@
 <script>
+	import Drawer from '../comps/Drawer.svelte';
 	import '../app.css';
 	import 'tailwindcss/tailwind.css';
+	import { drawerState } from '../store/settings';
 </script>
 
 <div class="app">
 	<main>
+		{#if $drawerState}
+			<Drawer />
+		{/if}
 		<slot />
 	</main>
 </div>
