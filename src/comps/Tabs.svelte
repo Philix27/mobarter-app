@@ -1,6 +1,7 @@
 <script>
+	import { cn } from '$lib/utils';
+
 	import P from '../components/P.svelte';
-	import { cn } from '../routes/send/cn';
 
 	export let className = '';
 	export let tabs = [{ title: '', isActive: false, onClick: () => {} }];

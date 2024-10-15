@@ -40,37 +40,37 @@
         h-[50px] flex items-center 
         justify-between 
         fixed top-0 w-full 
-        z-10 bg-background
+        z-10 bg-background px-5
       `}
 >
-	<div class="flex items-center">
-		{#if isBack}
-			<iconify-icon
-				class="text-xl text-foreground"
-				icon="mingcute:left-line"
-				on:click={goBack}
-				role="button"
-			/>
-		{:else}
-			<iconify-icon
-				class="text-xl mb-2 text-foreground"
-				icon="mdi:menu"
-				on:click={onShowDrawer}
-				role="button"
-			/>
-		{/if}
-	</div>
+	{#if isBack}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-interactive-supports-focus -->
+		<iconify-icon
+			class="text-foreground text-[20px]"
+			icon="mingcute:left-line"
+			on:click={goBack}
+			role="button"
+		/>
+	{:else}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-interactive-supports-focus -->
+		<iconify-icon
+			class="text-foreground text-[20px]"
+			icon="mdi:menu"
+			on:click={onShowDrawer}
+			role="button"
+		/>
+	{/if}
 
 	<P
 		variant="p4"
 		className="text-card-foreground my-0 font-extrabold tracking-wide font-sans"
 		text={title}
 	/>
-	<div class="flex items-center gap-x-3">
+	<div class="flex items-center">
 		{#if icon}
-			<button type="button" on:click={onIconClick}>
-				<iconify-icon class="text-xl mb-2 text-foreground" {icon} />
-			</button>
+			<iconify-icon class="text-xl text-foreground mr-2" {icon} on:click={onIconClick} />
 		{/if}
 	</div>
 </div>

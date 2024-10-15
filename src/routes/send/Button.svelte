@@ -1,5 +1,5 @@
 <script>
-	import { cn, cva } from './cn';
+	// import { cn, cva } from './cn';
 
 	export let isLoading = false;
 	export let asChild = false;
