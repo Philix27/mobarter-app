@@ -7,7 +7,7 @@
 		{ id: '2', name: 'Swap', link: '/swap', icon: 'tdesign:swap' },
 		{ id: '3', name: 'Receive', link: '/receive', icon: 'hugeicons:money-receive-circle' },
 		{ id: '4', name: 'Withdraw', link: '/withdraw', icon: 'hugeicons:bitcoin-withdraw' },
-		{ id: '5', name: 'Settings', link: '/settings', icon: 'mdi:settings' },
+		{ id: '5', name: 'Savings', link: '/savings', icon: 'mdi:settings' },
 		{ id: '6', name: 'Airtime', link: '/airtime', icon: 'mdi:phone' },
 		{ id: '7', name: 'Utility', link: '/utility', icon: 'lucide:utility-pole' }
 	];
