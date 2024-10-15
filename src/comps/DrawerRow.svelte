@@ -2,13 +2,16 @@
 	import { cn } from '../lib/utils';
 	import P from '../components/P.svelte';
 	import { drawerState } from '../store/settings';
+	import { goto } from '$app/navigation';
 
 	export let isActive = false;
 	export let title;
 	export let icon;
+	export let link = '/dashboard';
 
 	function onItemClick() {
 		$drawerState = false;
+		goto(link);
 	}
 </script>
 

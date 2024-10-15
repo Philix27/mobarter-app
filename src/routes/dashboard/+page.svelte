@@ -11,7 +11,7 @@
 
 <div>
 	<Nav title="Mobarter" />
-	<div class="mt-[50px]">
+	<div class="mt-[40px]">
 		<QuickActions />
 		<Transactions />
 	</div>

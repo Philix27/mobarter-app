@@ -13,17 +13,15 @@
 	];
 </script>
 
-<div>
-	<div class="grid grid-cols-4 gap-x-2 gap-y-2 w-full">
-		{#each quickActions as quick, i}
-			<a
-				href={quick.link}
-				class="p-4 flex flex-col items-center justify-center bg-accent rounded-md cursor-pointer"
-			>
-				<iconify-icon class="text-xl mb-2 text-foreground mb-2" icon={quick.icon} />
-				<!-- <p>{quick.name}</p> -->
-				<P text={quick.name} variant="p6" />
-			</a>
-		{/each}
-	</div>
+<div class="grid grid-cols-4 gap-x-2 gap-y-2 w-full">
+	{#each quickActions as quick, i}
+		<a
+			href={quick.link}
+			class="p-4 flex flex-col items-center justify-center bg-accent rounded-md cursor-pointer"
+		>
+			<iconify-icon class="text-xl mb-2 text-foreground mb-2" icon={quick.icon} />
+			<!-- <p>{quick.name}</p> -->
+			<P text={quick.name} variant="p6" />
+		</a>
+	{/each}
 </div>

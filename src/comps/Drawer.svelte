@@ -7,13 +7,11 @@
 	};
 
 	const items = [
-		{ title: 'Dashboard', link: '', icon: 'mdi:home' },
-		{ title: 'Invoice', link: '', icon: 'mdi:settings' },
-		{ title: 'Settings', link: '', icon: 'mdi:menu' },
-		{ title: 'Help', link: '', icon: 'mdi:home' },
-		{ title: 'Support', link: '', icon: 'mdi:home' },
-		{ title: 'Wallet', link: '', icon: 'mdi:home' },
-		{ title: 'Version', link: '', icon: 'mdi:home' }
+		{ title: 'Dashboard', link: '/dashboard', icon: 'mdi:home' },
+		{ title: 'Invoice', link: '/invoice', icon: 'mdi:receipt' },
+		{ title: 'Settings', link: '/settings', icon: 'mdi:settings' },
+		{ title: 'Help', link: '/docs', icon: 'mdi:help' },
+		{ title: 'Support', link: '/support', icon: 'mdi:support' }
 	];
 
 	const onItemClick = () => {};
@@ -22,8 +20,8 @@
 <div class="w-full h-screen flex fixed top-0 left-0 bg-black/30">
 	<div class={'w-[60%] max-w-[300px] bg-background rounded-r-2xl'}>
 		<div class="mt-[50px] mb-[100px] flex flex-col">
-			{#each items as drawerItem, i}
-				<DrawerRow title={drawerItem.title} icon={drawerItem.icon} />
+			{#each items as { link, title, icon }, i}
+				<DrawerRow {title} {icon} {link} />
 			{/each}
 		</div>
 	</div>
