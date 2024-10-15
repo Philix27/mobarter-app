@@ -1,6 +1,25 @@
 <script>
+	import Tabs from '../../comps/Tabs.svelte';
 	import P from '../../components/P.svelte';
 	import Nav from '../../comps/Nav.svelte';
+	import { receiveState } from './store';
+
+	const tabs = [
+		{
+			title: 'Wallet',
+			isActive: $receiveState === 'WALLET',
+			onClick: () => {
+				$receiveState = 'WALLET';
+			}
+		},
+		{
+			title: 'Buy',
+			isActive: $receiveState === 'BUY',
+			onClick: () => {
+				$receiveState = 'BUY';
+			}
+		}
+	];
 </script>
 
 <svelte:head>
@@ -10,6 +29,7 @@
 
 <Nav title="Receive" isBack />
 <div class="mt-[50px]">
+	<Tabs {tabs} />
 	<div class="flex items-center justify-between">
 		<P text="Wallet address" />
 		<div class="max-w-[50%] p-2 break-words my-4 text-wrap">
