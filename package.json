@@ -1,5 +1,5 @@
 {
-	"name": "my-app",
+	"name": "mobarter",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
@@ -23,6 +23,7 @@
 		"@types/eslint": "^9.6.0",
 		"@vite-pwa/sveltekit": "^0.6.5",
 		"autoprefixer": "^10.4.20",
+		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",

@@ -37,7 +37,12 @@
 >
 	<div class="flex items-center">
 		{#if isBack}
-			<iconify-icon class="text-xl text-foreground" icon="mingcute:left-line" on:click={goBack} />
+			<iconify-icon
+				class="text-xl text-foreground"
+				icon="mingcute:left-line"
+				on:click={goBack}
+				role="button"
+			/>
 		{:else}
 			<iconify-icon class="text-xl mb-2 text-foreground" icon="mdi:menu" />
 		{/if}
