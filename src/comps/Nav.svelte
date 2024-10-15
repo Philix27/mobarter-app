@@ -39,7 +39,7 @@
 	class={`
         h-[50px] flex items-center 
         justify-between 
-        fixed top-0 w-full 
+        fixed top-0 w-full  left-0
         z-10 bg-background px-5
       `}
 >
