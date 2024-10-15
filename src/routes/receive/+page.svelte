@@ -3,6 +3,7 @@
 	import P from '../../components/P.svelte';
 	import Nav from '../../comps/Nav.svelte';
 	import { receiveState } from './store';
+	import { QRCodeImage } from 'svelte-qrcode-image';
 
 	const tabs = [
 		{
@@ -30,6 +31,12 @@
 <Nav title="Receive" isBack />
 <div class="mt-[50px]">
 	<Tabs {tabs} />
+	<div class="w-full flex items-center justify-center">
+		<div class="size-[300px] bg-white p-2 rounded-lg  my-5">
+			<QRCodeImage text="0x20F50b8832f87104853df3FdDA47Dd464f885a49" width={200} />
+		</div>
+	</div>
+
 	<div class="flex items-center justify-between">
 		<P text="Wallet address" />
 		<div class="max-w-[50%] p-2 break-words my-4 text-wrap">
