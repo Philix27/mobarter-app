@@ -1,6 +1,6 @@
 <script>
-	import Tabs from '../../comps/Tabs.svelte';
-	import Nav from '../../comps/Nav.svelte';
+	import Tabs from '../../../comps/Tabs.svelte';
+	import Nav from '../../../comps/Nav.svelte';
 	import { sendScreenState } from './store';
 	import ScreenBank from './ScreenBank.svelte';
 	import ScreenWallet from './ScreenWallet.svelte';
@@ -38,7 +38,7 @@
 
 <div>
 	<Nav title="Send" isBack />
-	<div class="mt-[50px]">
+	<div class="">
 		<Tabs {tabs} />
 
 		{#if $sendScreenState === 'BANK'}

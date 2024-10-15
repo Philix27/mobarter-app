@@ -1,15 +1,15 @@
 <script>
-	import Nav from '../../comps/Nav.svelte';
+	import Nav from '../../../comps/Nav.svelte';
 </script>
 
 <svelte:head>
-	<title>Utilities</title>
+	<title>Receive Funds</title>
 	<meta name="description" content="About this app" />
 </svelte:head>
 
 <div>
-	<Nav title="Utility" isBack />
-	<div class="mt-[50px]">
+	<Nav title="Withdraw" isBack />
+	<div class="">
 		<div>Send Money</div>
 	</div>
 </div>

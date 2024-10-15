@@ -9,7 +9,7 @@
 
 <div>
 	<Nav title="Documentation" isBack />
-	<div class="mt-[50px]">
+	<div class="">
 		<div>Send Money</div>
 	</div>
 </div>

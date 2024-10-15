@@ -1,5 +1,5 @@
 <script>
-	import Nav from '../../comps/Nav.svelte';
+	import Nav from '../../../comps/Nav.svelte';
 </script>
 
 <svelte:head>
@@ -8,8 +8,8 @@
 </svelte:head>
 
 <div>
-	<Nav title="Airtime" isBack />
-	<div class="mt-[50px]">
+	<Nav title="Notifications" isBack />
+	<div class="">
 		<div>Send Money</div>
 	</div>
 </div>

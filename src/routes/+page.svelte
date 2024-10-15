@@ -5,8 +5,8 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Mobarter</title>
+	<meta name="description" content="On & Off ramping" />
 </svelte:head>
 
 <section>
@@ -26,6 +26,8 @@
 	</h2>
 
 	<Counter />
+
+	<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
 </section>
 
 <style>

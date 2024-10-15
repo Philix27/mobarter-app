@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
-	import Nav from '../../comps/Nav.svelte';
+	import Nav from '../../../comps/Nav.svelte';
 	import QuickActions from './QuickActions.svelte';
 	import Transactions from './Transactions.svelte';
 
@@ -16,7 +16,7 @@
 
 <div>
 	<Nav title="Mobarter" icon="mdi:notifications" onIconClick={clickIcon} />
-	<div class="mt-[40px]">
+	<div class="">
 		<QuickActions />
 		<Transactions />
 	</div>

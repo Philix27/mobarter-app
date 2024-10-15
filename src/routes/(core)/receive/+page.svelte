@@ -1,7 +1,7 @@
 <script>
-	import Tabs from '../../comps/Tabs.svelte';
-	import P from '../../components/P.svelte';
-	import Nav from '../../comps/Nav.svelte';
+	import Tabs from '../../../comps/Tabs.svelte';
+	import P from '../../../components/P.svelte';
+	import Nav from '../../../comps/Nav.svelte';
 	import { receiveState } from './store';
 	import { QRCodeImage } from 'svelte-qrcode-image';
 
@@ -29,10 +29,10 @@
 </svelte:head>
 
 <Nav title="Receive" isBack />
-<div class="mt-[50px]">
+<div class="">
 	<Tabs {tabs} />
 	<div class="w-full flex items-center justify-center">
-		<div class="size-[300px] bg-white p-2 rounded-lg  my-5">
+		<div class="size-[300px] bg-white p-2 rounded-lg my-5">
 			<QRCodeImage text="0x20F50b8832f87104853df3FdDA47Dd464f885a49" width={200} />
 		</div>
 	</div>

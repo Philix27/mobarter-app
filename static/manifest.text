@@ -1,6 +1,8 @@
 {
 	"name": "Mobarter",
 	"short_name": "Mobarter",
+	// "theme_color": "#151718",
+	// "background_color": "#151718",
 	"start_url": "/",
 	"display": "standalone",
 	"orientation": "portrait",

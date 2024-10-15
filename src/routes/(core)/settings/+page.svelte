@@ -1,5 +1,5 @@
 <script>
-	import Nav from '../../comps/Nav.svelte';
+	import Nav from '../../../comps/Nav.svelte';
 </script>
 
 <svelte:head>
@@ -8,7 +8,7 @@
 </svelte:head>
 
 <Nav title="Settings" isBack />
-<div class="mt-[50px]">
+<div class="">
 	<h1>About this app</h1>
 
 	<p>

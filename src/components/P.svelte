@@ -3,6 +3,7 @@
 	export let className = '';
 	export let variant = 'p4';
 
+
 	const p1 = 'text-3xl font-extrabold leading-tight text-muted-foreground ' + className;
 	const p2 = 'text-2xl font-bold leading-tight text-muted-foreground ' + className;
 	const p3 = 'text-lg font-bold leading-tight  text-muted-foreground ' + className;
@@ -36,5 +37,4 @@
 {/if}
 
 <style lang="postcss">
-
 </style>
