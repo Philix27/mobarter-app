@@ -7,7 +7,7 @@
 		{ id: '2', name: 'Swap', link: '/swap', icon: 'tdesign:swap' },
 		{ id: '3', name: 'Receive', link: '/receive', icon: 'hugeicons:money-receive-circle' },
 		{ id: '4', name: 'Withdraw', link: '/withdraw', icon: 'hugeicons:bitcoin-withdraw' },
-		{ id: '5', name: 'Savings', link: '/savings', icon: 'mdi:settings' },
+		{ id: '5', name: 'Savings', link: '/savings', icon: 'material-symbols-light:savings-outline' },
 		{ id: '6', name: 'Airtime', link: '/airtime', icon: 'mdi:phone' },
 		{ id: '7', name: 'Utility', link: '/utility', icon: 'lucide:utility-pole' }
 	];
@@ -21,7 +21,7 @@
 		>
 			<iconify-icon class="text-xl mb-2 text-foreground mb-2" icon={quick.icon} />
 			<!-- <p>{quick.name}</p> -->
-			<P text={quick.name} variant="p6" />
+			<P variant="p6">{quick.name}</P>
 		</a>
 	{/each}
 </div>

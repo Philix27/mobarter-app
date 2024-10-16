@@ -1,10 +1,28 @@
 <script>
+	import P from '../../../components/P.svelte';
 	import 'iconify-icon';
+	const transactions = [
+		{
+			amount: 90,
+			date: '23-10-09'
+		}
+	];
+
+	const oldObj = { a: 4, b: 9 };
+
+	const newObj = structuredClone(oldObj);
 </script>
 
 <div class="text-column">
 	<h1>Transactions</h1>
-	<iconify-icon icon="mdi:home"></iconify-icon>
+	<iconify-icon icon="mdi:home" />
+	{#each transactions as item}
+		<div>
+			<P>{item.amount}</P>
+		</div>
+		>
+	{/each}
+
 	<p>
 		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
 		following into your command line and following the prompts:

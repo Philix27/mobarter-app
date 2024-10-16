@@ -63,11 +63,9 @@
 		/>
 	{/if}
 
-	<P
-		variant="p4"
-		className="text-card-foreground my-0 font-extrabold tracking-wide font-sans"
-		text={title}
-	/>
+	<P variant="p4" className="text-card-foreground my-0 font-extrabold tracking-wide font-sans"
+		>{title}
+	</P>
 	<div class="flex items-center">
 		{#if icon}
 			<iconify-icon class="text-xl text-foreground mr-2" {icon} on:click={onIconClick} />

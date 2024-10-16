@@ -2,6 +2,8 @@
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
+
+	// import { connected } from 'svelte-wagmi';
 </script>
 
 <svelte:head>
@@ -21,13 +23,15 @@
 		to your new<br />SvelteKit appex
 	</h1>
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
 	<Counter />
 
 	<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
+
+	<!-- {#if $connected}
+		<p>Connected to Ethereum</p>
+	{:else}
+		<p>Not connected to Ethereum</p>
+	{/if} -->
 </section>
 
 <style>

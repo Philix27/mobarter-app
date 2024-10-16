@@ -22,5 +22,5 @@
 	on:click={onItemClick}
 >
 	<iconify-icon class="text-xl mb-1 mr-2 text-foreground" {icon} role="button" />
-	<P text={title} className={'font-normal text-[15px]'} />
+	<P className={'font-normal text-[15px]'}>{title}</P>
 </div>
