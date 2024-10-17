@@ -3,6 +3,9 @@
 	import { P } from 'components';
 	import { cva, type VariantProps } from 'class-variance-authority';
 
+	export let onclick: VoidFunction;
+	// $: onclick();
+
 	export let className: string = '';
 	export let isLoading: boolean = false;
 	export let variant: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' =
@@ -44,7 +47,7 @@
 	//
 </script>
 
-<button disabled={isLoading} class={cn(buttonVariants({ variant, size, className }))}>
+<button disabled={isLoading} class={cn(buttonVariants({ variant, size, className }))} on:click={onclick}>
 	{#if isLoading}
 		<!-- <Spinner color="#fff" size={40} />  -->
 		<P>...</P>

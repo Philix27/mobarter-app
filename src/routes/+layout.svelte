@@ -5,6 +5,7 @@
 	import '../app.css';
 	import 'tailwindcss/tailwind.css';
 	import { drawerState } from '../store/settings';
+	import { Toaster } from 'svelte-sonner';
 </script>
 
 <div class="app">
@@ -14,6 +15,7 @@
 			<Drawer />
 		{/if}
 		<slot />
+		<Toaster position="top-center" />
 	</main>
 	<!-- </WagmiProvider> -->
 </div>
