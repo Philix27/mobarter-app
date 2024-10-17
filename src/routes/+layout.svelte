@@ -5,13 +5,10 @@
 	import '../app.css';
 	import 'tailwindcss/tailwind.css';
 	import { drawerState } from '../store/settings';
-	// import { WagmiProvider } from '@byteatatime/wagmi-svelte';
-	// import { WagmiProvider, createWagmiConfig, http } from '@byteatatime/wagmi-svelte';
-	// import { mainnet, sepolia } from '@byteatatime/wagmi-svelte/chains';
+	import { http, createConfig } from '@wagmi/core';
+	import { mainnet, sepolia } from '@wagmi/core/chains';
 
-	// import { WagmiProvider } from 'wagmi-svelte';
-
-	const config = createWagmiConfig({
+	export const config = createConfig({
 		chains: [mainnet, sepolia],
 		transports: {
 			[mainnet.id]: http(),

@@ -52,6 +52,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@wagmi/connectors": "^5.2.1",
+		"@wagmi/core": "^2.13.8",
+		"@web3modal/wagmi": "5.1.11",
+		"bignumber.js": "^9.1.2",
 		"@byteatatime/wagmi-svelte": "^0.1.1",
 		"svelte-persisted-store": "^0.11.0",
 		"svelte-qrcode-image": "^2.0.0-alpha.1"
