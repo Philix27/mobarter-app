@@ -1,7 +1,8 @@
 <script>
-	import Counter from './Counter.svelte';
+	// import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import Counter from './Counter.svelte';
 
 	// import { connected } from 'svelte-wagmi';
 </script>
@@ -26,12 +27,6 @@
 	<Counter />
 
 	<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
-
-	<!-- {#if $connected}
-		<p>Connected to Ethereum</p>
-	{:else}
-		<p>Not connected to Ethereum</p>
-	{/if} -->
 </section>
 
 <style>

@@ -1,20 +1,10 @@
 <script>
 	// @ts-nocheck
 
-	import Drawer from '../components/Drawer.svelte';
+	import { Drawer } from 'components';
 	import '../app.css';
 	import 'tailwindcss/tailwind.css';
 	import { drawerState } from '../store/settings';
-	import { http, createConfig } from '@wagmi/core';
-	import { mainnet, sepolia } from '@wagmi/core/chains';
-
-	export const config = createConfig({
-		chains: [mainnet, sepolia],
-		transports: {
-			[mainnet.id]: http(),
-			[sepolia.id]: http()
-		}
-	});
 </script>
 
 <div class="app">

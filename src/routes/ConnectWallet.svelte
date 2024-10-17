@@ -1,8 +1,9 @@
 <script lang="ts">
-	import type { ConfiguredChainId } from '$lib/wallet';
+	// import type { ConfiguredChainId } from '$lib/wallet';
+	// import { modal, wallet, WalletSummary } from '$lib/wallet';
 	import { getChain } from '$lib/helpers/chain';
-	import { modal, wallet, WalletSummary } from '$lib/wallet';
-	import { Button } from '$lib/components';
+	import { Button } from 'components';
+	import { modal, wallet, type ConfiguredChainId } from './client';
 
 	export let chainId: ConfiguredChainId | undefined;
 
@@ -16,7 +17,7 @@
 <div class="connect-wallet">
 	{#if $wallet.isConnected}
 		<div class="is-connected">
-			<WalletSummary wallet={$wallet} {chain} />
+			<!-- <WalletSummary wallet={$wallet} {chain} /> -->
 			<Button size="sm" label="Change wallet" on:click={connectWallet} />
 		</div>
 	{:else}
