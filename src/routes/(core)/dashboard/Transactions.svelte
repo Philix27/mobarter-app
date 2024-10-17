@@ -5,39 +5,60 @@
 		{
 			amount: 90,
 			date: '23-10-09'
+		},
+		{
+			amount: 90,
+			date: '23-10-09'
+		},
+		{
+			amount: 90,
+			date: '23-10-09'
+		},
+		{
+			amount: 90,
+			date: '23-10-09'
+		},
+		{
+			amount: 90,
+			date: '23-10-09'
+		},
+		{
+			amount: 90,
+			date: '23-10-09'
+		},
+		{
+			amount: 90,
+			date: '23-10-09'
+		},
+		{
+			amount: 90,
+			date: '23-10-09'
+		},
+		{
+			amount: 90,
+			date: '23-10-09'
 		}
 	];
+	const longList = [...transactions, ...transactions, ...transactions];
+	// const oldObj = { a: 4, b: 9 };
 
-	const oldObj = { a: 4, b: 9 };
-
-	const newObj = structuredClone(oldObj);
+	// const newObj = structuredClone(oldObj);
 </script>
 
-<div class="text-column">
-	<h1>Transactions</h1>
-	<iconify-icon icon="mdi:home" />
-	{#each transactions as item}
-		<div>
-			<P>{item.amount}</P>
-		</div>
-		>
-	{/each}
+<div class="">
+	<h1 class="mt-4 mb-2 font-bold">Transactions</h1>
 
-	<p>
-		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
-		following into your command line and following the prompts:
-	</p>
-
-	<pre>npm create svelte@latest</pre>
-
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
-	</p>
-
-	<p>
-		The <a href="/sverdle">Sverdle</a> page illustrates SvelteKit's data loading and form handling. Try
-		using it with JavaScript disabled!
-	</p>
+	<div class="overflow-y-scroll h-full max-h-[800px] no-scrollbar">
+		{#each longList as item}
+			<div class="flex items-center p-2 w-full bg-card mb-1">
+				<div class="size-[40px] bg-background rounded-full flex items-center justify-center">
+					<iconify-icon icon="mdi:dollar" class="text-xl" />
+				</div>
+				<div class="flex items-center justify-between p-2 w-full">
+					<P>{item.amount.toString()}</P>
+					<P>{item.date}</P>
+				</div>
+			</div>
+		{/each}
+	</div>
 </div>

@@ -18,7 +18,10 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-	class={cn('w-full flex items-center py-2 px-4 cursor-pointer', isActive && 'bg-accent')}
+	class={cn(
+		'w-full flex items-center py-3 px-4 cursor-pointer border-b-[0.1px] border-secondary',
+		isActive && 'bg-accent'
+	)}
 	on:click={onItemClick}
 >
 	<iconify-icon class="text-xl mb-1 mr-2 text-foreground" {icon} role="button" />
