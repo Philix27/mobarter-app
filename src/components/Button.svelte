@@ -1,178 +1,80 @@
-<!--
-@component
-Display a button. Adaptively uses correct HTML element (anchor or button)
-depending on supplied props. Button label may be included as a prop or the
-default slot (or ommitted for icon-only buttons). Supports four style variants
-using flags: primary (default), secondary, ternary, quarternary.
-
-@example
-
-```svelte
-	<Button
-		label="Click here!"
-		secondary
-		size="lg"
-		disabled
-		href="http://example.org"
-		target="_blank"
-		title="include for accessibility when label ommitted"
-		on:click={() => console.log('clicked!')}
-	/>
-```
--->
 <script lang="ts">
-	let classes = '';
-	export { classes as class };
-	export let disabled: boolean | undefined = undefined;
-	export let download: string | boolean | undefined = undefined;
-	export let rel: string | undefined = undefined;
-	export let href: string | undefined = undefined;
-	export let label: string = '';
-	export let ghost = false;
-	export let quarternary = false;
-	export let secondary = false;
-	export let tertiary = false;
-	export let size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' = 'md';
-	export let submit = false;
-	export let tabindex: number | undefined = undefined;
-	export let target: string | undefined = undefined;
-	export let title: string | undefined = undefined;
+	import { cn } from '$lib/utils';
+	import { P } from 'components';
+	import { cva, type VariantProps } from 'class-variance-authority';
 
-	$: tag = href && !disabled ? 'a' : 'button';
-	$: role = tag === 'a' ? 'link' : 'button';
-	$: hasLabel = $$slots.default || label;
-	$: kind = ghost ? 'ghost' : quarternary ? 'quarternary' : tertiary ? 'tertiary' : secondary ? 'secondary' : 'primary';
-	$: allClasses = `button ${kind} ${size} ${classes}`;
+	export let className: string = '';
+	export let isLoading: boolean = false;
+	export let variant: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' =
+		'default';
+	export let size: 'default' | 'sm' | 'lg' | 'icon' = 'default';
 
-	$: linkAttrs = {
-		href,
-		rel,
-		target,
-		download: typeof download === 'string' ? download : download ? '' : undefined
-	};
-
-	$: buttonAttrs = {
-		disabled,
-		type: submit ? 'submit' : undefined
-	};
-
-	$: attrs = tag === 'a' ? linkAttrs : buttonAttrs;
+	const buttonVariants = cva(
+		`inline-flex items-center
+  justify-center rounded-md
+  text-sm font-medium transition-colors
+  focus-visible:outline-none
+  focus-visible:ring-2 focus-visible:ring-ring
+  focus-visible:ring-offset-2 disabled:opacity-50
+  disabled:pointer-events-none ring-offset-background w-[70%]`,
+		{
+			variants: {
+				variant: {
+					default: 'bg-primary text-primary-foreground hover:bg-primary/60 hover:border-secondary',
+					destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+					outline:
+						'border border-input border-primary hover:bg-accent hover:text-accent-foreground',
+					secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+					ghost: 'hover:bg-accent hover:text-accent-foreground',
+					link: 'underline-offset-4 hover:underline text-primary'
+				},
+				size: {
+					default: 'h-10 py-2 px-4',
+					sm: 'h-9 px-3 rounded-md',
+					lg: 'h-11 px-8 rounded-md',
+					icon: 'h-10 w-10'
+				}
+			},
+			defaultVariants: {
+				variant: 'default',
+				size: 'default'
+			}
+		}
+	);
+	//
 </script>
 
-<svelte:element this={tag} {...attrs} class={allClasses} {tabindex} {title} {role} data-css-props on:click>
-	{#if hasLabel}
-		<span><slot>{label}</slot></span>
+<button disabled={isLoading} class={cn(buttonVariants({ variant, size, className }))}>
+	{#if isLoading}
+		<!-- <Spinner color="#fff" size={40} />  -->
+		<P>...</P>
+	{:else}
+		<slot />
 	{/if}
-	<slot name="icon" />
-</svelte:element>
+</button>
 
-<style>
-	[data-css-props] {
-		--icon-size: 1.25em;
-		--button-border-radius: var(--radius-md);
+<!-- import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib';
+import { Spinner } from '../spinner'; -->
 
-		&.xs {
-			--button-border-radius: var(--radius-lg);
-			--button-padding: 0.375rem 0.75rem;
-			--button-font: var(--f-ui-sm-medium);
-			--button-letter-spacing: var(--f-ui-sm-spacing);
-		}
-		&.sm {
-			--button-padding: 0.5rem 1.125rem;
-			--button-font: var(--f-ui-md-medium);
-			--button-letter-spacing: var(--f-ui-md-spacing);
-		}
-		&.md {
-			--button-padding: 0.75rem 1.375rem;
-			--button-font: var(--f-ui-md-medium);
-			--button-letter-spacing: var(--f-ui-md-spacing);
-		}
-		&.lg {
-			--button-padding: 1rem 1.375rem;
-			--button-font: var(--f-ui-lg-medium);
-			--button-letter-spacing: var(--f-ui-lg-spacing);
-		}
-		&.xl {
-			--button-padding: 1rem 1.375rem;
-			--button-font: var(--f-ui-xl-medium);
-			--button-letter-spacing: var(--f-ui-xl-spacing);
-		}
+<!-- export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  isLoading?: boolean;
+} -->
 
-		&.ghost {
-			--button-padding: 0 0.25rem;
-		}
-	}
+<!-- const AppButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, disabled, variant, size, isLoading, children, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return (
+      <Comp disabled={isLoading} className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
+        {isLoading ? <Spinner color="#fff" size={40} /> : children}
+      </Comp>
+    );
+  }
+);
+AppButton.displayName = 'Button'; -->
 
-	.button {
-		display: inline-flex;
-		gap: 0.5em;
-		justify-content: center;
-		align-items: center;
-		width: var(--button-width, auto);
-		padding: var(--button-padding);
-		border: 1px solid transparent;
-		border-radius: var(--button-border-radius);
-		font: var(--button-font);
-		letter-spacing: var(--button-letter-spacing, normal);
-		transition: all var(--time-sm) ease-out;
-		text-decoration: none;
-		text-align: center;
-		cursor: pointer;
-	}
-
-	.primary {
-		--c-accent: var(--c-box-4);
-		background: var(--c-accent);
-		color: var(--c-text);
-		outline-color: var(--c-accent);
-		outline-offset: -1px;
-
-		&:is(:hover, :focus):not([disabled]) {
-			--c-accent: var(--c-text);
-			color: var(--c-text-inverted);
-		}
-	}
-
-	.secondary {
-		background: transparent;
-		color: var(--c-text);
-		border-color: var(--c-text);
-
-		&:is(:hover, :focus):not([disabled]) {
-			background: var(--c-text);
-			color: var(--c-text-inverted);
-		}
-	}
-
-	.tertiary {
-		background: var(--c-box-2);
-		color: var(--c-text);
-		border-color: transparent;
-
-		&:is(:hover, :focus):not([disabled]) {
-			background: var(--c-box-4);
-		}
-	}
-
-	.quarternary {
-		background: var(--c-box-2);
-	}
-
-	.ghost {
-		background: transparent;
-		text-decoration: underline;
-	}
-
-	:focus {
-		outline: none;
-	}
-
-	:active {
-		opacity: 0.8;
-	}
-
-	.button[disabled] {
-		opacity: 0.5;
-		cursor: not-allowed;
-	}
-</style>
+<!-- export { AppButton, buttonVariants }; -->

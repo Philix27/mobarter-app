@@ -4,18 +4,18 @@
 	import { P } from 'components';
 
 	export let isPassword: boolean = false;
-	export let control: any;
+	export let control: any = '';
 	/** name to be used as label */
-	export let name: string;
+	export let name: string = '';
 	/** placeholder */
-	export let place: string;
+	export let place: string = '';
 	/** Description */
-	export let desc: string;
-	export let label: string;
+	export let desc: string = '';
+	export let label: string = '';
 	export let inputType: 'text' | 'number' | 'date' | 'file' = 'text';
-	export let errorMessage: string;
-	export let className: string;
-	export let showPassword: boolean;
+	export let errorMessage: string = '';
+	export let className: string = '';
+	export let showPassword: boolean = false;
 </script>
 
 <div class={cn('flex-[1] w-full mb-2', className)}>
@@ -29,7 +29,7 @@
 		<div
 			class={cn(
 				`flex justify-between 
-            items-center border rounded-md 
+            items-center border rounded-md border-secondary 
             w-full px-2 bg-background`,
 				errorMessage && 'border-red-600'
 			)}
@@ -51,21 +51,23 @@
 				{name}
 			/>
 			{#if isPassword}
-				<iconify-icon
-					icon="mdi:eye"
-					on:click={() => {
-						// Todo
-						// setToggle -> false
-					}}
-				/>
-			{:else}
-				<iconify-icon
-					icon="mdi:close"
-					on:click={() => {
-						// Todo
-						// setToggle -> true
-					}}
-				/>
+				{#if showPassword}
+					<iconify-icon
+						icon="mdi:eye"
+						on:click={() => {
+							// Todo
+							// setToggle -> false
+						}}
+					/>
+				{:else}
+					<iconify-icon
+						icon="mdi:close"
+						on:click={() => {
+							// Todo
+							// setToggle -> true
+						}}
+					/>
+				{/if}
 			{/if}
 		</div>
 
@@ -73,7 +75,10 @@
 			<P className={`text-red-500 my-2`}>{errorMessage}</P>
 		{/if}
 		{#if desc}
-			<P>{desc}</P>
+			<div class="flex items-center justify-center mt-1 text-muted text-xs px-1">
+				<iconify-icon icon="mdi:info" class='mr-2' />
+				<P className="font-thin ">{desc}</P>
+			</div>
 		{/if}
 	</div>
 </div>

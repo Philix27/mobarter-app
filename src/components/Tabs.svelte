@@ -19,7 +19,7 @@
 				)}
 				on:click={onClick}
 			>
-				<P className={cn(isActive && 'text-primary')} variant="p5">{title}</P>
+				<P className={cn(isActive && 'text-primary')} v="p5">{title}</P>
 			</div>
 		{/each}
 	</div>
