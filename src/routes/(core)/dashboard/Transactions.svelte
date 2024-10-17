@@ -50,7 +50,7 @@
 
 	<div class="overflow-y-scroll h-full max-h-[800px] no-scrollbar">
 		{#each longList as item}
-			<div class="flex items-center p-2 w-full bg-card mb-1">
+			<div class="flex items-center p-2 w-full bg-card mb-1 rounded-md">
 				<div class="size-[40px] bg-background rounded-full flex items-center justify-center">
 					<iconify-icon icon="mdi:dollar" class="text-xl" />
 				</div>
