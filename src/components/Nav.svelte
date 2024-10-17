@@ -1,5 +1,5 @@
 <script>
-	import P from '../components/P.svelte';
+	import P from './P.svelte';
 	import 'iconify-icon';
 	import { goto } from '$app/navigation';
 	import { drawerState } from '../store/settings';

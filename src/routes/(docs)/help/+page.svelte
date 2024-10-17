@@ -1,6 +1,6 @@
 <script lang="ts">
 	import P from '../../../components/P.svelte';
-	import Nav from '../../../comps/Nav.svelte';
+	import Nav from '../../../components/Nav.svelte';
 
 	const pages: { name: string; link: string; icon: string; subtitle?: string }[] = [
 		{

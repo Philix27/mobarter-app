@@ -1,6 +1,5 @@
 <script>
-	import Tabs from '../../../comps/Tabs.svelte';
-	import Nav from '../../../comps/Nav.svelte';
+	import { Nav, Tabs } from 'components';
 	import { receiveState } from './store';
 
 	const tabs = [

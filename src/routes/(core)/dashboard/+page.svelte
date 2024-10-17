@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
-	import Nav from '../../../comps/Nav.svelte';
+	import { Nav } from 'components';
 	import QuickActions from './QuickActions.svelte';
 	import Transactions from './Transactions.svelte';
 

@@ -14,8 +14,9 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			'@/*': './path/to/lib/*',
-			'@/components': './src/components/*',
-			'@/comps': './src/comps/*'
+			'@/comps': './src/comps/*',
+			components: 'src/components',
+			wizard: 'src/routes/wizard'
 		}
 	}
 };

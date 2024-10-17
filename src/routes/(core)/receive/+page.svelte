@@ -1,7 +1,5 @@
 <script>
-	import Tabs from '../../../comps/Tabs.svelte';
-	import P from '../../../components/P.svelte';
-	import Nav from '../../../comps/Nav.svelte';
+	import { Nav, P, Tabs } from 'components';
 	import { receiveState } from './store';
 	import { QRCodeImage } from 'svelte-qrcode-image';
 

@@ -1,7 +1,7 @@
 <script>
 	// @ts-nocheck
 
-	import Drawer from '../comps/Drawer.svelte';
+	import Drawer from '../components/Drawer.svelte';
 	import '../app.css';
 	import 'tailwindcss/tailwind.css';
 	import { drawerState } from '../store/settings';

@@ -1,6 +1,6 @@
 <script>
 	import 'iconify-icon';
-	import P from '../../../components/P.svelte';
+	import { P } from 'components';
 
 	let quickActions = [
 		{ id: '1', name: 'Send', link: '/send', icon: 'mdi:send' },

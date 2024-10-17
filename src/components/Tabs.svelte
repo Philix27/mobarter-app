@@ -1,7 +1,7 @@
 <script>
 	import { cn } from '$lib/utils';
 
-	import P from '../components/P.svelte';
+	import P from './P.svelte';
 
 	export let className = '';
 	export let tabs = [{ title: '', isActive: false, onClick: () => {} }];

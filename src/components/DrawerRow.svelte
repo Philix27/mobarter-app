@@ -1,6 +1,6 @@
 <script>
 	import { cn } from '../lib/utils';
-	import P from '../components/P.svelte';
+	import P from './P.svelte';
 	import { drawerState } from '../store/settings';
 	import { goto } from '$app/navigation';
 
