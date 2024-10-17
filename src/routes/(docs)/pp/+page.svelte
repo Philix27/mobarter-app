@@ -1,8 +1,13 @@
+<script>
+	import Nav from '../../../comps/Nav.svelte';
+</script>
+
 <svelte:head>
-	<title>About</title>
+	<title>Privacy Policy</title>
 	<meta name="description" content="About this app" />
 </svelte:head>
 
+<Nav title="Privacy Policy" isBack />
 <div class="text-column">
 	<h1>About this app</h1>
 
