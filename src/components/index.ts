@@ -9,3 +9,4 @@ export { default as Tabs } from './Tabs.svelte';
 export { default as Button } from './Button.svelte';
 export { default as P } from './P.svelte';
 export { default as H } from './H.svelte';
+export { default as TextInput } from './TextInput.svelte';

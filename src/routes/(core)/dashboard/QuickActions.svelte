@@ -21,7 +21,7 @@
 		>
 			<iconify-icon class="text-xl text-primary mb-2" icon={quick.icon} />
 			<!-- <p>{quick.name}</p> -->
-			<P variant="p6">{quick.name}</P>
+			<P v="p6">{quick.name}</P>
 		</a>
 	{/each}
 </div>

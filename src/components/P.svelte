@@ -1,7 +1,7 @@
 <script>
 	// export let text;
 	export let className = '';
-	export let variant = 'p4';
+	export let v = 'p4';
 
 	const p1 = 'text-3xl font-extrabold leading-tight text-muted-foreground ' + className;
 	const p2 = 'text-2xl font-bold leading-tight text-muted-foreground ' + className;
@@ -11,27 +11,27 @@
 	const p6 = 'text-xs font-light leading-tight text-muted-foreground ' + className;
 </script>
 
-{#if variant == 'p1'}
+{#if v == 'p1'}
 	<p class={p1}><slot /></p>
 {/if}
 
-{#if variant == 'p2'}
+{#if v == 'p2'}
 	<p class={p2}><slot /></p>
 {/if}
 
-{#if variant == 'p3'}
+{#if v == 'p3'}
 	<p class={p3}><slot /></p>
 {/if}
 
-{#if variant == 'p4'}
+{#if v == 'p4'}
 	<p class={p4}><slot /></p>
 {/if}
 
-{#if variant == 'p5'}
+{#if v == 'p5'}
 	<p class={p5}><slot /></p>
 {/if}
 
-{#if variant == 'p6'}
+{#if v == 'p6'}
 	<p class={p6}><slot /></p>
 {/if}
 
