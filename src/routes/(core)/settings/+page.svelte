@@ -1,5 +1,55 @@
-<script>
-	import { Nav } from 'components';
+<script lang="ts">
+	import { Nav, P } from 'components';
+	import 'iconify-icon';
+
+	const sections: {
+		title: string;
+		subtitle?: string;
+		link: string;
+		icon: string;
+		onClick?: VoidFunction;
+	}[] = [
+		{
+			title: 'Profile',
+			link: '/settings/profile',
+			icon: 'mdi:account'
+		},
+		{
+			title: 'Wallet Address',
+			link: '/settings/profile',
+			icon: 'mdi:wallet'
+		},
+		{
+			title: 'Verification',
+			subtitle: 'KYC verification',
+			link: '/settings/secure',
+			icon: 'mdi:account'
+		},
+		{
+			title: 'Theme',
+			link: '/settings/profile',
+			icon: 'mdi:color'
+		},
+		{
+			title: 'Bank accounts',
+			subtitle: 'Manage all your bank accounts',
+			link: '/settings/bank',
+			icon: 'mdi:account'
+		},
+
+		{
+			title: 'Version',
+			subtitle: 'App version no: 0.0.1',
+			link: '/settings/profile',
+			icon: 'mdi:account'
+		},
+		{
+			title: 'Logout',
+			subtitle: 'Disconnect from Mobarter',
+			link: '#',
+			icon: 'mdi:logout'
+		}
+	];
 </script>
 
 <svelte:head>
@@ -7,25 +57,19 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<Nav title="Settings" isBack />
+<Nav title="Settings" isBack icon="mdi:dollar" />
 <div class="">
-	<h1>About this app</h1>
-
-	<p>
-		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
-		following into your command line and following the prompts:
-	</p>
-
-	<pre>npm create svelte@latest</pre>
-
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
-	</p>
-
-	<p>
-		The <a href="/sverdle">Sverdle</a> page illustrates SvelteKit's data loading and form handling. Try
-		using it with JavaScript disabled!
-	</p>
+	{#each sections as item}
+		<div class="flex items-center p-2 w-full bg-card mb-[2px] rounded-md">
+			<div class="h-[40px] w-[50px] bg-background rounded-full flex items-center justify-center mr-2">
+				<iconify-icon icon={item.icon} class="text-xl" />
+			</div>
+			<div class="flex flex-col items-start p-2 w-full">
+				<P>{item.title.toString()}</P>
+				{#if item.subtitle}
+					<P className="text-muted text-xs mt-1 font-thin">{item.subtitle}</P>
+				{/if}
+			</div>
+		</div>
+	{/each}
 </div>
