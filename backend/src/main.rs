@@ -1,5 +1,6 @@
 mod error;
 mod web;
+mod model;
 
 pub use self::error::{Error, Result};
 use std::ops::Deref;
@@ -26,7 +27,7 @@ async fn main() -> shuttle_axum::ShuttleAxum {
     // build our application with a single route
     let app = Router::new()
         .merge(static_routes())
-        .merge(web::routes_login::routes())
+        .merge(web::routes() )
         .layer(middleware::map_response(main_response_mapper))
         .layer(CookieManagerLayer::new())
         // .nest_service("/", ServeDir::new("assets"))
