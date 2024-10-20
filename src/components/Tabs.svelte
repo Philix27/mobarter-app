@@ -9,7 +9,7 @@
 </script>
 
 <div class={cn('w-full', className)}>
-	<div class="flex items-center justify-between border-secondary border-2 rounded-md">
+	<div class="flex items-center justify-between border-secondary border-2 rounded-xl">
 		{#each tabs as { title, onClick }, i}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
