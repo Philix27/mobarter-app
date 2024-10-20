@@ -17,6 +17,13 @@ const config = {
 			'@/comps': './src/comps/*',
 			components: 'src/components',
 			wizard: 'src/routes/wizard'
+		},
+		csrf: {
+			checkOrigin: false
+		},
+
+		env: {
+			publicPrefix: 'TS_PUBLIC_'
 		}
 	}
 };

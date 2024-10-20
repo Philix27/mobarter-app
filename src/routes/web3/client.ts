@@ -16,9 +16,10 @@ import {
 import { injected, walletConnect } from '@wagmi/connectors';
 import { arbitrum, avalanche, bsc, mainnet, polygon } from '@wagmi/core/chains';
 import { createWeb3Modal } from '@web3modal/wagmi';
-import { rpcUrls, walletConnectConfig } from './config';
 
-const { projectId } = walletConnectConfig;
+export const projectId = import.meta.env.VITE_PROJECT_ID;
+
+// const projectId = process.env.TS_PUBLIC_VITE_PROJECT_ID || process.env.VITE_PROJECT_ID;
 
 const ssr = !browser;
 
@@ -29,7 +30,8 @@ export type ConfiguredChainId = ConfiguredChain['id'];
 // Initialize chain-specific transports based on configured RPC URLs
 const transports = chains.reduce(
 	(acc, { id }) => {
-		const url = rpcUrls[id];
+		// const url = rpcUrls[id];
+		const url = 'rpcUrls[id]';
 		acc[id] = url ? fallback([http(url), http()]) : http();
 		return acc;
 	},

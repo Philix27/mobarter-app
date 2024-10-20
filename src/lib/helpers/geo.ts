@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { geoBlock } from '$lib/config';
+// import { geoBlock } from '$lib/config';
 import { error } from '@sveltejs/kit';
+import { geoBlock } from '../../routes/web3/config';
 
 export const countryCodeSchema = z.string().regex(/^[A-Z]{2}$/);
 export type CountryCode = z.infer<typeof countryCodeSchema>;

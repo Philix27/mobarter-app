@@ -1,10 +1,6 @@
 <script lang="ts">
 	import { Nav, P } from 'components';
 	import { TokenList } from 'celo-kit';
-
-	// const tokenBalances: {
-	// 	title: string;
-	// } = [];
 </script>
 
 <svelte:head>
@@ -18,10 +14,8 @@
 	<div>
 		{#each TokenList as item}
 			<div class="flex items-center px-3 py-1 w-full bg-card mb-[2px] rounded-md">
-				<div
-					class="h-[40px] w-[50px] bg-background rounded-full flex items-center justify-center mr-2"
-				>
-					<iconify-icon icon={'mdi:dollar'} class="text-xl" />
+				<div class="h-[40px] w-[50px] rounded-full flex items-center justify-center mr-2">
+					<img src={`/tokens/${item.symbol}.svg`} alt="cUSD" />
 				</div>
 				<div class="flex items-center justify-between w-full">
 					<div class="flex flex-col items-start p-2">

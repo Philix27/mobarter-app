@@ -13,7 +13,7 @@ const VERY_LARGE_PERCENT = 1e4; // 1,000,000%
 
 const BYTE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
-export function toFloatingPoint(n: MaybeNumberlike) {
+export function toFloatingPoint(n: number) {
 	if (typeof n == 'string') {
 		return parseFloat(n);
 	}
@@ -22,7 +22,7 @@ export function toFloatingPoint(n: MaybeNumberlike) {
 }
 
 // Type predicate to help TypeScript properly narrow type to number
-export function isNumber(n: MaybeNumber): n is number {
+export function isNumber(n: number): n is number {
 	return Number.isFinite(n);
 }
 
@@ -37,7 +37,7 @@ function isExtreme(n: number, small: number, large: number) {
  *
  * No suffix added.
  */
-export function formatKilos(n: MaybeNumber): string {
+export function formatKilos(n: number): string {
 	if (!isNumber(n)) return notFilledMarker;
 
 	if (n <= 1000) {
@@ -52,7 +52,7 @@ export function formatKilos(n: MaybeNumber): string {
  *
  * E.g., 123 B, 2.34 KB, 34.5 MB, 5.6 GB, etc.
  */
-export function formatByteUnits(n: MaybeNumber): string {
+export function formatByteUnits(n: number): string {
 	if (!isNumber(n)) return notFilledMarker;
 
 	const magnitude = Math.floor(Math.log(Math.abs(n || 1)) / Math.log(1024));
@@ -74,7 +74,7 @@ export function formatByteUnits(n: MaybeNumber): string {
  * @param options - additional Intl.NumberFormat options
  */
 export function formatTokenAmount(
-	n: MaybeNumberlike,
+	n: number,
 	minDigits = 2,
 	maxPrecision = minDigits,
 	options: Intl.NumberFormatOptions = {}
@@ -83,7 +83,9 @@ export function formatTokenAmount(
 	if (!isNumber(n)) return notFilledMarker;
 
 	// If n is very small or large, use scientific notation
-	const notation = isExtreme(n, VERY_SMALL_USD_VALUE, VERY_LARGE_USD_VALUE) ? 'scientific' : 'compact';
+	const notation = isExtreme(n, VERY_SMALL_USD_VALUE, VERY_LARGE_USD_VALUE)
+		? 'scientific'
+		: 'compact';
 
 	return formatNumber(n, minDigits, maxPrecision, {
 		notation,
@@ -102,7 +104,7 @@ export function formatTokenAmount(
  * @param maxPrecision - maximum number of significant digits (default = minDigits)
  */
 export function formatDollar(
-	n: MaybeNumberlike,
+	n: number,
 	minDigits = 2,
 	maxPrecision = minDigits,
 	options: Intl.NumberFormatOptions = {}
@@ -134,7 +136,7 @@ export function formatDollar(
  * @param options - additional options to pass through to `toLocaleString()`
  */
 export function formatNumber(
-	n: MaybeNumberlike,
+	n: number,
 	minDigits = 2,
 	maxPrecision = minDigits,
 	options: Intl.NumberFormatOptions = {}
@@ -175,7 +177,7 @@ export function formatNumber(
  * number of digits.
  */
 export function formatPrice(
-	n: MaybeNumberlike,
+	n: number,
 	minDigits = 2,
 	maxPrecision = 4,
 	options: Intl.NumberFormatOptions = {}
@@ -188,7 +190,7 @@ export function formatPrice(
 	});
 }
 
-export function formatPriceChange(n: MaybeNumberlike, minDigits = 1, maxPrecision = minDigits) {
+export function formatPriceChange(n: number, minDigits = 1, maxPrecision = minDigits) {
 	n = toFloatingPoint(n);
 	if (!isNumber(n)) return notFilledMarker;
 	return `${n > 0 ? '▲' : '▼'} ${formatPercent(Math.abs(n), minDigits, maxPrecision)}`;
@@ -197,7 +199,7 @@ export function formatPriceChange(n: MaybeNumberlike, minDigits = 1, maxPrecisio
 /**
  * Format number using an English thousand separation
  */
-export function formatAmount(n: MaybeNumberlike): string {
+export function formatAmount(n: number): string {
 	n = toFloatingPoint(n);
 	if (!isNumber(n)) return notFilledMarker;
 
@@ -207,7 +209,7 @@ export function formatAmount(n: MaybeNumberlike): string {
 /**
  * Format number using an English thousand separation
  */
-export function formatMillion(n: MaybeNumber): string {
+export function formatMillion(n: number): string {
 	if (!isNumber(n)) return notFilledMarker;
 
 	return (n / 1_000_000).toLocaleString('en', {
@@ -228,7 +230,7 @@ export function formatUrlAsDomain(url: string): string {
  *
  * Mostly useful for formattiong ISO-8601 datetime strings coming from the backend.
  */
-export function formatDatetime(d: MaybeDate): string {
+export function formatDatetime(d: Date): string {
 	if (!d) return '---';
 
 	const s = d.toLocaleString('en-GB', { timeZone: 'UTC' });
@@ -238,7 +240,7 @@ export function formatDatetime(d: MaybeDate): string {
 /**
  * Shorten Ethereum address
  */
-export function formatShortAddress(address: MaybeString): string {
+export function formatShortAddress(address: string): string {
 	if (!address) return notFilledMarker;
 
 	return address.substring(0, 8) + '…';
@@ -250,7 +252,7 @@ export function formatShortAddress(address: MaybeString): string {
  * Like average winning profit.
  */
 export function formatPercent(
-	n: MaybeNumberlike,
+	n: number,
 	minDigits = 1,
 	maxPrecision = minDigits,
 	options: Intl.NumberFormatOptions = {}
@@ -269,14 +271,14 @@ export function formatPercent(
 /**
  * Format interest rate value given as percent-form value
  */
-export function formatInterestRate(n: MaybeNumber, minDigits = 2, maxPrecision = minDigits) {
+export function formatInterestRate(n: number, minDigits = 2, maxPrecision = minDigits) {
 	return formatPercent(n / 100, minDigits, maxPrecision);
 }
 
 /**
  * Format strategy key metric float numbers like Sharpe and Sortino
  */
-export function formatKeyMetricNumber(n: MaybeNumber): string {
+export function formatKeyMetricNumber(n: number): string {
 	if (!isNumber(n)) return notFilledMarker;
 	return n.toLocaleString('en', {
 		minimumFractionDigits: 2,
@@ -289,7 +291,7 @@ export function formatKeyMetricNumber(n: MaybeNumber): string {
  *
  * Uses `minimumSignificantDigits` instead of `minimumFractionDigits`
  */
-export function formatSwapFee(n: MaybeNumber): string {
+export function formatSwapFee(n: number): string {
 	if (!isNumber(n)) return '';
 	return n.toLocaleString('en', {
 		minimumSignificantDigits: 1,
@@ -332,7 +334,7 @@ export function formatDurationMinutesSeconds(seconds: number): string {
  *
  * unixTimestamp is received from API as unix seconds since epoch
  */
-export function formatDaysAgo(unixTimestamp: MaybeNumber): string {
+export function formatDaysAgo(unixTimestamp: number): string {
 	if (!isNumber(unixTimestamp)) return notFilledMarker;
 	const seconds = Date.now() / 1000 - unixTimestamp;
 	const days = Math.floor(seconds / DAY);
@@ -354,7 +356,7 @@ export function formatValue(value: any): string {
  * @param before UNIX timestamp
  * @param after UNIX timestamp
  */
-export function formatTimeDiffMinutesSeconds(before: MaybeNumber, after: MaybeNumber): string {
+export function formatTimeDiffMinutesSeconds(before: number, after: number): string {
 	if (!isNumber(before) || !isNumber(after)) {
 		return '---';
 	}
@@ -372,7 +374,7 @@ export function formatTimeDiffMinutesSeconds(before: MaybeNumber, after: MaybeNu
  * @param before Dollar value
  * @param after Dollar value
  */
-export function formatPriceDifference(before: MaybeNumber, after: MaybeNumber): string {
+export function formatPriceDifference(before: number, after: number): string {
 	if (!isNumber(before) || !isNumber(after)) {
 		return '---';
 	}
