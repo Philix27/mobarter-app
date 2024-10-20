@@ -1,3 +1,4 @@
 import { writable } from 'svelte/store';
 
-export const receiveState = writable<'BUY' | 'WALLET'>('BUY');
+export type ISavingsStore = 'Deposit' | 'Withdraw';
+export const savingsStore = writable<ISavingsStore>('Deposit');

@@ -1,29 +1,24 @@
-<script>
+<script lang="ts">
 	import { Nav, P, Tabs } from 'components';
-	import { receiveState } from './store';
+	import { receiveState, type IReceiveTabs } from './store';
 	import { QRCodeImage } from 'svelte-qrcode-image';
 	import { getTitle } from 'components/TabTitle';
 
-	const tabs = [
+	const tabs: { title: IReceiveTabs; onClick: VoidFunction }[] = [
 		{
 			title: 'Wallet',
 			onClick: () => {
-				$receiveState = 'WALLET';
+				$receiveState = 'Wallet';
 			}
 		},
 		{
 			title: 'Buy',
 			onClick: () => {
-				$receiveState = 'BUY';
+				$receiveState = 'Buy';
 			}
 		}
 	];
 </script>
-
-<svelte:head>
-	<title>Receive Funds</title>
-	<meta name="description" content="About this app" />
-</svelte:head>
 
 <Nav title="Receive" isBack />
 <div class="">

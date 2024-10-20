@@ -1,3 +1,4 @@
 import { writable } from 'svelte/store';
 
-export const receiveState = writable<'BUY' | 'WALLET'>('BUY');
+export type IReceiveTabs = "Buy" | "Wallet"
+export const receiveState = writable<IReceiveTabs>('Buy');

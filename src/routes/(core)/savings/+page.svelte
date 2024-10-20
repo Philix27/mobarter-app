@@ -1,20 +1,19 @@
-<script>
+<script lang="ts">
 	import { Nav, Tabs } from 'components';
-	import { receiveState } from './store';
+	import { savingsStore, type ISavingsStore } from './store';
+	import { getTitle } from 'components/TabTitle';
 
-	const tabs = [
+	const tabs: { title: ISavingsStore; onClick: VoidFunction }[] = [
 		{
-			title: 'Wallet',
-			isActive: $receiveState === 'WALLET',
+			title: "Withdraw",
 			onClick: () => {
-				$receiveState = 'WALLET';
+				$savingsStore = 'Withdraw';
 			}
 		},
 		{
-			title: 'Buy',
-			isActive: $receiveState === 'BUY',
+			title: 'Deposit',
 			onClick: () => {
-				$receiveState = 'BUY';
+				$savingsStore = 'Deposit';
 			}
 		}
 	];
@@ -28,7 +27,7 @@
 <div>
 	<Nav title="Savings" isBack />
 	<div class="">
-		<Tabs {tabs} />
+		<Tabs {tabs} activeTitle={getTitle(tabs, $savingsStore)} />
 		<div>Send Money</div>
 	</div>
 </div>
