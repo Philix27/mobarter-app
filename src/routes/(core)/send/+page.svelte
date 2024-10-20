@@ -1,30 +1,28 @@
-<script>
+<script lang="ts">
 	import { Nav, Tabs } from 'components';
-	import { sendScreenState } from './store';
+	import { sendScreenState, type ISendTabs } from './store';
 	import ScreenBank from './ScreenBank.svelte';
 	import ScreenWallet from './ScreenWallet.svelte';
 	import ScreenPhone from './ScreenPhone.svelte';
+	import { getTitle } from 'components/TabTitle';
 
-	const tabs = [
+	const tabs: { title: ISendTabs; onClick: VoidFunction }[] = [
 		{
 			title: 'Wallet',
-			isActive: $sendScreenState === 'WALLET',
 			onClick: () => {
-				$sendScreenState = 'WALLET';
+				$sendScreenState = 'Wallet';
 			}
 		},
 		{
-			title: 'Bank Account',
-			isActive: $sendScreenState === 'BANK',
+			title: 'Bank',
 			onClick: () => {
-				$sendScreenState = 'BANK';
+				$sendScreenState = 'Bank';
 			}
 		},
 		{
 			title: 'Phone',
-			isActive: $sendScreenState === 'PHONE',
 			onClick: () => {
-				$sendScreenState = 'PHONE';
+				$sendScreenState = 'Phone';
 			}
 		}
 	];
@@ -38,17 +36,23 @@
 <div>
 	<Nav title="Send" isBack />
 	<div class="">
-		<Tabs {tabs} />
-
-		{#if $sendScreenState === 'BANK'}
+		<Tabs {tabs} activeTitle={getTitle(tabs, $sendScreenState)} />
+		{#if $sendScreenState === 'Bank'}
 			<ScreenBank />
-		{:else if $sendScreenState === 'PHONE'}
+		{:else if $sendScreenState === 'Phone'}
 			<ScreenPhone />
-		{:else if $sendScreenState === 'WALLET'}
+		{:else if $sendScreenState === 'Wallet'}
 			<ScreenWallet />
 		{/if}
 	</div>
 </div>
 
-<style lang="postcss">
-</style>
+<!-- activeTitle={$sendScreenState === 'BANK'
+	? 'Bank'
+	: $sendScreenState === 'PHONE'
+		? 'Phone'
+		: 'Wallet'} -->
+
+<!-- activeTitle={tabs
+				.filter((val) => val.title.toString() === $sendScreenState)[0]
+				.title.toString()} -->

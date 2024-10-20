@@ -1,3 +1,4 @@
 import { writable } from 'svelte/store';
 
-export const sendScreenState = writable<'PHONE' | 'WALLET' | 'BANK'>('WALLET');
+export type ISendTabs = 'Phone' | 'Wallet' | 'Bank';
+export const sendScreenState = writable<ISendTabs>('Wallet');
