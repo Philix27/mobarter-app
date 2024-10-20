@@ -16,6 +16,7 @@ const config = {
 			'@/*': './path/to/lib/*',
 			'@/comps': './src/comps/*',
 			components: 'src/components',
+			lib: 'src/lib',
 			wizard: 'src/routes/wizard'
 		},
 		csrf: {

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Nav, P } from 'components';
 	import { TokenList } from 'celo-kit';
+	import { getBalance , account, } from 'lib/web3';
+
 </script>
 
 <svelte:head>
@@ -24,6 +26,11 @@
 						<P className="text-muted text-xs mt-1 font-thin">Celo Network</P>
 					</div>
 					<div class="flex">
+						<!-- {#await $getBalance("0x3432", "0x3432")}
+							<p>... </p>
+						{:then value}
+						<p>Done</p>
+						{/await} -->
 						<P className="text-sm text-primary font-extralight">0.12 {item.symbol}</P>
 					</div>
 				</div>

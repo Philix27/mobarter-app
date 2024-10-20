@@ -2,9 +2,8 @@
 	// import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
-	import { account, chainId } from './web3modal';
+	import { account, chainId, modal } from 'lib/web3';
 	import Counter from '../Counter.svelte';
-	import { modal } from './client';
 
 	// import { connected } from 'svelte-wagmi';
 
