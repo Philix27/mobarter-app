@@ -40,17 +40,11 @@ import { walletConnect } from '@wagmi/connectors';
 //#endregion
 
 // #region State variables
-let storedCustomWallet;
-if (typeof window !== 'undefined') {
-	storedCustomWallet = localStorage.getItem(CUSTOM_WALLET);
-}
-
-const customWallets = storedCustomWallet ? [JSON.parse(storedCustomWallet)] : undefined;
 
 const metadata = {
-	name: 'skelekit-wagmiconnect',
-	description: 'skelekit-wagmiconnect example',
-	url: 'https://skelekit-wagmiconnect.vercel.app/',
+	name: 'Mobarter',
+	description: 'Manage your crypto assets',
+	url: 'https://mobarter.vercel.app/',
 	icons: ['https://avatars.githubusercontent.com/u/37784886']
 };
 //#endregion
@@ -99,7 +93,6 @@ export const chains = [
 ] as const;
 //#endregion
 
-
 export const projectId = 'env.VITE_PROJECT_ID';
 // export const projectId = import.meta.env.VITE_PROJECT_ID;
 
@@ -139,16 +132,15 @@ createWeb3Modal({
 	themeMode: 'dark', // light/dark mode
 	themeVariables: {
 		//--w3m-font-family
-		'--w3m-accent': '#6B7280', // Button colour surface-500
-		'--w3m-color-mix': '#1e3a8a', // Modal colour mix primary-300
+		'--w3m-accent': '#999BA1', // Button colour surface-500
+		'--w3m-color-mix': '#071A25', // Modal colour mix primary-300
 		'--w3m-color-mix-strength': 50, // Strength of colour
 		'--w3m-font-size-master': '8px', // Font size
 		'--w3m-border-radius-master': '999px' // border rounding
 		// --w3m-z-index
 	},
 	featuredWalletIds: [],
-	enableAnalytics: false,
-	customWallets
+	enableAnalytics: false
 });
 
 export const chainId = readable(getChainId(wagmiConfig), (set) =>
