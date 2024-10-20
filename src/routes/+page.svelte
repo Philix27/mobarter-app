@@ -3,6 +3,7 @@
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 	import { account, chainId, modal } from 'lib/web3';
+	import { Button } from 'components';
 
 	// import { connected } from 'svelte-wagmi';
 
@@ -11,46 +12,19 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Mobarter</title>
-	<meta name="description" content="On & Off ramping" />
-</svelte:head>
-
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit appex
-	</h1>
-
+<section class="bg-primary h-screen flex flex-col items-center ">
+	<img src="dollar.png" alt="Welcome" class="h-fit max-h-[300px] mt-[100px]" />
 	<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
 
 	{#if $account.isConnected}
-		<p>Connected</p>
+		<p>Already Connected</p>
 	{:else}
-		<button on:click={connectWallet} class="p-2 bg-orange-500 rounded-lg">Not Connected</button>
+		<Button variant="secondary" className="w-fit" onclick={connectWallet}>Connect</Button>
 		<!-- <button on:click={}>Connect</button> -->
 	{/if}
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
 	.welcome {
 		display: block;
 		position: relative;
