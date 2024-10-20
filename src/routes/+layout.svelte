@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	// @ts-nocheck
 
 	import { Drawer } from 'components';
@@ -6,6 +6,12 @@
 	import 'tailwindcss/tailwind.css';
 	import { drawerState } from '../store/settings';
 	import { Toaster } from 'svelte-sonner';
+	// Import the Analytics package, and the SvelteKit dev variable.
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+
+	// Inject the Analytics functionality
+	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
 <div class="app">

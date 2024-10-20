@@ -12,7 +12,7 @@
 	const sections: { title: string; icon: string; link: IAdminScreen }[] = [
 		{ title: 'Buyers', icon: 'icons8:buy', link: 'CreditBuy' },
 		{ title: 'Sellers', icon: 'mdi:dollar', link: 'CreditSell' },
-		{ title: 'Customer Care', icon: 'mdi:support', link: 'Support' },
+		{ title: 'Support', icon: 'mdi:support', link: 'Support' },
 		{ title: 'Emails', icon: 'mdi:email-outline', link: 'Email' },
 		{ title: 'Kyc', icon: 'mdi:lock', link: 'Kyc' },
 		{ title: 'Newsletter', icon: 'noto:newspaper', link: 'NewsLetter' },
@@ -26,13 +26,13 @@
 
 <div>
 	<Nav title="Admin" isBack />
-	<div class="grid grid-cols-7 w-full gap-4">
+	<div class="grid md:grid-cols-7 grid-cols-4 w-full md:gap-4 gap-2">
 		{#each sections as item}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div
 				role="button"
 				on:click={() => clickTab(item.link)}
-				class="bg-card rounded-md p-2 flex flex-col items-center justify-center h-full hover:border-primary hover:border"
+				class="bg-card rounded-md md:p-2 px-1 py-2 flex flex-col items-center justify-center h-full hover:border-primary hover:border"
 			>
 				<iconify-icon class="text-foreground text-[20px] mb-2" icon={item.icon} />
 				<p class="text-xs">{item.title}</p>
