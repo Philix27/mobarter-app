@@ -8,14 +8,36 @@
 	export let tabs: { title: string; onClick: VoidFunction }[] = [];
 </script>
 
-<div class={cn('w-full', className)}>
-	<div class="flex items-center justify-between border-secondary border-2 rounded-xl">
+<div class={cn('w-full border-b border-secondary', className)}>
+	<div class="flex items-center justify-between rounded-xl">
 		{#each tabs as { title, onClick }, i}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<div
 				class={cn(
-					'flex items-center justify-center bg-background w-full px-3 py-2 rounded-md',
+					'flex items-center justify-center w-full px-3 py-2 border-b-[4px] border-background',
+					activeTitle === title && 'border-primary border-b-[4px] '
+				)}
+				on:click={onClick}
+			>
+				<p
+					class={cn(
+						'font-bold text-sm',
+
+					)}
+				>
+					{title}
+				</p>
+			</div>
+		{/each}
+	</div>
+</div>
+<!-- <div class={cn('w-full', className)}>
+	<div class="flex items-center justify-between rounded-xl bg-secondary">
+		{#each tabs as { title, onClick }, i}
+			<div
+				class={cn(
+					'flex items-center justify-center bg-secondary w-full px-3 py-2 rounded-md',
 					activeTitle === title && 'bg-card rounded-lg'
 				)}
 				on:click={onClick}
@@ -26,6 +48,6 @@
 			</div>
 		{/each}
 	</div>
-</div>
+</div> -->
 
 <!-- isActive && 'bg-background rounded-lg' -->

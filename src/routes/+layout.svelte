@@ -14,6 +14,12 @@
 	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
+<!-- <svelte:head>
+	<html class="overscroll-none bg-background color-scheme: dark">
+		<slot />
+	</html>
+</svelte:head> -->
+
 <div class="app">
 	<!-- <WagmiProvider {config}> -->
 	<main>
