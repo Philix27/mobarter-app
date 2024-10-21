@@ -9,6 +9,7 @@ mod web;
 
 pub use self::error::{Error, Result};
 
+use app_state::AppState;
 use axum::{
     extract::{Path, Query},
     middleware,
@@ -18,6 +19,7 @@ use axum::{
 };
 
 use model::ModelController;
+use routes::core_routes;
 use serde::Deserialize;
 use tower_cookies::CookieManagerLayer;
 use tower_http::services::ServeDir;
@@ -32,13 +34,17 @@ async fn main() -> shuttle_axum::ShuttleAxum {
     // build our application with a single route
 
     let mc = ModelController::new().unwrap();
+    let app_state = AppState::new().unwrap();
     let routes_apis =
         web::tickets::routes(mc).route_layer(middleware::from_fn(web::mw_auth::mw_require_auth));
+    let core_auth_routes =
+        core_routes(app_state).route_layer(middleware::from_fn(web::mw_auth::mw_require_auth));
 
     let app = Router::new()
         .merge(static_routes())
         .merge(web::routes())
         .nest("/api", routes_apis)
+        .nest("/api/v1", core_auth_routes)
         .layer(middleware::map_response(main_response_mapper))
         .layer(CookieManagerLayer::new())
         .route("/hey", get(|| async { "Hello, World!" }))

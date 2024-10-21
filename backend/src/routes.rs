@@ -1,34 +1,51 @@
 use axum::{routing::post, Router};
 
-use crate::{controllers::auth::login, model::ModelController};
+use crate::{
+    app_state::AppState,
+    controllers::auth::{self, login},
+};
 
-pub fn auth_route(mc: ModelController) -> Router {
-    Router::new().route("/auth/login", post(login))
+pub fn core_routes(app_state: AppState) -> Router {
+    Router::new()
+        .merge(auth_route(app_state.clone()))
+        .merge(airtime_routes(app_state.clone()))
+        .merge(user_routes(app_state.clone()))
+        .merge(kyc_routes(app_state.clone()))
+        .merge(bank_accounts_routes(app_state.clone()))
+        .merge(support_routes(app_state.clone()))
+        .merge(orders_routes(app_state.clone()))
+        .merge(swap_routes(app_state.clone()))
+        .merge(exchange_routes(app_state.clone()))
+        .merge(fiat_walletroutes(app_state.clone()))
 }
-pub fn airtime_routes(mc: ModelController) -> Router {
+
+fn auth_route(app_state: AppState) -> Router {
+    Router::new().route("/auth/login", post(auth::login))
+}
+fn airtime_routes(app_state: AppState) -> Router {
     Router::new().route("/airtime", post(login))
 }
-pub fn user_routes(mc: ModelController) -> Router {
+fn user_routes(app_state: AppState) -> Router {
     Router::new().route("/user", post(login))
 }
-pub fn kyc_routes(mc: ModelController) -> Router {
+fn kyc_routes(app_state: AppState) -> Router {
     Router::new().route("/kyc", post(login))
 }
-pub fn bank_accounts_routes(mc: ModelController) -> Router {
+fn bank_accounts_routes(app_state: AppState) -> Router {
     Router::new().route("/bank_accounts", post(login))
 }
-pub fn support_routes(mc: ModelController) -> Router {
+fn support_routes(app_state: AppState) -> Router {
     Router::new().route("/support", post(login))
 }
-pub fn orders_routes(mc: ModelController) -> Router {
+fn orders_routes(app_state: AppState) -> Router {
     Router::new().route("/orders", post(login))
 }
-pub fn swap_routes(mc: ModelController) -> Router {
+fn swap_routes(app_state: AppState) -> Router {
     Router::new().route("/swap", post(login))
 }
-pub fn exchange_routes(mc: ModelController) -> Router {
+fn exchange_routes(app_state: AppState) -> Router {
     Router::new().route("/exchange", post(login))
 }
-pub fn fiat_walletroutes(mc: ModelController) -> Router {
+fn fiat_walletroutes(app_state: AppState) -> Router {
     Router::new().route("/fiat_wallet", post(login))
 }
