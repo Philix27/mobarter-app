@@ -8,7 +8,6 @@
 
 	const items = [
 		{ title: 'Dashboard', link: '/dashboard', icon: 'mdi:home' },
-		{ title: 'Invoice', link: '/invoice', icon: 'mdi:receipt' },
 		{ title: 'Settings', link: '/settings', icon: 'mdi:settings' },
 		{ title: 'Help', link: '/help', icon: 'mdi:help' },
 		{ title: 'Support', link: '/support', icon: 'mdi:support' },

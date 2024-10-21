@@ -9,7 +9,7 @@
 		{ id: '4', name: 'Withdraw', link: '/withdraw', icon: 'hugeicons:bitcoin-withdraw' },
 		{ id: '5', name: 'Savings', link: '/savings', icon: 'material-symbols-light:savings-outline' },
 		{ id: '6', name: 'Airtime', link: '/airtime', icon: 'mdi:phone' },
-		{ id: '7', name: 'Utility', link: '/utility', icon: 'lucide:utility-pole' }
+		{ id: '7', name: 'Settings', link: '/settings', icon: 'mdi:settings' }
 	];
 </script>
 
