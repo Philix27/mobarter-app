@@ -55,6 +55,7 @@ async fn main() -> shuttle_axum::ShuttleAxum {
 
     // run our app with hyper, listening globally on port 3000
     let listener = tokio::net::TcpListener::bind("0.0.0.0:5000").await.unwrap();
+
     axum::serve(listener, app.clone()).await.unwrap();
 
     Ok(app.into())

@@ -14,7 +14,7 @@ pub struct LoginResponse {
     message: String,
 }
 
-pub async fn login(
+pub async fn controller(
     cookies: Cookies,
     Json(payload): Json<LoginPayload>,
 ) -> Result<Json<LoginResponse>> {
@@ -33,3 +33,4 @@ pub async fn login(
 
     Ok(body_response)
 }
+// #endregion
