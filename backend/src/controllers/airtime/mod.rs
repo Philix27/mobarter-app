@@ -1,11 +1,5 @@
-mod approve;
-mod bvn;
-mod nin;
-mod phone;
-mod status;
+mod credit;
+mod history;
 
-pub use approve::*;
-pub use bvn::*;
-pub use nin::*;
-pub use phone::*;
-pub use status::*;
+pub use credit::*;
+pub use history::*;

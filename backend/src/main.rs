@@ -37,8 +37,7 @@ async fn main() -> shuttle_axum::ShuttleAxum {
     let app_state = AppState::new().unwrap();
     let routes_apis =
         web::tickets::routes(mc).route_layer(middleware::from_fn(web::mw_auth::mw_require_auth));
-    let core_auth_routes =
-        core_routes(app_state).route_layer(middleware::from_fn(web::mw_auth::mw_require_auth));
+    let core_auth_routes = core_routes(app_state);
 
     let app = Router::new()
         .merge(static_routes())

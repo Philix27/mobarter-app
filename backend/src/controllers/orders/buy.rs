@@ -13,7 +13,7 @@ pub struct KycApproveResponse {
     message: String,
 }
 
-pub async fn approve(
+pub async fn buy(
     cookies: Cookies,
     Json(payload): Json<KycApprovePayload>,
 ) -> Result<Json<KycApproveResponse>> {

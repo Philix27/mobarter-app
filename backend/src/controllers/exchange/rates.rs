@@ -5,19 +5,19 @@ use serde_json::{json, Value};
 use tower_cookies::{Cookie, Cookies};
 
 #[derive(Debug, Deserialize)]
-pub struct KycPhonePayload {
+pub struct KycApprovePayload {
     payload: String,
 }
 #[derive(Debug, Serialize)]
-pub struct KycPhoneResponse {
+pub struct KycApproveResponse {
     message: String,
 }
 
-pub async fn verify_phone(
+pub async fn get_rates(
     cookies: Cookies,
-    Json(payload): Json<KycPhonePayload>,
-) -> Result<Json<KycPhoneResponse>> {
-    let body_response = Json(KycPhoneResponse {
+    Json(payload): Json<KycApprovePayload>,
+) -> Result<Json<KycApproveResponse>> {
+    let body_response = Json(KycApproveResponse {
         message: payload.payload,
     });
 

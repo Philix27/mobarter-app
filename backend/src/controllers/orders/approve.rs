@@ -5,19 +5,19 @@ use serde_json::{json, Value};
 use tower_cookies::{Cookie, Cookies};
 
 #[derive(Debug, Deserialize)]
-pub struct KycBvnPayload {
+pub struct KycNinPayload {
     payload: String,
 }
 #[derive(Debug, Serialize)]
-pub struct KycBvnResponse {
+pub struct KycNinResponse {
     message: String,
 }
 
-pub async fn verify_bvn(
+pub async fn approve(
     cookies: Cookies,
-    Json(payload): Json<KycBvnPayload>,
-) -> Result<Json<KycBvnResponse>> {
-    let body_response = Json(KycBvnResponse {
+    Json(payload): Json<KycNinPayload>,
+) -> Result<Json<KycNinResponse>> {
+    let body_response = Json(KycNinResponse {
         message: payload.payload,
     });
 

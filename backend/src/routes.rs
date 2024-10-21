@@ -5,7 +5,7 @@ use axum::{
 
 use crate::{
     app_state::AppState,
-    controllers::{auth, kyc},
+    controllers::{airtime, auth, bank_accounts, exchange, kyc, orders, user},
 };
 
 pub fn core_routes(app_state: AppState) -> Router {
@@ -28,14 +28,18 @@ fn auth_route(app_state: AppState) -> Router {
         .route("/auth/logout", post(auth::logout::controller))
         .route("/auth/send_otp", post(auth::send_otp::controller))
         .route("/auth/verify_otp", post(auth::verify_otp::controller))
+        .with_state(app_state)
 }
 fn airtime_routes(app_state: AppState) -> Router {
     Router::new()
-        .route("/airtime/credit", post(auth::login::controller))
-        .route("/airtime/history", get(auth::logout::controller))
+        .route("/airtime/credit", post(airtime::credit_no))
+        .route("/airtime/history", get(airtime::get_history))
+        .with_state(app_state)
 }
 fn user_routes(app_state: AppState) -> Router {
-    Router::new().route("/user/info", get(auth::login::controller))
+    Router::new()
+        .route("/user/info", get(user::get_info))
+        .with_state(app_state)
 }
 fn kyc_routes(app_state: AppState) -> Router {
     Router::new()
@@ -44,33 +48,44 @@ fn kyc_routes(app_state: AppState) -> Router {
         .route("/kyc/bvn", post(kyc::verify_bvn))
         .route("/kyc/approve", post(kyc::approve))
         .route("/kyc/status", get(kyc::get_status))
+        .with_state(app_state)
 }
 fn bank_accounts_routes(app_state: AppState) -> Router {
-    Router::new().route(
-        "/bank_accounts",
-        post(auth::login::controller).get(auth::login::controller),
-    )
+    Router::new()
+        .route(
+            "/bank_accounts",
+            post(bank_accounts::add_account).get(bank_accounts::get_account),
+        )
+        .with_state(app_state)
 }
 fn exchange_routes(app_state: AppState) -> Router {
     Router::new()
-        .route("/exchange/rates", get(auth::login::controller))
-        .route("/exchange/partner_rates", get(auth::login::controller))
+        .route("/exchange/rates", get(exchange::get_rates))
+        .route("/exchange/partner_rates", get(exchange::get_partner_rates))
+        .with_state(app_state)
 }
 fn fiat_walletroutes(app_state: AppState) -> Router {
-    Router::new().route("/fiat_wallet", post(auth::login::controller))
+    Router::new()
+        .route("/fiat_wallet", post(auth::login::controller))
+        .with_state(app_state)
 }
 fn orders_routes(app_state: AppState) -> Router {
     Router::new()
-        .route("/orders", get(auth::login::controller))
-        .route("/orders/buy", post(auth::login::controller))
-        .route("/orders/sell", post(auth::login::controller))
-        .route("/orders/approve", post(auth::login::controller))
-        .route("/orders/close", post(auth::login::controller))
+        .route("/orders", get(orders::get_all))
+        .route("/orders/buy", post(orders::buy))
+        .route("/orders/sell", post(orders::sell))
+        .route("/orders/approve", post(orders::approve))
+        .route("/orders/close", post(orders::close))
+        .with_state(app_state)
 }
 fn support_routes(app_state: AppState) -> Router {
-    Router::new().route("/support", post(auth::login::controller))
+    Router::new()
+        .route("/support", post(auth::login::controller))
+        .with_state(app_state)
 }
 
 fn swap_routes(app_state: AppState) -> Router {
-    Router::new().route("/swap", post(auth::login::controller))
+    Router::new()
+        .route("/swap", post(auth::login::controller))
+        .with_state(app_state)
 }
