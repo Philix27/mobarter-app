@@ -3,7 +3,10 @@ use axum::{
     Router,
 };
 
-use crate::{app_state::AppState, controllers::auth};
+use crate::{
+    app_state::AppState,
+    controllers::{auth, kyc},
+};
 
 pub fn core_routes(app_state: AppState) -> Router {
     Router::new()
@@ -36,11 +39,11 @@ fn user_routes(app_state: AppState) -> Router {
 }
 fn kyc_routes(app_state: AppState) -> Router {
     Router::new()
-        .route("/kyc/personal", post(auth::login::controller))
-        .route("/kyc/nin", post(auth::logout::controller))
-        .route("/kyc/bvn", post(auth::send_otp::controller))
-        .route("/kyc/approve", post(auth::verify_otp::controller))
-        .route("/kyc/status", get(auth::verify_otp::controller))
+        .route("/kyc/phone", post(kyc::verify_phone))
+        .route("/kyc/nin", post(kyc::verify_nin))
+        .route("/kyc/bvn", post(kyc::verify_bvn))
+        .route("/kyc/approve", post(kyc::approve))
+        .route("/kyc/status", get(kyc::get_status))
 }
 fn bank_accounts_routes(app_state: AppState) -> Router {
     Router::new().route(
