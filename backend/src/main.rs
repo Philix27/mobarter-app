@@ -1,9 +1,11 @@
 mod error;
-mod web;
 mod model;
+mod web;
+mod ctx;
+mod routes;
+mod mw;
 
 pub use self::error::{Error, Result};
-use std::ops::Deref;
 
 use axum::{
     extract::{Path, Query},
@@ -13,6 +15,7 @@ use axum::{
     Router,
 };
 
+use model::ModelController;
 use serde::Deserialize;
 use tower_cookies::CookieManagerLayer;
 use tower_http::services::ServeDir;
@@ -25,16 +28,22 @@ async fn main() -> shuttle_axum::ShuttleAxum {
     // Ok(router.into())
 
     // build our application with a single route
+
+    let mc = ModelController::new().unwrap();
+    let routes_apis =
+        web::tickets::routes(mc).route_layer(middleware::from_fn(web::mw_auth::mw_require_auth));
+
     let app = Router::new()
         .merge(static_routes())
-        .merge(web::routes() )
+        .merge(web::routes())
+        .nest("/api", routes_apis)
         .layer(middleware::map_response(main_response_mapper))
         .layer(CookieManagerLayer::new())
-        // .nest_service("/", ServeDir::new("assets"))
         .route("/hey", get(|| async { "Hello, World!" }))
         .route("/foo", get(get_foo).post(post_foo))
         .route("/query_param", get(handle_hello))
-        .route("/path_param/:name", get(handle_path));
+        .route("/path_param/:name", get(handle_path))
+        .fallback_service(get(handle_hello));
 
     // run our app with hyper, listening globally on port 3000
     let listener = tokio::net::TcpListener::bind("0.0.0.0:5000").await.unwrap();
@@ -44,7 +53,7 @@ async fn main() -> shuttle_axum::ShuttleAxum {
 }
 
 async fn main_response_mapper(res: Response) -> Response {
-    println!(" ->> RESPONSE MW ",);
+    println!(" ->> RESPONSE MW ");
     println!();
     res
 }

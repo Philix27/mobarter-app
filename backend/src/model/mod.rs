@@ -25,7 +25,7 @@ impl ModelController {
         })
     }
 
-    pub fn create_ticket(&self, ticket_fc: TicketForCreate) -> Result<Ticket> {
+    pub async fn create_ticket(&self, ticket_fc: TicketForCreate) -> Result<Ticket> {
         let mut store = self.ticket_store.lock().unwrap();
 
         let id = store.len() as u64;
@@ -39,7 +39,7 @@ impl ModelController {
         Ok(ticket)
     }
 
-    pub fn list_tickets(&self) -> Result<Vec<Ticket>> {
+    pub async fn list_tickets(&self) -> Result<Vec<Ticket>> {
         let store = self.ticket_store.lock().unwrap();
         let iter = store.iter();
 
@@ -49,7 +49,7 @@ impl ModelController {
         Ok(tickets)
     }
 
-    pub fn delete_tickets(&self, id: u64) -> Result<Ticket> {
+    pub async fn delete_tickets(&self, id: u64) -> Result<Ticket> {
         let mut store = self.ticket_store.lock().unwrap();
 
         let ticket = store.get_mut(id as usize).and_then(|t| t.take());
