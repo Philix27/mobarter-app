@@ -3,9 +3,10 @@ use axum::{routing::post, Json, Router};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use tower_cookies::{Cookie, Cookies};
+use utoipa_axum::{router::OpenApiRouter, routes, PathItemExt};
 
-#[derive(Debug, Deserialize)]
-pub struct KycApprovePayload {
+#[derive(Debug, Deserialize, Serialize)]
+pub struct AirtimePayload {
     payload: String,
 }
 #[derive(Debug, Serialize)]
@@ -15,7 +16,7 @@ pub struct KycApproveResponse {
 
 pub async fn credit_no(
     cookies: Cookies,
-    Json(payload): Json<KycApprovePayload>,
+    Json(payload): Json<AirtimePayload>,
 ) -> Result<Json<KycApproveResponse>> {
     let body_response = Json(KycApproveResponse {
         message: payload.payload,
