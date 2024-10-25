@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import 'iconify-icon';
 	import { P } from 'components';
 

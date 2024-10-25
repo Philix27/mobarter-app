@@ -27,6 +27,3 @@
 	</div>
 	<div class={'w-[40%]'} on:click={hideDrawer} />
 </div>
-
-<style>
-</style>
