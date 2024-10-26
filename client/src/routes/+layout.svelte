@@ -1,12 +1,42 @@
-<script>
-	import '../app.css';
-	import 'tailwindcss/tailwind.css';
-</script>
-
-<div class="app">
+<<<<<<< HEAD
+<div class="mt-[40px] app">
 	<main>
 		<slot />
 	</main>
+=======
+<script lang="ts">
+	// @ts-nocheck
+
+	import { Drawer } from 'components';
+	import '../app.css';
+	import 'tailwindcss/tailwind.css';
+	import { drawerState } from '../store/settings';
+	import { Toaster } from 'svelte-sonner';
+	// Import the Analytics package, and the SvelteKit dev variable.
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+
+	// Inject the Analytics functionality
+	inject({ mode: dev ? 'development' : 'production' });
+</script>
+
+<!-- <svelte:head>
+	<html class="overscroll-none bg-background color-scheme: dark">
+		<slot />
+	</html>
+</svelte:head> -->
+
+<div class="app">
+	<!-- <WagmiProvider {config}> -->
+	<main>
+		{#if $drawerState}
+			<Drawer />
+		{/if}
+		<slot />
+		<Toaster position="top-center" />
+	</main>
+	<!-- </WagmiProvider> -->
+>>>>>>> main
 </div>
 
 <style>
@@ -16,7 +46,11 @@
 		min-height: 100vh;
 	}
 
+<<<<<<< HEAD
 	main {
+=======
+	/* main {
+>>>>>>> main
 		flex: 1;
 		display: flex;
 		flex-direction: column;
@@ -25,5 +59,9 @@
 		max-width: 64rem;
 		margin: 0 auto;
 		box-sizing: border-box;
+<<<<<<< HEAD
 	}
+=======
+	} */
+>>>>>>> main
 </style>

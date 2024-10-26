@@ -58,6 +58,7 @@ self.addEventListener('fetch', (event) => {
 		// fall back to the cache if we're offline
 		try {
 			const response = await fetch(event.request);
+			const isNotExtension = url.protocol === 'http:';
 
 			// if we're offline, fetch can return a value that is not a Response
 			// instead of throwing - and we can't pass this non-Response to respondWith
@@ -65,12 +66,13 @@ self.addEventListener('fetch', (event) => {
 				throw new Error('invalid response from fetch');
 			}
 
-			if (response.status === 200) {
+			if (isNotExtension && response.status === 200) {
 				cache.put(event.request, response.clone());
 			}
 
 			return response;
 		} catch (err) {
+			// fallback to cache
 			const response = await cache.match(event.request);
 
 			if (response) {

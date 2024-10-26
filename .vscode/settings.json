@@ -1,3 +1,42 @@
 {
-	"cSpell.words": ["mobarter"]
+	"cSpell.words": [
+		"Alfajores",
+		"celo",
+		"CEURO",
+		"CUSD",
+		"endregion",
+		"extralight",
+		"fhenix",
+		"hookform",
+		"iconify",
+		"mobarter",
+		"Mobarter",
+		"Openlogin",
+		"qrcode",
+		"rainbowkit",
+		"sepolia",
+		"superjson",
+		"tanstack",
+		"toformat",
+		"trpc",
+		"viem",
+		"Wagmi",
+		"Xmpt",
+		"xmtp"
+	],
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/.DS_Store": true,
+		".yarn": true,
+		".husky": false,
+		".devcontainer": true,
+		".config": true,
+		"docs": true,
+		// ".commitlintrc.json": true,
+		"contracts": true,
+		".github": true,
+		"yarn.lock": true
+	}
 }
