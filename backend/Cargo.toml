@@ -28,7 +28,7 @@ once_cell = "1"
 time ="0.3"
 # rs utils
 strum = "0.26"
-strum_macros = "0.26"
+strum_macros = "0.26" 
 async-trait = "0.1" 
 # tracing
 tracing = "0.1"
@@ -41,6 +41,13 @@ rand="0.8"
 hmac="0.12"
 sha2="0.10"
 base64-url = "3.0.0"
+argon2="0.5.1"
+chrono={version = "0.4.26", features = ["serde"]}
+dotenv = "0.15.0"
+jsonwebtoken = "9.2.0"
+lettre = "0.15.0"
+validator ={version = "0.16.1", features = ["derive"]}
+axum-extra ={version = "0.9.3", features = ["derive"]}
 
 [dev-dependencies]
 anyhow="1.0.90"
