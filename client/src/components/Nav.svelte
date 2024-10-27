@@ -87,7 +87,9 @@
 		/>
 	{/if}
 
-	<P v="p4" className="text-card-foreground my-0 font-extrabold tracking-wide font-sans ml-4">{title}</P>
+	<P v="p4" className="text-card-foreground my-0 font-extrabold tracking-wide font-sans ml-4"
+		>{title}</P
+	>
 	<div class="flex items-center">
 		{#if isHome}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -98,7 +100,7 @@
 						formaction="/?/setTheme&theme=dark&redirectTo={$page.url.pathname}"
 						class="outline-none border-none p-0 mt-1 mr-4"
 					>
-						<iconify-icon icon="iconamoon:mode-dark" class="text-xl text-foreground" />
+						<iconify-icon icon="tabler:moon" class="text-xl text-foreground" />
 					</button>
 				{:else}
 					<button
@@ -109,6 +111,11 @@
 					</button>
 				{/if}
 			</form>
+			<iconify-icon
+				class="text-xl text-foreground mr-2"
+				icon="system-uicons:bell"
+				on:click={onIconClick}
+			/>
 		{/if}
 		{#if icon}
 			<iconify-icon class="text-xl text-foreground mr-2" {icon} on:click={onIconClick} />

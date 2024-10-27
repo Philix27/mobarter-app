@@ -31,7 +31,6 @@
 <div>
 	<Nav
 		title="Mobarter"
-		icon="mdi:notifications"
 		theme={data.theme}
 		onIconClick={clickIcon}
 		isHome={true}
