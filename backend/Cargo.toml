@@ -1,0 +1,48 @@
+lear[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+axum = "0.7.3"
+tokio = "1.28.2"
+tower-http = { version = "0.6.1", features = ["fs"] }
+tower-cookies = "0.10.0"
+# shuttle
+shuttle-axum = "0.48.0"
+shuttle-runtime = "0.48.0"
+# serde
+serde = {version = "1", features = ["derive"]}
+serde_json = {version = "1"}
+serde_with = "3.11.0"
+# Others
+anyhow="1.0.90"
+lazy-regex = "3.3.0"
+# open_api
+utoipa-swagger-ui = { version = "8", features = ["axum"] }
+utoipa-axum = "0.1"
+utoipa = {version = "0.1" , features = ["axum-extras"]}
+uuid = {version = "1", features=["v4", "fast-rng"]}
+once_cell = "1"
+time ="0.3"
+# rs utils
+strum = "0.26"
+strum_macros = "0.26"
+async-trait = "0.1" 
+# tracing
+tracing = "0.1"
+tracing-subscriber = {version = "0.3", features = ["env-filter"]}
+# db
+# sqlx = {version = "0.8.2", features = ["runtime-tokio-rustls", "postgres", "uuid", "time"] }
+# sqlb = "0.4.0"
+# Cypto
+rand="0.8"
+hmac="0.12"
+sha2="0.10"
+base64-url = "3.0.0"
+
+[dev-dependencies]
+anyhow="1.0.90"
+httpc-test = "0.1.1"
+serial_test = "3.1.1"
