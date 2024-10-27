@@ -15,15 +15,12 @@ export const handle = (async ({ event, resolve }) => {
 		}
 	}
 
-	const newHref = theme === 'light' ? 'manifestLight.json"' : 'manifestDark.json"';
 	if (theme) {
 		return await resolve(event, {
 			transformPageChunk: (input) => {
 				// return input.html.replace('data-theme=""', `data-theme="${theme}"`);
-				input.html.replace(`href=""`, `href="%sveltekit.assets%/${newHref}.json"`);
 				return input.html.replace('class="color-scheme:"', `class="color-scheme: ${theme}"`);
-			},
-			
+			}
 		});
 	}
 	return await resolve(event);
