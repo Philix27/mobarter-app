@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { Nav, P, Tabs } from 'components';
+	import { Nav, P, Tabs, getTitle } from 'components';
 	import { receiveState, type IReceiveTabs } from './store';
 	import { QRCodeImage } from 'svelte-qrcode-image';
-	import { getTitle } from 'components/TabTitle';
 
 	const tabs: { title: IReceiveTabs; onClick: VoidFunction }[] = [
 		{

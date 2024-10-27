@@ -17,8 +17,15 @@
 </script>
 
 <svelte:head>
-	<title>About</title>
+	<title>Dashboard</title>
 	<meta name="description" content="About this app" />
+	<!-- <link rel="manifest" href="%sveltekit.assets%/manifestDark.json" /> -->
+	<!-- <html {lang} {dir} /> -->
+	<!-- {#if data.theme === 'light'}
+		<link rel="manifest" href="%sveltekit.assets%/manifestLight.json" />
+	{:else}
+		<link rel="manifest" href="%sveltekit.assets%/manifestDark.json" />
+	{/if} -->
 </svelte:head>
 
 <div>

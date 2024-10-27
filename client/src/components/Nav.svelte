@@ -87,7 +87,7 @@
 		/>
 	{/if}
 
-	<P v="p4" className="text-card-foreground my-0 font-extrabold tracking-wide font-sans">{title}</P>
+	<P v="p4" className="text-card-foreground my-0 font-extrabold tracking-wide font-sans ml-4">{title}</P>
 	<div class="flex items-center">
 		{#if isHome}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -96,13 +96,13 @@
 				{#if theme === 'light'}
 					<button
 						formaction="/?/setTheme&theme=dark&redirectTo={$page.url.pathname}"
-						class="outline-none border-none p-0 mt-1 mr-2"
+						class="outline-none border-none p-0 mt-1 mr-4"
 					>
 						<iconify-icon icon="iconamoon:mode-dark" class="text-xl text-foreground" />
 					</button>
 				{:else}
 					<button
-						class="outline-none border-none p-0 mt-1 mr-2"
+						class="outline-none border-none p-0 mt-1 mr-4"
 						formaction="/?/setTheme&theme=light&redirectTo={$page.url.pathname}"
 					>
 						<iconify-icon icon="lets-icons:sun-light" class="text-xl text-foreground" />
