@@ -12,7 +12,7 @@
 	}
 </script>
 
-<section class="bg-primary h-screen flex flex-col items-center ">
+<section class="bg-primary h-screen flex flex-col items-center">
 	<img src="dollar.png" alt="Welcome" class="h-fit max-h-[300px] mt-[100px]" />
 	<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
 
