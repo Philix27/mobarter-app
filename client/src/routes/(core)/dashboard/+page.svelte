@@ -23,13 +23,13 @@
 
 <div>
 	<Nav
-		title={data.theme}
+		title="Mobarter"
 		icon="mdi:notifications"
 		theme={data.theme}
 		onIconClick={clickIcon}
 		isHome={true}
 	/>
-	<!-- <Nav title="Mobarter" icon="mdi:notifications" onIconClick={clickIcon} isHome={true} /> -->
+
 	<div class="">
 		<div class="flex items-center justify-between mb-3 mx-4">
 			<P className="text-3xl font-extralight">$0.00</P>
