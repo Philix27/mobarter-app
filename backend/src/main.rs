@@ -47,7 +47,7 @@ async fn main() -> shuttle_axum::ShuttleAxum {
         .merge(web::routes())
         .nest("/api", routes_apis)
         .nest("/api/v1", core_auth_routes)
-        .nest("/api/v1e", open_api())
+        // .nest("/api/v1e", open_api())
         .layer(middleware::map_response(main_response_mapper))
         .layer(CookieManagerLayer::new())
         .route("/hey", get(|| async { "Hello, World!" }))
@@ -99,10 +99,10 @@ fn static_routes() -> Router {
     Router::new().nest_service("/", ServeDir::new("./"))
 }
 
-fn open_api() -> Router {
-    let (router, api): (axum::Router, OpenApi) = OpenApiRouter::new()
-        .routes(routes!(get_user))
-        .split_for_parts();
+// fn open_api() -> Router {
+//     let (router, api): (axum::Router, OpenApi) = OpenApiRouter::new()
+//         .routes(routes!(get_user))
+//         .split_for_parts();
 
-    router
-}
+//     router
+// }

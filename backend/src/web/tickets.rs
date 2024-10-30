@@ -23,6 +23,7 @@ async fn create_ticket(
 
     Ok(Json(ticket))
 }
+
 async fn list_tickets(State(mc): State<ModelController>) -> Result<Json<Vec<Ticket>>> {
     println!("->> {:12} - create_ticket", "Handler");
 
@@ -30,6 +31,7 @@ async fn list_tickets(State(mc): State<ModelController>) -> Result<Json<Vec<Tick
 
     Ok(Json(tickets))
 }
+
 async fn delete_tickets(
     State(mc): State<ModelController>,
     Path(id): Path<u64>,
