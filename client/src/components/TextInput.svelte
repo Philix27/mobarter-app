@@ -12,7 +12,7 @@
 	/** Description */
 	export let desc: string = '';
 	export let label: string = '';
-	export let inputType: 'text' | 'number' | 'date' | 'file' = 'text';
+	export let inputType: 'text' | 'number' | 'date' | 'file' | 'password' = 'text';
 	export let errorMessage: string = '';
 	export let className: string = '';
 	export let showPassword: boolean = false;
@@ -76,7 +76,7 @@
 		{/if}
 		{#if desc}
 			<div class="flex items-center justify-center mt-1 text-muted text-xs px-1">
-				<iconify-icon icon="mdi:info" class='mr-2' />
+				<iconify-icon icon="mdi:info" class="mr-2" />
 				<P className="font-thin ">{desc}</P>
 			</div>
 		{/if}
