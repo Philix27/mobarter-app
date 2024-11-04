@@ -13,3 +13,7 @@ type NoteResponse struct {
 type CreateNoteRequest struct {
 	Content string `validate:"required,min=2,max=100" json:"content"`
 }
+type UpdateNoteRequest struct {
+	Id string `validate:"required`
+	Content string `validate:"required,min=2,max=100" json:"content"`
+}
