@@ -1,7 +1,12 @@
 package helper
 
-func ErrorPanic(err error) {
+import (
+	"log"
+)
+
+func ErrorPanic(err error, msg string) {
+
 	if err != nil {
-		panic(err)
+		log.Panicln(msg, " : ", err)
 	}
 }

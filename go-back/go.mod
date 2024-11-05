@@ -9,6 +9,7 @@ require (
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/jackc/pgx/v5 v5.5.5 // indirect
 	github.com/jackc/puddle/v2 v2.2.1 // indirect
+	go.mongodb.org/mongo-driver v1.12.1 // indirect
 	golang.org/x/sync v0.7.0 // indirect
 )
 
@@ -51,6 +52,8 @@ require (
 )
 
 require (
+	github.com/LNMMusic/optional v1.1.0
 	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/joho/godotenv v1.5.1
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
 )
