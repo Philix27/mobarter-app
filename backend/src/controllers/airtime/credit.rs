@@ -1,9 +1,7 @@
-use crate::{web::AUTH_TOKEN, Error, Result};
-use axum::{routing::post, Json, Router};
+use crate::Result;
+use axum::Json;
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
-use tower_cookies::{Cookie, Cookies};
-use utoipa_axum::{router::OpenApiRouter, routes, PathItemExt};
+use tower_cookies::Cookies;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct AirtimePayload {

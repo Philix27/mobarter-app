@@ -34,7 +34,7 @@ async-trait = "0.1"
 tracing = "0.1"
 tracing-subscriber = {version = "0.3", features = ["env-filter"]}
 # db
-# sqlx = {version = "0.8.2", features = ["runtime-tokio-rustls", "postgres", "uuid", "time"] }
+sqlx = {version = "0.8.2", features = ["runtime-async-std-native-tls", "postgres", "uuid","chrono", "time"] }
 # sqlb = "0.4.0"
 # Cypto
 rand="0.8"
@@ -47,6 +47,7 @@ dotenv = "0.15.0"
 jsonwebtoken = "9.2.0"
 lettre = "0.11.10"
 validator ={version = "0.18.1", features = ["derive"]}
+reqwest= {version = "0.12.9", features =["blocking", "json"]}
 # axum-extra ={version = "0.9.4", features = ["derive"]}
 
 [dev-dependencies]

@@ -5,7 +5,7 @@ use axum::{
 
 use crate::{
     app_state::AppState,
-    controllers::{airtime, auth, bank_accounts, exchange, kyc, orders, user},
+    controllers::{airtime, auth, bank_accounts, exchange, kyc, orders, prices, user},
 };
 
 pub fn core_routes(app_state: AppState) -> Router {
@@ -19,7 +19,8 @@ pub fn core_routes(app_state: AppState) -> Router {
         .merge(orders_routes(app_state.clone()))
         .merge(swap_routes(app_state.clone()))
         .merge(exchange_routes(app_state.clone()))
-        .merge(fiat_walletroutes(app_state.clone()))
+        .merge(prices_routes(app_state.clone()))
+        .merge(fiat_wallet_routes(app_state.clone()))
 }
 
 fn auth_route(app_state: AppState) -> Router {
@@ -64,7 +65,7 @@ fn exchange_routes(app_state: AppState) -> Router {
         .route("/exchange/partner_rates", get(exchange::get_partner_rates))
         .with_state(app_state)
 }
-fn fiat_walletroutes(app_state: AppState) -> Router {
+fn fiat_wallet_routes(app_state: AppState) -> Router {
     Router::new()
         .route("/fiat_wallet", post(auth::login::controller))
         .with_state(app_state)
@@ -78,6 +79,14 @@ fn orders_routes(app_state: AppState) -> Router {
         .route("/orders/close", post(orders::close))
         .with_state(app_state)
 }
+
+fn prices_routes(app_state: AppState) -> Router {
+    Router::new()
+        .route("/prices/buy", get(prices::buy))
+        .route("/prices/sell", get(prices::sell))
+        .with_state(app_state)
+}
+
 fn support_routes(app_state: AppState) -> Router {
     Router::new()
         .route("/support", post(auth::login::controller))

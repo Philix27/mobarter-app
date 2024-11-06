@@ -8,3 +8,4 @@ pub mod exchange;
 pub mod swap;
 pub mod fiat_wallet;
 pub mod support;
+pub mod prices;

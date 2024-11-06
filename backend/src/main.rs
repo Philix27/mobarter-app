@@ -7,7 +7,6 @@ mod model;
 mod mw;
 mod routes;
 mod web;
-
 pub use self::error::{Error, Result};
 
 use app_state::AppState;
