@@ -21,7 +21,7 @@ export default defineConfig({
 		})
 	],
 	optimizeDeps: {
-		include: ['dayjs/plugin/relativeTime.js', 'dayjs', '@web3auth/ethereum-provider']
+		include: ['dayjs/plugin/relativeTime.js', 'dayjs',]
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
