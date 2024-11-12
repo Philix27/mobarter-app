@@ -11,11 +11,12 @@
 	<div
 		class="fixed top-0 left-0 bg-black/30 w-full bottom-0 z-30 h-screen flex flex-col justify-between"
 	>
+		<div class="bg-teal-600" on:click={onClose} />
 		<motion.div
 			initial={{ y: 2000 }}
 			animate={{ y: 0 }}
 			transition={{ ease: 'easeInOut', duration: 0.4 }}
-			class="bg-background w-full p-4 rounded-t-[20px] min-h-[calc(30vh)] border-t"
+			class="bg-background w-full p-4 rounded-t-[20px] min-h-[calc(30vh)] border-t border-secondary"
 		>
 			<div
 				class={`
@@ -36,7 +37,7 @@
 					<iconify-icon class="text-[15px]" icon="mdi:close" />
 				</div>
 			</div>
-			<hr class="" />
+			<hr class="border-secondary" />
 			<div class="px-2 py-5">
 				<slot />
 			</div>
