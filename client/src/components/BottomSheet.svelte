@@ -11,7 +11,7 @@
 	<div
 		class="fixed top-0 left-0 bg-black/30 w-full bottom-0 z-30 h-screen flex flex-col justify-between"
 	>
-		<div class="bg-teal-600" on:click={onClose} />
+		<div class="bg-teal-600" />
 		<motion.div
 			initial={{ y: 2000 }}
 			animate={{ y: 0 }}
@@ -33,7 +33,12 @@
 					<div />
 				{/if}
 
-				<div class="rounded-[10px] p-[4px] bg-card" on:click={onClose} role="button" tabindex={1}>
+				<div
+					class="rounded-[10px] h-[20px] w-[20px] p-[4px] bg-card flex items-center justify-center"
+					on:click={onClose}
+					role="button"
+					tabindex={1}
+				>
 					<iconify-icon class="text-[15px]" icon="mdi:close" />
 				</div>
 			</div>

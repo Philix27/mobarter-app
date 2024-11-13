@@ -9,6 +9,7 @@
 	export let name: string = '';
 	/** placeholder */
 	export let place: string = '';
+	export let value: string | number = '';
 	/** Description */
 	export let desc: string = '';
 	export let label: string = '';
@@ -40,6 +41,7 @@
 			<input
 				{...control}
 				placeholder={place}
+				value={value}
 				type={isPassword ? 'password' : !showPassword && inputType}
 				class={cn(
 					`flex h-10 w-full rounded-md

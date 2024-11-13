@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { BottomSheet, Button, Nav, P, TextInput } from 'components';
 	import { toast } from 'svelte-sonner';
+	import { AirtimeData } from './data';
+	import { cn } from 'lib/utils';
+	import Row from './Row.svelte';
 
 	type INetwork = 'MTN' | 'GLO' | 'AIRTEL';
 	const getImgPath = (name: INetwork) => {
@@ -12,6 +15,8 @@
 
 	let networkSelected: INetwork = 'MTN';
 	$: showNetwork = false;
+	$: amountSelected = 100;
+	$: phoneValue = '';
 </script>
 
 <svelte:head>
@@ -29,14 +34,37 @@
 		on:click={() => {
 			showNetwork = true;
 		}}
-		class="flex w-full items-center justify-between mb-4"
+		class="flex w-full items-center justify-between bg-secondary py-2 px-3 rounded-md"
 	>
-		<P className="text-primary">Select Network</P>
+		<P className="text-sm">Select Network</P>
 		<img src={getImgPath(networkSelected)} alt="" height={35} width={35} />
 	</div>
-	<TextInput place="Select Airtime" label="Select Airtime" />
-	<TextInput place="Mobile number" inputType="number" label="Phone number" />
-	<TextInput place="Amount" inputType="number" label="Amount" />
+	<div class="w-full grid grid-cols-4 gap-2 my-4">
+		{#each AirtimeData['Nigeria'].amount as val}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<div
+				class={cn(
+					`py-4 bg-secondary border-secondary border rounded-md flex items-center justify-center`,
+					amountSelected === val && 'border-primary '
+				)}
+				on:click={() => {
+					amountSelected = val;
+				}}
+			>
+				<P className="text-[14px] font-semibold"
+					>{`${AirtimeData['Nigeria'].symbol}${val.toString()}`}</P
+				>
+			</div>
+		{/each}
+	</div>
+	<TextInput place="Amount" inputType="number" label="Amount" bind:value={amountSelected} />
+	<TextInput
+		place="Mobile number"
+		inputType="number"
+		label="Phone number"
+		bind:value={phoneValue}
+	/>
 	<Button onclick={() => toast('Funds sent')}>Buy</Button>
 </div>
 
@@ -47,6 +75,28 @@
 	}}
 	title="Networks"
 >
-	<div></div>
-	<P>Hello</P>
+	<Row
+		title="MTN"
+		imgSrc={getImgPath('MTN')}
+		isActive={networkSelected === 'MTN'}
+		onClick={() => {
+			networkSelected = 'MTN';
+		}}
+	/>
+	<Row
+		title="Airtel"
+		imgSrc={getImgPath('AIRTEL')}
+		isActive={networkSelected === 'AIRTEL'}
+		onClick={() => {
+			networkSelected = 'AIRTEL';
+		}}
+	/>
+	<Row
+		title="Glo"
+		imgSrc={getImgPath('GLO')}
+		isActive={networkSelected === 'GLO'}
+		onClick={() => {
+			networkSelected = 'GLO';
+		}}
+	/>
 </BottomSheet>
