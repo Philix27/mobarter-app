@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { Nav, P } from 'components';
 	import QuickActions from './QuickActions.svelte';
-	import Transactions from './Transactions.svelte';
+	import Categories from './Categories.svelte';
 	import { account, getBalance } from 'lib/web3';
 	import type { PageData } from './$types';
 	import { cUSD } from 'celo-kit';
@@ -32,7 +32,7 @@
 </svelte:head>
 
 <div>
-	<Nav title="Mobarter" theme={data.theme} onIconClick={clickIcon} isHome={true} />
+	<Nav theme={data.theme} onIconClick={clickIcon} isHome={true} />
 
 	<div class="">
 		<div class="flex items-center justify-between mb-3 mx-4">
@@ -42,7 +42,9 @@
 				<P className="text-primary text-sm">Balances</P>
 			</a>
 		</div>
-		<QuickActions />
-		<Transactions />
+		<div class=" min-h-screen h-screen overflow-y-scroll no-scrollbar scroll-smooth">
+			<QuickActions />
+			<Categories />
+		</div>
 	</div>
 </div>

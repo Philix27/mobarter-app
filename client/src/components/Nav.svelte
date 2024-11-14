@@ -7,13 +7,14 @@
 	import { page } from '$app/stores';
 	import type { SubmitFunction } from '@sveltejs/kit';
 
-	export let theme: string = 'dark';
-	export let isHome: boolean = false;
-	export let title;
-	export let isBack = false;
-	export let icon = '';
-	export let onIconClick = () => {};
-
+	const props = $props<{
+		theme?: string;
+		title?: string;
+		icon?: string;
+		isHome?: boolean;
+		isBack?: boolean;
+		onIconClick?: () => void;
+	}>();
 	/**
 	 * @param {string} route
 	 * @param {boolean} replaceState
@@ -24,7 +25,7 @@
 
 	function goBack(defaultRoute = '/dashboard') {
 		// function goBack() {
-		if (isBack) {
+		if (props.isBack) {
 			const ref = document.referrer;
 			// console.log('Cliecked backe', { ref });
 			// goto(ref.length > 0 ? ref : defaultRoute);
@@ -67,7 +68,7 @@
         z-10 bg-background px-5
       `}
 >
-	{#if isBack}
+	{#if props.isBack}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-interactive-supports-focus -->
 		<iconify-icon
@@ -87,15 +88,20 @@
 		/>
 	{/if}
 
-	<P v="p4" className="text-card-foreground my-0 font-extrabold tracking-wide font-sans ml-4 text-sm"
-		>{title}</P
-	>
+	{#if props.title}
+		<P
+			v="p4"
+			className="text-card-foreground my-0 font-extrabold tracking-wide font-sans ml-4 text-sm"
+			>{props.title}</P
+		>
+	{/if}
+
 	<div class="flex items-center">
-		{#if isHome}
+		{#if props.isHome}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-interactive-supports-focus -->
 			<form action="" method="POST" use:enhance={submitUpdateTheme}>
-				{#if theme === 'light'}
+				{#if props.theme === 'light'}
 					<button
 						formaction="/?/setTheme&theme=dark&redirectTo={$page.url.pathname}"
 						class="outline-none border-none p-0 mt-1 mr-4"
@@ -114,11 +120,15 @@
 			<iconify-icon
 				class="text-xl text-foreground mr-2"
 				icon="system-uicons:bell"
-				on:click={onIconClick}
+				on:click={props.onIconClick}
 			/>
 		{/if}
-		{#if icon}
-			<iconify-icon class="text-xl text-foreground mr-2" {icon} on:click={onIconClick} />
+		{#if props.icon}
+			<iconify-icon
+				class="text-xl text-foreground mr-2"
+				icon={props.icon}
+				on:click={props.onIconClick}
+			/>
 		{/if}
 	</div>
 </div>

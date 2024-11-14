@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getTitle, Nav, P, Tabs } from 'components';
-	import Transactions from '../dashboard/Transactions.svelte';
+	import Transactions from './Transactions.svelte';
 	import type { ITransactionsTabs } from './store';
 	import { transactionsState } from './store';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { BottomSheet, Button, Nav, P, TextInput, BottomRow } from 'components';
-	import { AirtimeData } from './data';
+	import { AirtimeData } from 'lib/data.js';
 	import { cn } from 'lib/utils';
 	import { z } from 'zod';
 
