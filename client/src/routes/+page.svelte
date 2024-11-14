@@ -24,7 +24,8 @@
 				// to comply with API Minipay injects one address but in the form of array
 				console.log(accounts[0]);
 				// @ts-ignore
-				accountAddress = $account.address;
+				// accountAddress = $account.address;
+				accountAddress = accounts[0];
 			}
 
 			// User is not using MiniPay
@@ -44,6 +45,7 @@
 	<img src="dollar.png" alt="Welcome" class="h-fit max-h-[300px] mt-[100px]" />
 	<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
 	<p>Address: {accountAddress}</p>
+	<p>Address Wag: {$account.address}</p>
 
 	{#if $account.isConnected}
 		<p>Already Connected</p>
