@@ -12,10 +12,7 @@
 		class="fixed top-0 left-0 bg-black/30 w-full bottom-0 z-30 h-screen flex flex-col justify-between"
 	>
 		<div class="bg-teal-600" />
-		<motion.div
-			initial={{ y: 2000 }}
-			animate={{ y: 0 }}
-			transition={{ ease: 'easeInOut', duration: 0.4 }}
+		<div
 			class="bg-background w-full p-4 rounded-t-[20px] min-h-[calc(30vh)] border-t border-secondary"
 		>
 			<div
@@ -46,6 +43,6 @@
 			<div class="px-2 py-5">
 				<slot />
 			</div>
-		</motion.div>
+		</div>
 	</div>
 {/if}
