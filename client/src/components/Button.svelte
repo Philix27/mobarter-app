@@ -3,7 +3,7 @@
 	import { P } from 'components';
 	import { cva, type VariantProps } from 'class-variance-authority';
 
-	export let onclick: VoidFunction;
+	export let onclick: VoidFunction = () => {};
 	// $: onclick();
 
 	export let className: string = '';
@@ -11,6 +11,7 @@
 	export let variant: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' =
 		'default';
 	export let size: 'default' | 'sm' | 'lg' | 'icon' = 'default';
+	export let btype: 'submit' | 'button' = 'submit';
 
 	const buttonVariants = cva(
 		`inline-flex items-center
@@ -47,7 +48,12 @@
 	//
 </script>
 
-<button disabled={isLoading} class={cn(buttonVariants({ variant, size, className }))} on:click={onclick}>
+<button
+	type={btype}
+	disabled={isLoading}
+	class={cn(buttonVariants({ variant, size, className }))}
+	on:click={onclick}
+>
 	{#if isLoading}
 		<!-- <Spinner color="#fff" size={40} />  -->
 		<P>...</P>

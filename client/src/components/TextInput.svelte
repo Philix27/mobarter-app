@@ -4,6 +4,7 @@
 	import { P } from 'components';
 
 	export let isPassword: boolean = false;
+	export let required: boolean = false;
 	export let control: any = '';
 	/** name to be used as label */
 	export let name: string = '';
@@ -41,7 +42,7 @@
 			<input
 				{...control}
 				placeholder={place}
-				value={value}
+				{value}
 				type={isPassword ? 'password' : !showPassword && inputType}
 				class={cn(
 					`flex h-10 w-full rounded-md
@@ -50,7 +51,8 @@
 				)}
 				pattern={inputType === 'number' && '[0-9]*'}
 				inputmode={inputType === 'number' && 'numeric'}
-				{name}
+				name={label}
+				required
 			/>
 			{#if isPassword}
 				{#if showPassword}

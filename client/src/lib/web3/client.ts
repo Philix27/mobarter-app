@@ -112,13 +112,18 @@ export const provider = readable<unknown | undefined>(undefined, (set) =>
 	})
 );
 
-export const getBalance = (tokenAddress: `0x${string}`, userAddress: `0x${string}`) =>
-	readable(
-		_getBalance(wagmiConfig, {
-			address: userAddress,
-			token: tokenAddress
-		})
-	);
+export const getBalance = (tokenAddress: `0x${string}`, userAddress: `0x${string}`) => {
+	// return readable(
+	// 	_getBalance(wagmiConfig, {
+	// 		address: userAddress,
+	// 		token: tokenAddress
+	// 	})
+	// );
+	return _getBalance(wagmiConfig, {
+		address: userAddress,
+		token: tokenAddress
+	});
+};
 
 export const supported_chains = writable<string[]>([]);
 

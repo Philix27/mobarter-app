@@ -1,11 +1,35 @@
 <script lang="ts">
-	import { BottomSheet, Button, Nav, P, TextInput } from 'components';
-	import { toast } from 'svelte-sonner';
+	import { BottomSheet, Button, Nav, P, TextInput, BottomRow } from 'components';
 	import { AirtimeData } from './data';
 	import { cn } from 'lib/utils';
-	import Row from './Row.svelte';
+	import { z } from 'zod';
+
+	const formSchema = z.object({
+		amountSelected: z.number({ message: 'Must be a number' }),
+		phoneValue: z.number({ message: 'Not more than 11 letters' }).max(11)
+	});
+
+	const handleSubmit = () => {
+		const result = formSchema.safeParse({ amountSelected, phoneValue });
+		if (!result.success) {
+			showConfirm = true;
+			// zErrors = result.error.format().amountSelected?._errors;
+			// let uop = parseFormError('', cerrors);
+			// errors = result.error.errors.map((error) => {
+			// 	return {
+			// 		field: error.path[0],
+			// 		message: error.message
+			// 	};
+			// });
+			return;
+		} else {
+			//! Continue with form submission...
+		}
+	};
 
 	type INetwork = 'MTN' | 'GLO' | 'AIRTEL';
+	type IConfirm = 'Not Confirmed' | 'Confirm';
+
 	const getImgPath = (name: INetwork) => {
 		if (name.trim().toUpperCase() === 'MTN') return '/networks/mtn2.png';
 		if (name.trim().toUpperCase() === 'GLO') return '/networks/glo.png';
@@ -13,10 +37,14 @@
 		return '/networks/mtn2.png';
 	};
 
-	let networkSelected: INetwork = 'MTN';
-	$: showNetwork = false;
-	$: amountSelected = 100;
-	$: phoneValue = '';
+	let { data, form } = $props();
+
+	let networkSelected: INetwork = $state('MTN');
+	let showNetwork = $state(false);
+	let amountSelected = $state(100);
+	let phoneValue = $state('');
+
+	let showConfirm = $state(false);
 </script>
 
 <svelte:head>
@@ -26,12 +54,10 @@
 
 <div class="w-full flex flex-col items-center justify-center gap-y-4">
 	<Nav title="Airtime" isBack />
-	<!-- svelte-ignore missing-declaration -->
-	<!-- svelte-ignore a11y-interactive-supports-focus -->
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
-		on:click={() => {
+		onclick={() => {
 			showNetwork = true;
 		}}
 		class="flex w-full items-center justify-between bg-secondary py-2 px-3 rounded-md"
@@ -40,15 +66,18 @@
 		<img src={getImgPath(networkSelected)} alt="" height={35} width={35} />
 	</div>
 	<div class="w-full grid grid-cols-4 gap-2 my-4">
+		<!-- svelte-ignore legacy_code -->
 		{#each AirtimeData['Nigeria'].amount as val}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<!-- svelte-ignore legacy_code -->
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div
 				class={cn(
-					`py-4 bg-secondary border-secondary border rounded-md flex items-center justify-center`,
+					`py-4 bg-secondary border-secondary 
+					border rounded-md flex items-center justify-center`,
 					amountSelected === val && 'border-primary '
 				)}
-				on:click={() => {
+				onclick={() => {
 					amountSelected = val;
 				}}
 			>
@@ -58,24 +87,53 @@
 			</div>
 		{/each}
 	</div>
-	<TextInput place="Amount" inputType="number" label="Amount" bind:value={amountSelected} />
+
+	<TextInput
+		place="Amount"
+		inputType="number"
+		label="Amount"
+		required
+		bind:value={amountSelected}
+	/>
+	<!-- errorMessage={errors['amountSelected']} -->
 	<TextInput
 		place="Mobile number"
 		inputType="number"
 		label="Phone number"
+		required
 		bind:value={phoneValue}
 	/>
-	<Button onclick={() => toast('Funds sent')}>Buy</Button>
+	<!-- onclick={() => toast('Funds sent')} -->
+	<Button onclick={handleSubmit} btype="submit">Buy</Button>
 </div>
 
+<BottomSheet
+	bind:show={showConfirm}
+	onClose={() => {
+		showConfirm = false;
+	}}
+	title="Confirm"
+>
+	<div class="w-full flex flex-col items-center justify-center gap-y-3">
+		<p>You are about this thousand naira $7.98</p>
+
+		<Button
+			onclick={() => {
+				showConfirm = false;
+			}}
+			btype="submit">Buy</Button
+		>
+	</div>
+</BottomSheet>
 <BottomSheet
 	bind:show={showNetwork}
 	onClose={() => {
 		showNetwork = false;
+		showConfirm = false;
 	}}
 	title="Networks"
 >
-	<Row
+	<BottomRow
 		title="MTN"
 		imgSrc={getImgPath('MTN')}
 		isActive={networkSelected === 'MTN'}
@@ -83,7 +141,7 @@
 			networkSelected = 'MTN';
 		}}
 	/>
-	<Row
+	<BottomRow
 		title="Airtel"
 		imgSrc={getImgPath('AIRTEL')}
 		isActive={networkSelected === 'AIRTEL'}
@@ -91,7 +149,7 @@
 			networkSelected = 'AIRTEL';
 		}}
 	/>
-	<Row
+	<BottomRow
 		title="Glo"
 		imgSrc={getImgPath('GLO')}
 		isActive={networkSelected === 'GLO'}

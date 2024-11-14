@@ -9,7 +9,7 @@
 
 {#if show}
 	<div
-		class="fixed top-0 left-0 bg-black/30 w-full bottom-0 z-30 h-screen flex flex-col justify-between"
+		class="fixed top-0 left-0 bg-black/50 w-full bottom-0 z-30 h-screen flex flex-col justify-between"
 	>
 		<div class="bg-teal-600" />
 		<div
@@ -23,7 +23,7 @@
       px-2 pb-2`}
 			>
 				{#if title}
-					<P>
+					<P className="font-semibold">
 						{title}
 					</P>
 				{:else}

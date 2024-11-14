@@ -1,11 +1,13 @@
 <script>
-	import { account, chainId, modal } from 'lib/web3';
+	import { account, chainId, modal, getBalance } from 'lib/web3';
 	import { Button } from 'components';
 
 	// import { connected } from 'svelte-wagmi';
 	import { browser } from '$app/environment';
+	import { boolean } from 'zod';
 
 	$: accountAddress = '';
+	$: isMiniPay = false;
 
 	if (browser) {
 		if (window && window.ethereum) {
@@ -13,7 +15,7 @@
 
 			if (window.ethereum.isMiniPay) {
 				// User is using Minipay
-
+				isMiniPay = true;
 				// Requesting account addresses
 				let accounts = window.ethereum.request({
 					method: 'eth_requestAccounts',

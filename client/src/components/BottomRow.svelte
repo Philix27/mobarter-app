@@ -25,7 +25,7 @@
 </script>
 
 <div
-	class="w-full flex items-center justify-between border-b border-secondary py-2"
+	class="w-full flex items-center justify-between py-2"
 	on:click={onClick}
 >
 	<div class="flex items-center justify-center">

@@ -1,15 +1,13 @@
 <script lang="ts">
-	import 'iconify-icon';
 	import { P } from 'components';
 
 	let quickActions = [
 		{ id: '6', name: 'Airtime', link: '/payments/airtime', icon: 'fluent:call-32-regular' },
-		{ id: '7', name: 'Data', link: '/payments/data', icon: 'mdi-light:settings' },
-		{ id: '8', name: 'Cable TV', link: '/payments/cable', icon: 'mdi-light:settings' },
-		{ id: '9', name: 'Electricity', link: '/payments/electric', icon: 'mdi-light:settings' },
-		{ id: '10', name: 'Sports', link: '/payments/sports', icon: 'mdi-light:settings' },
+		{ id: '7', name: 'Data', link: '/payments/data', icon: 'gg:data' },
+		{ id: '8', name: 'Cable TV', link: '/payments/cable', icon: 'ic:outline-live-tv' },
+		{ id: '9', name: 'Electricity', link: '/payments/electric', icon: 'lucide:utility-pole' },
+		{ id: '10', name: 'Sports', link: '/payments/sports', icon: 'solar:gamepad-outline' },
 		{ id: '4', name: 'Travel', link: '/payments/travel', icon: 'hugeicons:bitcoin-withdraw' },
-		{ id: '4', name: 'Religion', link: '/payments/religion', icon: 'hugeicons:bitcoin-withdraw' }
 		// { id: '5', name: 'Savings', link: '/savings', icon: 'material-symbols-light:savings-outline' },
 		// { id: '4', name: 'Withdraw', link: '/withdraw', icon: 'hugeicons:bitcoin-withdraw' },
 		// { id: '1', name: 'Send', link: '/send', icon: 'majesticons:send-line' },
@@ -25,7 +23,6 @@
 			class="p-4 flex flex-col items-center justify-center bg-accent rounded-md cursor-pointer"
 		>
 			<iconify-icon class="text-xl text-primary mb-2" icon={quick.icon} />
-			<!-- <p>{quick.name}</p> -->
 			<P v="p6">{quick.name}</P>
 		</a>
 	{/each}

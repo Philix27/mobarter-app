@@ -87,7 +87,7 @@
 		/>
 	{/if}
 
-	<P v="p4" className="text-card-foreground my-0 font-extrabold tracking-wide font-sans ml-4"
+	<P v="p4" className="text-card-foreground my-0 font-extrabold tracking-wide font-sans ml-4 text-sm"
 		>{title}</P
 	>
 	<div class="flex items-center">
