@@ -7,6 +7,7 @@
 	import type { PageData } from './$types';
 	import { cUSD } from 'celo-kit';
 	import { onMount } from 'svelte';
+	import Transactions from '../transactions/Transactions.svelte';
 
 	export let data: PageData;
 
@@ -44,7 +45,27 @@
 		</div>
 		<div class=" min-h-screen h-screen overflow-y-scroll no-scrollbar scroll-smooth">
 			<QuickActions />
-			<Categories />
+			<div class="">
+				<div class="flex items-center justify-between mt-5 mb-3 mx-2">
+					<P className="text-sm">Utilities</P>
+					<div></div>
+				</div>
+				<div class="max-h-[300px] overflow-y-scroll no-scrollbar">
+					<Categories />
+				</div>
+			</div>
+
+			<div>
+				<div class="flex items-center justify-between mt-5 mb-3 mx-2">
+					<P className="text-sm">Transactions</P>
+					<a href="/transactions">
+						<iconify-icon icon="material-symbols:history" class="text-xl text-primary" />
+					</a>
+				</div>
+				<div class="max-h-[300px] overflow-y-scroll no-scrollbar">
+					<Transactions />
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

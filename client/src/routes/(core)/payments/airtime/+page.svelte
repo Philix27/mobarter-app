@@ -60,7 +60,7 @@
 		onclick={() => {
 			showNetwork = true;
 		}}
-		class="flex w-full items-center justify-between bg-secondary py-2 px-3 rounded-md"
+		class="flex w-full items-center justify-between bg-card py-2 px-3 rounded-md"
 	>
 		<P className="text-sm">Select Network</P>
 		<img src={getImgPath(networkSelected)} alt="" height={35} width={35} />
@@ -73,7 +73,7 @@
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div
 				class={cn(
-					`py-4 bg-secondary border-secondary 
+					`py-4 bg-card border-secondary 
 					border rounded-md flex items-center justify-center`,
 					amountSelected === val && 'border-primary '
 				)}
