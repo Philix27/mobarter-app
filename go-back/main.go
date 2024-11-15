@@ -60,7 +60,7 @@ func main() {
 	}
 
 	database.RunMigrations(db)
-	// Slog
+	// // Slog
 	handlerOpt := &slog.HandlerOptions{
 		Level:     slog.LevelDebug,
 		AddSource: true,
