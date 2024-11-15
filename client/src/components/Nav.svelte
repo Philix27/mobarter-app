@@ -12,6 +12,7 @@
 		title?: string;
 		icon?: string;
 		isHome?: boolean;
+		showThemeToggle?: boolean;
 		isBack?: boolean;
 		onIconClick?: () => void;
 	}>();
@@ -97,7 +98,7 @@
 	{/if}
 
 	<div class="flex items-center">
-		{#if props.isHome}
+		{#if props.showThemeToggle}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-interactive-supports-focus -->
 			<form action="" method="POST" use:enhance={submitUpdateTheme}>
@@ -117,6 +118,8 @@
 					</button>
 				{/if}
 			</form>
+		{/if}
+		{#if props.isHome}
 			<iconify-icon
 				class="text-xl text-foreground mr-2"
 				icon="system-uicons:bell"

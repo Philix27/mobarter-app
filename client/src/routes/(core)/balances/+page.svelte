@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Nav, P } from 'components';
 	import { TokenList } from 'celo-kit';
-	import { getBalance , account, } from 'lib/web3';
-
+	import { getBalance, account } from 'lib/web3';
 </script>
 
 <svelte:head>
@@ -15,15 +14,17 @@
 
 	<div>
 		{#each TokenList as item}
-			<div class="flex items-center px-3 py-1 w-full bg-card mb-[2px] rounded-md">
-				<div class="h-[40px] w-[50px] rounded-full flex items-center justify-center mr-2">
+			<div
+				class="flex items-center px-3 py-[2px] w-full bg-accent border-b-[0.5px] border-background"
+			>
+				<div class="h-[30px] w-[30px] rounded-full flex items-center justify-center mr-2">
 					<img src={`/tokens/${item.symbol}.svg`} alt="cUSD" />
 				</div>
 				<div class="flex items-center justify-between w-full">
 					<div class="flex flex-col items-start p-2">
-						<P>{item.name}</P>
+						<P className="text-sm">{item.name}</P>
 
-						<P className="text-muted text-xs mt-1 font-thin">Celo Network</P>
+						<P className="text-secondary text-xs mt-1 font-thin">Celo Network</P>
 					</div>
 					<div class="flex">
 						<!-- {#await $getBalance("0x3432", "0x3432")}

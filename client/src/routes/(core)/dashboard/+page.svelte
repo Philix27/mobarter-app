@@ -33,8 +33,7 @@
 </svelte:head>
 
 <div>
-	<Nav theme={data.theme} onIconClick={clickIcon} isHome={true} />
-
+	<Nav theme={data.theme} showThemeToggle />
 	<div class="">
 		<div class="flex items-center justify-between mb-3 mx-4">
 			<P className="text-3xl font-extralight">${balance}</P>

@@ -14,20 +14,71 @@ type User struct {
 }
 type UserAuth struct {
 	gorm.Model
-	Email          string
-	Password       string
-	AccessToken    string
-	RefreshToken   string
-	SlackToken     string
-	LinkedInToken  string
-	TwitterToken   string
-	WhatsappToken  string
-	InstagramToken string
-	DiscordToken   string
-	UserID         uint
+	Email        string
+	Password     string
+	AccessToken  string
+	RefreshToken string
+	UserID       uint
 }
 
-// / * Workspace
+type Waitlist struct {
+	gorm.Model
+	Email     string
+	FirstName string
+	LastName  string
+}
+type KycCredential struct {
+	gorm.Model
+	Email                 string
+	IsEmailVerified       bool
+	Phone                 string
+	IsPhoneVerified       bool
+	Nin                   string
+	IsNinVerified         bool
+	Bvn                   string
+	IsBvnVerified         bool
+	HomeAddress           string
+	IsHomeAddressVerified bool
+	NextOfKinName         string
+	NextOfKinPhone        string
+}
+
+type BankAccount struct {
+	gorm.Model
+	Name     string
+	No       string
+	BankName string
+}
+type WalletTransactions struct {
+	gorm.Model
+	Title  string
+	Amount int
+	From   string
+	To     string
+	Status string
+}
+
+type AirtimeTransactions struct {
+	gorm.Model
+	Phone   string
+	Network string
+	Amount  int
+	Fee     int
+	Status  string
+	To      string
+}
+type DataTransactions struct {
+	gorm.Model
+	Phone      string
+	Network    string
+	Amount     int
+	Fee        int
+	Status     string
+	DataPlanId string
+	To         string
+}
+
+// ! Old
 type Workspace struct {
 	gorm.Model
 	Name          string
@@ -90,34 +141,6 @@ type Announcement struct {
 	Subtitle    string
 	WorkspaceID uint
 }
-type Waitlist struct {
-	gorm.Model
-	Email     string
-	FirstName string
-	LastName  string
-}
-type KycCredential struct {
-	gorm.Model
-	Email                 string
-	IsEmailVerified       bool
-	Phone                 string
-	IsPhoneVerified       bool
-	Nin                   string
-	IsNinVerified         bool
-	Bvn                   string
-	IsBvnVerified         bool
-	HomeAddress           string
-	IsHomeAddressVerified bool
-	NextOfKinName         string
-	NextOfKinPhone        string
-}
-
-type BankAccount struct {
-	gorm.Model
-	Name     string
-	No       string
-	BankName string
-}
 
 type TaskTags struct {
 	gorm.Model
@@ -126,7 +149,6 @@ type TaskTags struct {
 	ColorCode   string
 }
 
-// / * Schedule
 type Schedule struct {
 	gorm.Model
 	Title       string

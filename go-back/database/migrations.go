@@ -9,6 +9,13 @@ import (
 // Tables with More dependencies stays on top
 func RunMigrations(db *gorm.DB) {
 	err := db.AutoMigrate(
+		KycCredential{},
+		Waitlist{},
+		BankAccount{},
+		AirtimeTransactions{},
+		DataTransactions{},
+		WalletTransactions{},
+		//! Old
 		Workspace{},
 		WorkspaceEpic{},
 		WorkspaceStory{},

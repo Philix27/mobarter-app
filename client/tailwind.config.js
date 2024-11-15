@@ -29,7 +29,7 @@ export default {
 					foreground: 'var(--secondary-foreground)'
 				},
 				destructive: {
-					DEFAULT: 'hsl(var(--destructive))',
+					DEFAULT: 'var(--destructive)',
 					foreground: 'hsl(var(--destructive-foreground))'
 				},
 				muted: {
@@ -41,7 +41,7 @@ export default {
 					foreground: 'var(--accent-foreground)'
 				},
 				popover: {
-					DEFAULT: 'hsl(var(--popover))',
+					DEFAULT: 'var(--popover)',
 					foreground: 'hsl(var(--popover-foreground))'
 				},
 				card: {

@@ -48,7 +48,7 @@
 <div class="pb-[20px]">
 	{#each longList as item, index}
 		<a href={`/transactions/${index}`}>
-			<div class="flex items-center p-2 w-full bg-accent mb-[2px] rounded-md">
+			<div class="flex items-center px-2 py-[2px] w-full bg-accent border-b-[0.5px] border-background">
 				<div class="size-[40px] bg-background rounded-full flex items-center justify-center">
 					<iconify-icon icon="mdi:dollar" class="text-xl" />
 				</div>
