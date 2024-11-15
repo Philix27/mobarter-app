@@ -31,11 +31,11 @@ func NewRoutes(repo iRepository, logger *slog.Logger, logGroupKey string) iRoute
 }
 
 func (r *Routes) manager(route fiber.Router) {
-	route.Post("/", r.create).Name("WorkspaceCreate")
-	route.Put("/", r.update).Name("WorkspaceUpdate")
-	route.Delete("/:id", r.deleteOne).Name("WorkspaceDelete")
-	route.Get("/:id", r.getOne).Name("WorkspaceGetOne")
-	route.Get("/", r.getAllByUserId).Name("WorkspaceGetAll")
+	route.Post("/", r.create)
+	route.Put("/", r.update)
+	route.Delete("/:id", r.deleteOne)
+	route.Get("/:id", r.getOne)
+	route.Get("/", r.getAllByUserId)
 }
 
 func (r *Routes) create(c *fiber.Ctx) error {

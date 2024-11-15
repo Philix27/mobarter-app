@@ -8,12 +8,12 @@ import (
 	"gorm.io/gorm"
 )
 
-var ModuleName = "WAIT_LIST"
+var ModuleName = "kyc"
 
 func Setup(router fiber.Router, db *gorm.DB, logger *slog.Logger) {
 
 	repo := NewRepository(
-		db.Model(&database.Waitlist{}).Debug(),
+		db.Model(&database.KycCredential{}).Debug(),
 		logger, ModuleName+"_REPOSITORY")
 
 	handler := NewRoutes(repo, logger, ModuleName+"_ROUTES")

@@ -8,9 +8,9 @@ import (
 )
 
 type iRepository interface {
-	Create(data createDto) error
-	FindById(dataId int) (waitlist, error)
-	FindAll() ([]waitlist, error)
+	Create(data CreateInput) error
+	FindById(dataId int) (Waitlist, error)
+	FindAll() ([]Waitlist, error)
 }
 
 type Repository struct {
@@ -27,13 +27,12 @@ func NewRepository(db *gorm.DB, logger *slog.Logger, logGroupKey string) iReposi
 	}
 }
 
-// Create implements iRepository.
-func (r *Repository) Create(data createDto) error {
+func (r *Repository) Create(data CreateInput) error {
 
-	result := r.Db.Create(&database.Announcement{
-		Title:       data.Title,
-		Subtitle:    data.Subtitle,
-		WorkspaceID: data.WorkspaceId,
+	result := r.Db.Create(&database.Waitlist{
+		Email:     data.Email,
+		FirstName: data.FirstName,
+		LastName:  data.LastName,
 	})
 
 	if result.Error != nil {
@@ -49,46 +48,28 @@ func (r *Repository) Create(data createDto) error {
 	return nil
 }
 
-// FindAll implements iRepository.
-func (r *Repository) FindAll() ([]waitlist, error) {
-	var announceList []waitlist
-	result := r.Db.Limit(10).Find(&announceList)
+func (r *Repository) FindAll() ([]Waitlist, error) {
+	var list []Waitlist
+	result := r.Db.Limit(10).Find(&list)
 
 	if result.Error != nil {
 		r.logger.Error("CANNOT FIND_ALL:", result.Error)
 		return nil, result.Error
 	}
 	r.logger.Info("READ ALL")
-	return announceList, nil
+	return list, nil
 }
 
-// FindById implements iRepository.
-func (r *Repository) FindById(dataId int) (waitlist, error) {
-	waitlistItem := waitlist{}
+func (r *Repository) FindById(dataId int) (Waitlist, error) {
+	waitlistItem := Waitlist{}
 
 	result := r.Db.First(&waitlistItem, dataId)
 
 	if result.Error != nil {
 		r.logger.Error("CANNOT FIND_ONE:", result.Error, dataId)
-		return waitlist{}, result.Error
+		return Waitlist{}, result.Error
 	} else {
 		r.logger.Error("RETRIEVE FIND_ONE:", waitlistItem)
-		return waitlistItem, nil
-	}
-
-}
-
-// FindById implements iRepository.
-func (r *Repository) FindByProperties(dataId int) (waitlist, error) {
-	var waitlistItem waitlist
-	result := r.Db.Where(
-		"id = ?", dataId,
-	).First(&waitlistItem)
-
-	if result.Error != nil {
-		r.logger.Error("CANNOT FIND_ONE:", result.Error)
-		return waitlist{}, result.Error
-	} else {
 		return waitlistItem, nil
 	}
 

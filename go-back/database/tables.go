@@ -50,10 +50,10 @@ type WorkspaceEpic struct {
 
 type WorkspaceStory struct {
 	gorm.Model
-	Title       string
-	Description string
-	Tasks       []Task
-	WorkspaceEpicID  uint
+	Title           string
+	Description     string
+	Tasks           []Task
+	WorkspaceEpicID uint
 }
 
 type Board struct {
@@ -89,6 +89,34 @@ type Announcement struct {
 	Title       string
 	Subtitle    string
 	WorkspaceID uint
+}
+type Waitlist struct {
+	gorm.Model
+	Email     string
+	FirstName string
+	LastName  string
+}
+type KycCredential struct {
+	gorm.Model
+	Email                 string
+	IsEmailVerified       bool
+	Phone                 string
+	IsPhoneVerified       bool
+	Nin                   string
+	IsNinVerified         bool
+	Bvn                   string
+	IsBvnVerified         bool
+	HomeAddress           string
+	IsHomeAddressVerified bool
+	NextOfKinName         string
+	NextOfKinPhone        string
+}
+
+type BankAccount struct {
+	gorm.Model
+	Name     string
+	No       string
+	BankName string
 }
 
 type TaskTags struct {

@@ -23,11 +23,12 @@ type GetOneResponse struct {
 type GetAllInput struct {
 	Limit int `json:"limit"`
 }
+
 type GetAllResponse struct {
-	Data []Waitlist `json:"data"`
+	Data []KycCredential `json:"data"`
 }
 
-type Waitlist struct {
+type KycCredential struct {
 	Id       int    `json:"id"`
 	Title    string `json:"title"`
 	Subtitle string `json:"subtitle"`

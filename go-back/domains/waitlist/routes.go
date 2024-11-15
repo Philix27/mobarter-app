@@ -41,10 +41,10 @@ func (r *Routes) create(c *fiber.Ctx) error {
 		return err
 	}
 
-	if err := r.repository.Create(createDto{
-		Title:       input.Title,
-		Subtitle:    input.Subtitle,
-		WorkspaceId: input.WorkspaceId,
+	if err := r.repository.Create(CreateInput{
+		Email:     input.Email,
+		FirstName: input.FirstName,
+		LastName:  input.LastName,
 	}); err != nil {
 		return c.SendString("Error in request")
 	}
