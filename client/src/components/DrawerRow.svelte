@@ -19,7 +19,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
 	class={cn(
-		'w-full flex items-center py-3 px-4 cursor-pointer border-b-[0.1px] border-secondary',
+		'w-full flex items-center py-3 px-4 cursor-pointer border-b-[0.1px] border-accent',
 		isActive && 'bg-accent'
 	)}
 	on:click={onItemClick}

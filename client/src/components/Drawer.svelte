@@ -7,11 +7,10 @@
 	};
 
 	const items = [
-		{ title: 'Dashboard', link: '/dashboard', icon: 'mdi:home' },
+		{ title: 'Home', link: '/dashboard', icon: 'mdi:home' },
 		{ title: 'Settings', link: '/settings', icon: 'mdi:settings' },
-		{ title: 'Help', link: '/help', icon: 'mdi:help' },
 		{ title: 'Support', link: '/support', icon: 'mdi:support' },
-		{ title: 'Admin', link: '/admin', icon: 'mdi:support' }
+		{ title: 'Privacy Policy', link: 'https://www.mobarter.com', icon: 'mdi:support' }
 	];
 
 	const onItemClick = () => {};
