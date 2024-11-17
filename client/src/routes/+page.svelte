@@ -1,10 +1,20 @@
-<script>
+<script lang="ts">
 	import { account, chainId, modal, getBalance } from 'lib/web3';
 	import { Button } from 'components';
-
-	// import { connected } from 'svelte-wagmi';
 	import { browser } from '$app/environment';
-	import { boolean } from 'zod';
+	import { queryStore, gql, getContextClient } from '@urql/svelte';
+	import type { GetCountryQuery, GetCountryQueryStore } from '../generated/graphql';
+
+	const posts = queryStore<GetCountryQuery>({
+		client: getContextClient(),
+		query: gql`
+			query GetCountry {
+				CountryList {
+					name
+				}
+			}
+		`
+	});
 
 	$: accountAddress = '';
 	$: isMiniPay = false;
@@ -35,17 +45,22 @@
 	}
 
 	function connectWallet() {
+		const yoe = $posts.data;
 		modal.open({ view: 'Connect' });
 	}
-
-	// The code must run in a browser environment and not in node environment
-
-	// User does not have a injected wallet
 </script>
 
 <section class="bg-primary h-screen flex flex-col items-center">
 	<img src="dollar.png" alt="Welcome" class="h-fit max-h-[300px] mt-[100px]" />
 	<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
+	{#if !$posts.data}
+		<p>Loading....</p>
+	{:else if $posts.data}
+		<!-- <p>{$posts.data}</p> -->
+		<p>{$posts.data.CountryList!.name}</p>
+	{:else}
+		<p>Nothing...</p>
+	{/if}
 	<p>Address: {accountAddress}</p>
 	<p>Address Wag: {$account.address}</p>
 

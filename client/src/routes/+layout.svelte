@@ -9,6 +9,7 @@
 	// Import the Analytics package, and the SvelteKit dev variable.
 	import { dev } from '$app/environment';
 	import { inject } from '@vercel/analytics';
+	import Configs from './Configs.svelte';
 
 	// Inject the Analytics functionality
 	inject({ mode: dev ? 'development' : 'production' });
@@ -20,22 +21,16 @@
 	</html>
 </svelte:head> -->
 
-<div class="app">
-	<!-- <WagmiProvider {config}> -->
-	<main>
-		{#if $drawerState}
-			<Drawer />
-		{/if}
-		<slot />
-		<Toaster position="top-center" />
-	</main>
-	<!-- </WagmiProvider> -->
+<div class="flex flex-col min-h-screen">
+	<Configs>
+		<!-- <WagmiProvider {config}> -->
+		<main>
+			{#if $drawerState}
+				<Drawer />
+			{/if}
+			<slot />
+			<Toaster position="top-center" />
+		</main>
+		<!-- </WagmiProvider> -->
+	</Configs>
 </div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-</style>

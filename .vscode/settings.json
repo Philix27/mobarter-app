@@ -19,6 +19,7 @@
     "tanstack",
     "toformat",
     "trpc",
+    "urql",
     "viem",
     "Wagmi",
     "waitlist",
