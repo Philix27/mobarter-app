@@ -3,18 +3,25 @@
 	import { Button } from 'components';
 	import { browser } from '$app/environment';
 	import { queryStore, gql, getContextClient } from '@urql/svelte';
-	import type { GetCountryQuery, GetCountryQueryStore } from '../generated/graphql';
+	import type { GetCountryQuery } from '../generated/graphql';
+	// import { GetCountryDocument } from '../generated/graphql';
+	import { GetCountryDocument } from '../generated/graphql';
 
 	const posts = queryStore<GetCountryQuery>({
 		client: getContextClient(),
-		query: gql`
-			query GetCountry {
-				CountryList {
-					name
-				}
-			}
-		`
+		query: GetCountryDocument
 	});
+
+	// const posts = queryStore<GetCountryQuery>({
+	// 	client: getContextClient(),
+	// 	query: gql`
+	// 		query GetCountry {
+	// 			CountryList {
+	// 				name
+	// 			}
+	// 		}
+	// 	`
+	// });
 
 	$: accountAddress = '';
 	$: isMiniPay = false;

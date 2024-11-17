@@ -1,19 +1,25 @@
 package field
 
-import "github.com/graphql-go/graphql"
+import (
+	"mobarter/app"
 
-var CountryList *graphql.Field = &graphql.Field{
-	Type: graphql.NewObject(graphql.ObjectConfig{
-		Name: "CountryResponse",
-		Fields: graphql.Fields{
-			"name": String,
-			"flag": String,
+	"github.com/graphql-go/graphql"
+)
+
+func CountryList(appState app.AppState) *graphql.Field {
+	return &graphql.Field{
+		Type: graphql.NewObject(graphql.ObjectConfig{
+			Name: "CountryResponse",
+			Fields: graphql.Fields{
+				"name": String,
+				"flag": String,
+			},
+		}),
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+
+			return map[string]interface{}{
+				"name": "Meat Pie",
+			}, nil
 		},
-	}),
-	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
-		return map[string]interface{}{
-			"name": "Meat Pie",
-		}, nil
-	},
+	}
 }

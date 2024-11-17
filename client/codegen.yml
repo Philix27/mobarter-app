@@ -11,5 +11,7 @@ generates:
       - 'typescript-operations'
       - 'typescript-urql'
       - 'urql-svelte-operations-store'
+      # - 'typed-document-node'
+      - '@graphql-codegen/typed-document-node'
     presetConfig:
       gqlTagName: 'gql'

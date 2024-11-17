@@ -1,12 +1,19 @@
 {
   "extends": ["@commitlint/config-conventional"],
   "rules": {
-
     "type-enum": [
       2,
       "always",
       [
+        "backend(clean)",
+        "backend(chore)",
+        "backend(feat)",
+        "backend(fix)",
+        "backend(perf)",
+        "backend(refactor)",
+        "backend(ci)",
         "clean",
+        "frontend",
         "ci",
         "chore",
         "docs",
@@ -21,4 +28,3 @@
     ]
   }
 }
-

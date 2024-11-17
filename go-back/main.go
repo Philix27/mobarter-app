@@ -50,12 +50,13 @@ func main() {
 	slog.SetDefault(logger)
 
 	appState := app.AppState{
-		DB: db,
+		DB:     db,
+		Logger: logger,
 	}
 
 	// fields := fieldsRegistry
-	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: field.QueryFields}
-	rootMutation := graphql.ObjectConfig{Name: "RootMutations", Fields: field.MutationsFields}
+	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: field.QueryFields(appState)}
+	rootMutation := graphql.ObjectConfig{Name: "RootMutations", Fields: field.MutationsFields(appState)}
 
 	// Schema
 	schemaConfig := graphql.SchemaConfig{
@@ -89,9 +90,9 @@ func main() {
 	log.Println("Server is running on http://localhost:" + os.Getenv("PORT") + "/graphql")
 	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 
-	server := appState.NewApp()
+	// server := appState.NewApp()
 
-	appState.SetupRoutes(server, logger)
+	// appState.SetupRoutes(server, logger)
 
 	// log.Fatal(server.Listen(":" + os.Getenv("PORT")))
 

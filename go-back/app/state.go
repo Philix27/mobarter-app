@@ -10,6 +10,7 @@ import (
 type AppState struct {
 	DB     *gorm.DB
 	logger *slog.JSONHandler
+	Logger *slog.Logger
 }
 
 func (app AppState) NewApp() *fiber.App {

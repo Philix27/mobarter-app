@@ -1,93 +1,107 @@
 package field
 
-import "github.com/graphql-go/graphql"
+import (
+	"mobarter/app"
 
-var Kyc_VerifyNin *graphql.Field = &graphql.Field{
-	Type: graphql.NewObject(graphql.ObjectConfig{
-		Name: "Kyc_VerifyNinResponse",
-		Fields: graphql.Fields{
-			"message": String,
+	"github.com/graphql-go/graphql"
+)
+
+func Kyc_VerifyNin(appState app.AppState) *graphql.Field {
+	return &graphql.Field{
+		Type: graphql.NewObject(graphql.ObjectConfig{
+			Name: "Kyc_VerifyNinResponse",
+			Fields: graphql.Fields{
+				"message": String,
+			},
+		}),
+		Args: graphql.FieldConfigArgument{
+			"nin": argString,
 		},
-	}),
-	Args: graphql.FieldConfigArgument{
-		"nin": argString,
-	},
-	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 
-		return map[string]interface{}{
-			"name": "Meat Pie",
-		}, nil
-	},
+			return map[string]interface{}{
+				"name": "Meat Pie",
+			}, nil
+		},
+	}
 }
-var Kyc_VerifyBvn *graphql.Field = &graphql.Field{
-	Type: graphql.NewObject(graphql.ObjectConfig{
-		Name: "Kyc_VerifyBvnResponse",
-		Fields: graphql.Fields{
-			"message": String,
+func Kyc_VerifyBvn(appState app.AppState) *graphql.Field {
+	return &graphql.Field{
+		Type: graphql.NewObject(graphql.ObjectConfig{
+			Name: "Kyc_VerifyBvnResponse",
+			Fields: graphql.Fields{
+				"message": String,
+			},
+		}),
+		Args: graphql.FieldConfigArgument{
+			"bvn": argString,
 		},
-	}),
-	Args: graphql.FieldConfigArgument{
-		"bvn": argString,
-	},
-	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 
-		return map[string]interface{}{
-			"name": "Meat Pie",
-		}, nil
-	},
+			return map[string]interface{}{
+				"name": "Meat Pie",
+			}, nil
+		},
+	}
 }
-var Kyc_VerifyEmail *graphql.Field = &graphql.Field{
-	Type: graphql.NewObject(graphql.ObjectConfig{
-		Name: "Kyc_VerifyEmailResponse",
-		Fields: graphql.Fields{
-			"message": String,
+func Kyc_VerifyEmail(appState app.AppState) *graphql.Field {
+	return &graphql.Field{
+		Type: graphql.NewObject(graphql.ObjectConfig{
+			Name: "Kyc_VerifyEmailResponse",
+			Fields: graphql.Fields{
+				"message": String,
+			},
+		}),
+		Args: graphql.FieldConfigArgument{
+			"email": argString,
+			"otp":   argString,
+			"token": argString,
 		},
-	}),
-	Args: graphql.FieldConfigArgument{
-		"email": argString,
-		"otp":   argString,
-		"token": argString,
-	},
-	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 
-		return map[string]interface{}{
-			"name": "Meat Pie",
-		}, nil
-	},
+			return map[string]interface{}{
+				"name": "Meat Pie",
+			}, nil
+		},
+	}
 }
-var Kyc_VerifyPhone *graphql.Field = &graphql.Field{
-	Type: graphql.NewObject(graphql.ObjectConfig{
-		Name: "Kyc_VerifyPhoneResponse",
-		Fields: graphql.Fields{
-			"message": String,
+func Kyc_VerifyPhone(appState app.AppState) *graphql.Field {
+	return &graphql.Field{
+		Type: graphql.NewObject(graphql.ObjectConfig{
+			Name: "Kyc_VerifyPhoneResponse",
+			Fields: graphql.Fields{
+				"message": String,
+			},
+		}),
+		Args: graphql.FieldConfigArgument{
+			"phone": argString,
+			"otp":   argString,
+			"token": argString,
 		},
-	}),
-	Args: graphql.FieldConfigArgument{
-		"phone": argString,
-		"otp":   argString,
-		"token": argString,
-	},
-	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 
-		return map[string]interface{}{
-			"name": "Meat Pie",
-		}, nil
-	},
+			return map[string]interface{}{
+				"name": "Meat Pie",
+			}, nil
+		},
+	}
 }
 
-var Kyc_GetLevel *graphql.Field = &graphql.Field{
-	Type: graphql.NewObject(graphql.ObjectConfig{
-		Name: "Kyc_GetLevelResponse",
-		Fields: graphql.Fields{
-			"accountName": String,
-			"accountNo":   String,
-			"bankName":    String,
-		},
-	}),
-	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+func Kyc_GetLevel(appState app.AppState) *graphql.Field {
+	return &graphql.Field{
+		Type: graphql.NewObject(graphql.ObjectConfig{
+			Name: "Kyc_GetLevelResponse",
+			Fields: graphql.Fields{
+				"accountName": String,
+				"accountNo":   String,
+				"bankName":    String,
+			},
+		}),
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 
-		return map[string]interface{}{
-			"name": "Meat Pie",
-		}, nil
-	},
+			return map[string]interface{}{
+				"name": "Meat Pie",
+			}, nil
+		},
+	}
 }
