@@ -1,41 +1,20 @@
 package main
 
-// import (
-// 	"fmt"
-// 	"log"
-
-// 	"github.com/gofiber/fiber/v2"
-// )
-
-// func main() {
-// 	fmt.Println("Hello world!")
-
-// 	router := fiber.New()
-// 	app := fiber.New()
-
-// 	app.Mount("/api", router)
-
-// 	router.Get("/health", func(c *fiber.Ctx) error {
-// 		return c.Status(200).JSON(fiber.Map{
-// 			"status":  "sucess",
-// 			"message": "welcome",
-// 		})
-// 	})
-
-// 	log.Fatal(app.Listen(":3333"))
-
-// }
-
 import (
 	"log"
+	"net/http"
 
 	"mobarter/app"
 	"mobarter/database"
+	"mobarter/field"
 	"mobarter/helper"
 
 	"os"
 
+	"github.com/graphql-go/graphql"
+	"github.com/graphql-go/handler"
 	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 	"golang.org/x/exp/slog"
 )
 
@@ -74,11 +53,46 @@ func main() {
 		DB: db,
 	}
 
+	// fields := fieldsRegistry
+	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: field.QueryFields}
+	rootMutation := graphql.ObjectConfig{Name: "RootMutations", Fields: field.MutationsFields}
+
+	// Schema
+	schemaConfig := graphql.SchemaConfig{
+		Query:    graphql.NewObject(rootQuery),
+		Mutation: graphql.NewObject(rootMutation),
+	}
+	schema, err := graphql.NewSchema(schemaConfig)
+	if err != nil {
+		log.Fatalf("failed to create new schema, error: %v", err)
+	}
+	// handler
+	h := handler.New(&handler.Config{
+		Schema:     &schema,
+		Pretty:     true,
+		GraphiQL:   true,
+		Playground: true,
+	})
+
+	// Setup CORS
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{"GET", "POST", "OPTIONS"},
+		AllowedHeaders: []string{"Accept", "Authorization", "Content-Type"},
+		Debug:          true,
+	})
+
+	handler := c.Handler(h)
+
+	// Start server
+	http.Handle("/graphql", handler)
+	log.Println("Server is running on http://localhost:" + os.Getenv("PORT") + "/graphql")
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
+
 	server := appState.NewApp()
 
 	appState.SetupRoutes(server, logger)
 
-	log.Fatal(server.Listen(":" + os.Getenv("PORT")))
-	// log.Fatal()
+	// log.Fatal(server.Listen(":" + os.Getenv("PORT")))
 
 }

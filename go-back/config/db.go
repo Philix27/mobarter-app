@@ -1,22 +1,15 @@
 package config
 
 import (
-	"fmt"
-	"mobarter/helper"
-
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	"mobarter/database"
+	"os"
 )
 
-func ConnectionDb(config Config) *gorm.DB {
-	sqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", config.DbHost, config.DbPort, config.DbUsername, config.DbPassword, config.DbName)
-	fmt.Println("Connected to mock database successfully")
-
-	db, err := gorm.Open(postgres.Open(sqlInfo), &gorm.Config{})
-
-	helper.ErrorPanic(err, "Connection Failed")
-
-	fmt.Println("Connected to database successfully")
-	return db
-
+var DbConfig = database.DbConfig{
+	Host:     os.Getenv("DB_HOST"),
+	Port:     os.Getenv("DB_PORT"),
+	Password: os.Getenv("DB_PASSWORD"),
+	User:     os.Getenv("DB_USER"),
+	SSLMode:  os.Getenv("DB_SSLMODE"),
+	DbName:   os.Getenv("DB_NAME"),
 }
