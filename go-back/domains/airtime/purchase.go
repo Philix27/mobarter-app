@@ -1,6 +1,7 @@
 package airtime
 
 import (
+	"errors"
 	"mobarter/app"
 	"mobarter/log"
 
@@ -32,7 +33,7 @@ func PurchaseAirtime(appState app.AppState) *graphql.Field {
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			ilog := log.New("Purchase airtime")
-			// todo: setDto
+
 			dto := &PurchaseAirtimeDto{
 				amount:          p.Args["amount"].(int),
 				issuerAddress:   p.Args["issuerAddress"].(string),
@@ -45,13 +46,13 @@ func PurchaseAirtime(appState app.AppState) *graphql.Field {
 			if dto.amount < 100 {
 				return map[string]interface{}{
 					"message": "Amount is too small",
-				}, nil
+				}, errors.New("Amount is too small")
 			}
 			// todo: Validate the network
 			if !verifyNetwork(dto.network) {
 				return map[string]interface{}{
 					"message": "Invalid network provider",
-				}, nil
+				}, errors.New("Invalid network providerl")
 			}
 			// todo: Verify the transaction hash
 			if !verifyTransactionHash(dto.transactionHash) {
@@ -78,4 +79,3 @@ func PurchaseAirtime(appState app.AppState) *graphql.Field {
 		},
 	}
 }
-
