@@ -1,4 +1,4 @@
-package field
+package airtime
 
 import (
 	"mobarter/app"
@@ -11,15 +11,15 @@ func PurchaseAirtime(appState app.AppState) *graphql.Field {
 		Type: graphql.NewObject(graphql.ObjectConfig{
 			Name: "PurchaseAirtimeResponse",
 			Fields: graphql.Fields{
-				"message": String,
+				"message": app.String,
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
-			"phone":           argString,
-			"amount":          argString,
-			"transactionHash": argInt,
-			"network":         argString,
-			"issuerAddress":   argString,
+			"phone":           app.ArgString,
+			"amount":          app.ArgString,
+			"transactionHash": app.ArgInt,
+			"network":         app.ArgString,
+			"issuerAddress":   app.ArgString,
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 

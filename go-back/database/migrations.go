@@ -9,13 +9,13 @@ import (
 // Tables with More dependencies stays on top
 func RunMigrations(db *gorm.DB) {
 	err := db.AutoMigrate(
+		User{},
 		KycCredential{},
 		Waitlist{},
 		BankAccount{},
 		AirtimeTransactions{},
 		DataTransactions{},
 		WalletTransactions{},
-		User{},
 	)
 
 	if err != nil {

@@ -2,8 +2,9 @@ package field
 
 import (
 	"mobarter/app"
-	"mobarter/field/bank"
-	"mobarter/field/user"
+	"mobarter/domains/airtime"
+	"mobarter/domains/bank"
+	"mobarter/domains/user"
 
 	"github.com/graphql-go/graphql"
 )
@@ -25,7 +26,7 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"BankAccount_Create": bank.CreateBankAccount(appState),
 		"BankAccount_Delete": bank.DeleteBankAccount(appState),
 		"User_Create":        user.Create(appState),
-		"PurchaseAirtime":    PurchaseAirtime(appState),
+		"PurchaseAirtime":    airtime.PurchaseAirtime(appState),
 		"PurchaseData":       PurchaseData(appState),
 		"JoinWaitList":       JoinWaitList(appState),
 		"Auth_SentOtp":       Auth_SentOtp(appState),

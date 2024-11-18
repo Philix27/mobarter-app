@@ -6,7 +6,7 @@ import (
 
 	"mobarter/app"
 	"mobarter/database"
-	"mobarter/field"
+	field "mobarter/domains"
 	"mobarter/helper"
 
 	"os"
