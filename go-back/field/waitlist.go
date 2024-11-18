@@ -1,13 +1,14 @@
 package field
 
 import (
+	"fmt"
 	"mobarter/app"
 	"mobarter/database"
 
 	"github.com/graphql-go/graphql"
 )
 
-func joinWaitList(app app.AppState) *graphql.Field {
+func JoinWaitList(app app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
 			Name: "waitListResponse",
@@ -22,7 +23,7 @@ func joinWaitList(app app.AppState) *graphql.Field {
 			"country":   argString,
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
+			fmt.Println("Hit waitlist list")
 			result := app.DB.Create(&database.Waitlist{
 				Email:     p.Args["email"].(string),
 				FirstName: p.Args["firstName"].(string),
@@ -30,41 +31,19 @@ func joinWaitList(app app.AppState) *graphql.Field {
 			})
 
 			println("We put it all")
+
 			if result.Error != nil {
 				println(result.Error)
 
 				return map[string]interface{}{
 					"error": result.Error,
-				}, nil
+				}, result.Error
 			}
 
 			// return nil
 
 			return map[string]interface{}{
-				"name": "Meat Pie",
-			}, nil
-		},
-	}
-}
-
-func JoinWaitList(appState app.AppState) *graphql.Field {
-	return &graphql.Field{
-		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "waitListResponse",
-			Fields: graphql.Fields{
-				"message": String,
-			},
-		}),
-		Args: graphql.FieldConfigArgument{
-			"email":     argString,
-			"firstName": argString,
-			"lastName":  argString,
-			"country":   argString,
-		},
-		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
-			return map[string]interface{}{
-				"name": "Meat Pie",
+				"message": "success",
 			}, nil
 		},
 	}

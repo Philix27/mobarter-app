@@ -1,23 +1,26 @@
-package field
+package bank
 
 import (
-	"fmt"
 	"mobarter/app"
 
 	"github.com/graphql-go/graphql"
 )
 
-func CountryList(appState app.AppState) *graphql.Field {
+func DeleteBankAccount(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "CountryResponse",
+			Name: "DeleteBankAccountResponse",
 			Fields: graphql.Fields{
-				"name": String,
-				"flag": String,
+				"message": app.String,
 			},
 		}),
+		Args: graphql.FieldConfigArgument{
+			"accountName": app.ArgString,
+			"accountNo":   app.ArgString,
+			"bankName":    app.ArgString,
+		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			fmt.Println("Hit country list")
+
 			return map[string]interface{}{
 				"name": "Meat Pie",
 			}, nil

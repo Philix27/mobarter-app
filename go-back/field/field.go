@@ -2,15 +2,17 @@ package field
 
 import (
 	"mobarter/app"
+	"mobarter/field/bank"
+	"mobarter/field/user"
 
 	"github.com/graphql-go/graphql"
 )
 
 func QueryFields(appState app.AppState) graphql.Fields {
 	return graphql.Fields{
-		"BankAccount_Get":     GetBankAccount(appState),
-		"BankAccount_GetAll":  GetAllBankAccount(appState),
-		"User_GetInfo":        UserInfo(appState),
+		"BankAccount_Get":     bank.GetBankAccount(appState),
+		"BankAccount_GetAll":  bank.GetAllBankAccount(appState),
+		"User_GetInfo":        user.UserInfo(appState),
 		"CountryList":         CountryList(appState),
 		"Transactions_GetAll": GetAllTransactions(appState),
 		"Transactions_GetOne": GetOneTransactions(appState),
@@ -20,7 +22,9 @@ func QueryFields(appState app.AppState) graphql.Fields {
 
 func MutationsFields(appState app.AppState) graphql.Fields {
 	return graphql.Fields{
-		"BankAccount_Create": CreateBankAccount(appState),
+		"BankAccount_Create": bank.CreateBankAccount(appState),
+		"BankAccount_Delete": bank.DeleteBankAccount(appState),
+		"User_Create":        user.Create(appState),
 		"PurchaseAirtime":    PurchaseAirtime(appState),
 		"PurchaseData":       PurchaseData(appState),
 		"JoinWaitList":       JoinWaitList(appState),

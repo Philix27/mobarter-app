@@ -18,7 +18,7 @@ var (
 		Type: graphql.Float,
 	}
 
-	Str = &graphql.Field{
+	String = &graphql.Field{
 		Type: graphql.String,
 	}
 
@@ -31,7 +31,10 @@ var (
 	ArgInt = &graphql.ArgumentConfig{
 		Type: graphql.NewNonNull(graphql.Int),
 	}
-	ArgStr = &graphql.ArgumentConfig{
+	ArgString = &graphql.ArgumentConfig{
+		Type: graphql.NewNonNull(graphql.String),
+	}
+	ArgOptionalString = &graphql.ArgumentConfig{
 		Type: graphql.NewNonNull(graphql.String),
 	}
 )

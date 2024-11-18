@@ -1,4 +1,4 @@
-package field
+package user
 
 import (
 	"mobarter/app"
@@ -9,12 +9,11 @@ import (
 func UserInfo(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "UserResponse",
+			Name: "User_GetInfoResponse",
 			Fields: graphql.Fields{
-				"walletAddress": String,
-				"firstName":     String,
-				"lastName":      String,
-				"country":       String,
+				"walletAddress": app.String,
+				"firstName":     app.String,
+				"lastName":      app.String,
 			},
 		}),
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {

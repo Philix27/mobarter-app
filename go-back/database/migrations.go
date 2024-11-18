@@ -15,21 +15,7 @@ func RunMigrations(db *gorm.DB) {
 		AirtimeTransactions{},
 		DataTransactions{},
 		WalletTransactions{},
-		//! Old
-		Workspace{},
-		WorkspaceEpic{},
-		WorkspaceStory{},
-		Task{},
-		Board{},
-		BoardStage{},
 		User{},
-		UserAuth{},
-		Announcement{},
-		Note{},
-		Canvas{},
-		Document{},
-		TaskTags{},
-		Schedule{},
 	)
 
 	if err != nil {

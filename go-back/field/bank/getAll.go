@@ -1,23 +1,23 @@
-package field
+package bank
 
 import (
-	"fmt"
 	"mobarter/app"
 
 	"github.com/graphql-go/graphql"
 )
 
-func CountryList(appState app.AppState) *graphql.Field {
+func GetAllBankAccount(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "CountryResponse",
+			Name: "getAllBankAccountResponse",
 			Fields: graphql.Fields{
-				"name": String,
-				"flag": String,
+				"accountName": app.String,
+				"accountNo":   app.String,
+				"bankName":    app.String,
 			},
 		}),
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			fmt.Println("Hit country list")
+
 			return map[string]interface{}{
 				"name": "Meat Pie",
 			}, nil

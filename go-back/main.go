@@ -85,15 +85,10 @@ func main() {
 
 	handler := c.Handler(h)
 
+	port := ":" + os.Getenv("PORT")
 	// Start server
 	http.Handle("/graphql", handler)
-	log.Println("Server is running on http://localhost:" + os.Getenv("PORT") + "/graphql")
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
-
-	// server := appState.NewApp()
-
-	// appState.SetupRoutes(server, logger)
-
-	// log.Fatal(server.Listen(":" + os.Getenv("PORT")))
+	log.Println("Server is running on http://localhost" + port + "/graphql")
+	log.Fatal(http.ListenAndServe(port, nil))
 
 }
