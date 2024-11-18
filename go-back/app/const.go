@@ -38,3 +38,11 @@ var (
 		Type: graphql.NewNonNull(graphql.String),
 	}
 )
+
+const (
+	TransactionAirtime   = "Airtime"
+	TransactionData      = "Data"
+	TransactionTransfer  = "Transfer"
+	TransactionCable     = "Cable Tv"
+	TransactionLightBill = "Light Bill"
+)

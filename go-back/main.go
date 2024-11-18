@@ -7,7 +7,6 @@ import (
 	"mobarter/app"
 	"mobarter/database"
 	field "mobarter/domains"
-	"mobarter/helper"
 
 	"os"
 
@@ -20,7 +19,7 @@ import (
 
 func main() {
 	if err := godotenv.Load(".env"); err != nil {
-		helper.ErrorPanic(err, "Could not load env")
+		app.ErrorPanic(err, "Could not load env")
 	}
 
 	config := &database.DbConfig{
@@ -35,7 +34,7 @@ func main() {
 	db, err := database.NewConnection(config)
 
 	if err != nil {
-		helper.ErrorPanic(err, "Cannot connect to db")
+		app.ErrorPanic(err, "Cannot connect to db")
 	}
 
 	database.RunMigrations(db)

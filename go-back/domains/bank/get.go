@@ -2,6 +2,7 @@ package bank
 
 import (
 	"mobarter/app"
+	"mobarter/log"
 
 	"github.com/graphql-go/graphql"
 )
@@ -22,7 +23,8 @@ func GetBankAccount(appState app.AppState) *graphql.Field {
 			},
 		}),
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
+			ilog := log.New("Get bank account")
+			ilog.Trace("Get bank account")
 			return map[string]interface{}{
 				"name": "Meat Pie",
 			}, nil

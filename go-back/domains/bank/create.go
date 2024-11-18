@@ -3,6 +3,7 @@ package bank
 import (
 	"mobarter/app"
 	"mobarter/database"
+	"mobarter/log"
 
 	"github.com/graphql-go/graphql"
 )
@@ -23,7 +24,7 @@ func CreateBankAccount(appState app.AppState) *graphql.Field {
 			"wallet":      app.ArgString,
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
+			ilog := log.New("Create bank account")
 			// todo - verify user credentials
 
 			result := appState.DB.Create(&database.BankAccount{
@@ -39,7 +40,7 @@ func CreateBankAccount(appState app.AppState) *graphql.Field {
 					"error": result.Error,
 				}, result.Error
 			}
-
+			ilog.Trace("Bank account added")
 			return map[string]interface{}{
 				"message": "success",
 			}, nil

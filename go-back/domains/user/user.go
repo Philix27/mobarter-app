@@ -2,6 +2,7 @@ package user
 
 import (
 	"mobarter/app"
+	"mobarter/log"
 
 	"github.com/graphql-go/graphql"
 )
@@ -17,7 +18,8 @@ func UserInfo(appState app.AppState) *graphql.Field {
 			},
 		}),
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
+			ilog := log.New("Get user info")
+			ilog.Trace("Deleted bank account")
 			return map[string]interface{}{
 				"name": "Meat Pie",
 			}, nil
