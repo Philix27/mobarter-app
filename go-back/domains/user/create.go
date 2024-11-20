@@ -44,9 +44,7 @@ func Create(appState app.AppState) *graphql.Field {
 				"walletAddress = ?", p.Args["walletAddress"].(string),
 			).First(&database.User{})
 
-			if res.Error != nil {
-				appState.Logger.Error("CANNOT FIND_ONE:", res.Error)
-
+			if res.Error == nil {
 				err := createUserRepo(appState, &dto)
 
 				if err != nil {
@@ -55,6 +53,7 @@ func Create(appState app.AppState) *graphql.Field {
 						"message": "could not create user",
 					}, err
 				}
+
 				ilog.Trace("User created")
 				return map[string]interface{}{
 					"message": "success",

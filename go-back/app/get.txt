@@ -1,0 +1,77 @@
+package app
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+
+	"golang.org/x/exp/constraints"
+)
+
+// Define the struct to match the JSON structure
+type Post struct {
+	UserID int    `json:"userId"`
+	ID     int    `json:"id"`
+	Title  string `json:"title"`
+	Body   string `json:"body"`
+}
+
+func getReq(ur string) {
+	url := "https://jsonplaceholder.typicode.com/posts/1"
+
+	// Perform the GET request
+	resp, err := http.Get(url)
+	if err != nil {
+		log.Fatalf("Error making GET request: %v", err)
+	}
+	defer resp.Body.Close()
+
+	// Decode the JSON response into the struct
+	var post Post
+	err = json.NewDecoder(resp.Body).Decode(&post)
+	if err != nil {
+		log.Fatalf("Error decoding JSON: %v", err)
+	}
+
+	// Print the struct
+	fmt.Printf("Parsed Struct: %+v\n", post)
+}
+
+// Define the struct to match the JSON response structure
+type PostResponse struct {
+	ID     int    `json:"id"`
+	Title  string `json:"title"`
+	Body   string `json:"body"`
+	UserID int    `json:"userId"`
+}
+
+// func postReq[T string | int](url string, payload []byte, response T ) {
+func postReq[T constraints.Ordered](url string, payload []byte, response T) {
+	// url := "https://jsonplaceholder.typicode.com/posts"
+
+	// // JSON payload
+	// jsonData := []byte(`{
+	// 	"title": "foo",
+	// 	"body": "bar",
+	// 	"userId": 1
+	// }`)
+
+	// Perform the POST request
+	resp, err := http.Post(url, "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		log.Fatalf("Error making POST request: %v", err)
+	}
+	defer resp.Body.Close()
+
+	// Decode the JSON response into the struct
+	var response PostResponse
+	err = json.NewDecoder(resp.Body).Decode(&response)
+	if err != nil {
+		log.Fatalf("Error decoding JSON: %v", err)
+	}
+
+	// Print the struct
+	fmt.Printf("Parsed Struct: %+v\n", response)
+}

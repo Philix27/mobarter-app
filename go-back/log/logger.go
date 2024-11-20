@@ -35,53 +35,6 @@ const (
 	LvlDebug = LevelDebug
 )
 
-// FromLegacyLevel converts from old Geth verbosity level constants
-// to levels defined by slog
-func FromLegacyLevel(lvl int) slog.Level {
-	switch lvl {
-	case legacyLevelCrit:
-		return LevelCrit
-	case legacyLevelError:
-		return slog.LevelError
-	case legacyLevelWarn:
-		return slog.LevelWarn
-	case legacyLevelInfo:
-		return slog.LevelInfo
-	case legacyLevelDebug:
-		return slog.LevelDebug
-	case legacyLevelTrace:
-		return LevelTrace
-	default:
-		break
-	}
-
-	// TODO: should we allow use of custom levels or force them to match existing max/min if they fall outside the range as I am doing here?
-	if lvl > legacyLevelTrace {
-		return LevelTrace
-	}
-	return LevelCrit
-}
-
-// LevelAlignedString returns a 5-character string containing the name of a Lvl.
-func LevelAlignedString(l slog.Level) string {
-	switch l {
-	case LevelTrace:
-		return "TRACE"
-	case slog.LevelDebug:
-		return "DEBUG"
-	case slog.LevelInfo:
-		return "INFO "
-	case slog.LevelWarn:
-		return "WARN "
-	case slog.LevelError:
-		return "ERROR"
-	case LevelCrit:
-		return "CRIT "
-	default:
-		return "unknown level"
-	}
-}
-
 // LevelString returns a string containing the name of a Lvl.
 func LevelString(l slog.Level) string {
 	switch l {
@@ -168,6 +121,7 @@ func (l *logger) Write(level slog.Level, msg string, attrs ...any) {
 	if len(attrs)%2 != 0 {
 		attrs = append(attrs, nil, errorKey, "Normalized odd number of arguments by adding nil")
 	}
+	
 	r := slog.NewRecord(time.Now(), level, msg, pcs[0])
 	r.Add(attrs...)
 	l.inner.Handler().Handle(context.Background(), r)
