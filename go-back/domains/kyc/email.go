@@ -1,4 +1,4 @@
-package field
+package kyc
 
 import (
 	"mobarter/app"
@@ -6,20 +6,18 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-func PurchaseData(appState app.AppState) *graphql.Field {
+func Kyc_VerifyEmail(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "PurchaseDataResponse",
+			Name: "Kyc_VerifyEmailResponse",
 			Fields: graphql.Fields{
-				"message": String,
+				"message": app.String,
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
-			"phone":           argString,
-			"amount":          argString,
-			"transactionHash": argInt,
-			"network":         argString,
-			"issuerAddress":   argString,
+			"email": app.ArgString,
+			"otp":   app.ArgString,
+			"token": app.ArgString,
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 

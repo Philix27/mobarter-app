@@ -15,6 +15,11 @@ func rechargePhone(phone string) bool {
 	return true
 }
 
+func rechargePhoneWithData(phone string) bool {
+	//TODO -
+	return true
+}
+
 func addTransaction(email string, desc string) bool {
 	//TODO -
 	return true
