@@ -1,6 +1,7 @@
 package user
 
 import (
+	"errors"
 	"mobarter/app"
 
 	"github.com/graphql-go/graphql"
@@ -15,7 +16,7 @@ func UserInfo(appState app.AppState) *graphql.Field {
 				"walletAddress": app.String,
 				"firstName":     app.String,
 				"lastName":      app.String,
-				"id":      app.String,
+				"id":            app.String,
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
@@ -27,9 +28,7 @@ func UserInfo(appState app.AppState) *graphql.Field {
 			res, err := findByWalletAddress(appState, p.Args["walletAddress"].(string))
 
 			if err != nil {
-				return map[string]interface{}{
-					"message": "No user found",
-				}, nil
+				return nil, errors.New("No user found")
 			}
 
 			return map[string]interface{}{

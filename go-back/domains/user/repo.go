@@ -33,7 +33,3 @@ func findByWalletAddress(appState app.AppState, walletAddress string) (database.
 	}
 
 }
-
-// res := appState.DB.Where(
-// 				"wallet_address = ?", dto.WalletAddress,
-// 			).First(&database.User{})

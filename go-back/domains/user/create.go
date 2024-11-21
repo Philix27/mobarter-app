@@ -1,6 +1,7 @@
 package user
 
 import (
+	"errors"
 	"mobarter/app"
 
 	"github.com/graphql-go/graphql"
@@ -40,23 +41,16 @@ func Create(appState app.AppState) *graphql.Field {
 			// todo: check if wallet already exist
 
 			_, err := findByWalletAddress(appState, dto.WalletAddress)
-			// res := appState.DB.Where(
-			// 	"wallet_address = ?", dto.WalletAddress,
-			// ).First(&database.User{})
 
 			if err == nil {
 
-				return map[string]interface{}{
-					"message": "User already exist",
-				}, err
+				return nil, errors.New("User already exist")
 			}
 
 			err = createUserRepo(appState, &dto)
 
 			if err != nil {
-				return map[string]interface{}{
-					"message": "could not create user",
-				}, err
+				return nil, errors.New("Could not create user")
 			}
 
 			return map[string]interface{}{

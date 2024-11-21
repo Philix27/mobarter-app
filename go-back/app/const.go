@@ -35,7 +35,7 @@ var (
 		Type: graphql.NewNonNull(graphql.String),
 	}
 	ArgOptionalString = &graphql.ArgumentConfig{
-		Type: graphql.NewNonNull(graphql.String),
+		Type: graphql.String,
 	}
 )
 
