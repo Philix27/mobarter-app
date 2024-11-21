@@ -4,6 +4,7 @@ import (
 	"mobarter/app"
 	"mobarter/domains/airtime"
 	"mobarter/domains/bank"
+	"mobarter/domains/p2p"
 	"mobarter/domains/user"
 
 	"github.com/graphql-go/graphql"
@@ -14,6 +15,8 @@ func QueryFields(appState app.AppState) graphql.Fields {
 		"BankAccount_Get":     bank.GetBankAccount(appState),
 		"BankAccount_GetAll":  bank.GetAllBankAccount(appState),
 		"User_GetInfo":        user.UserInfo(appState),
+		"GetBuyers":           p2p.GetBuyers(appState),
+		"GetP2PSellers":       p2p.GetP2PSellers(appState),
 		"CountryList":         CountryList(appState),
 		"Transactions_GetAll": GetAllTransactions(appState),
 		"Transactions_GetOne": GetOneTransactions(appState),
@@ -27,6 +30,7 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"BankAccount_Delete": bank.DeleteBankAccount(appState),
 		"User_Create":        user.Create(appState),
 		"PurchaseAirtime":    airtime.PurchaseAirtime(appState),
+		"CreateVendor":       p2p.CreateVendor(appState),
 		"PurchaseData":       PurchaseData(appState),
 		"JoinWaitList":       JoinWaitList(appState),
 		"Auth_SentOtp":       Auth_SentOtp(appState),

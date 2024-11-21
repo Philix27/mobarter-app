@@ -2,8 +2,6 @@ package user
 
 import (
 	"mobarter/app"
-	"mobarter/database"
-	"mobarter/log"
 
 	"github.com/graphql-go/graphql"
 )
@@ -19,6 +17,7 @@ func Create(appState app.AppState) *graphql.Field {
 		Type: graphql.NewObject(graphql.ObjectConfig{
 			Name: "User_CreateResponse",
 			Fields: graphql.Fields{
+				"message":       app.String,
 				"walletAddress": app.String,
 				"firstName":     app.String,
 				"lastName":      app.String,
@@ -31,7 +30,6 @@ func Create(appState app.AppState) *graphql.Field {
 			"lastName":      app.ArgString,
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			ilog := log.New("Create User")
 
 			dto := CreateDto{
 				WalletAddress: p.Args["walletAddress"].(string),
@@ -40,46 +38,34 @@ func Create(appState app.AppState) *graphql.Field {
 			}
 
 			// todo: check if wallet already exist
-			res := appState.DB.Where(
-				"walletAddress = ?", p.Args["walletAddress"].(string),
-			).First(&database.User{})
 
-			if res.Error == nil {
-				err := createUserRepo(appState, &dto)
+			_, err := findByWalletAddress(appState, dto.WalletAddress)
+			// res := appState.DB.Where(
+			// 	"wallet_address = ?", dto.WalletAddress,
+			// ).First(&database.User{})
 
-				if err != nil {
-					ilog.Trace("Could not create user")
-					return map[string]interface{}{
-						"message": "could not create user",
-					}, err
-				}
+			if err == nil {
 
-				ilog.Trace("User created")
 				return map[string]interface{}{
-					"message": "success",
-				}, nil
-
-			} else {
-				ilog.Trace("User already exist")
-				return map[string]interface{}{
-					"error": "User already exist",
-				}, res.Error
+					"message": "User already exist",
+				}, err
 			}
+
+			err = createUserRepo(appState, &dto)
+
+			if err != nil {
+				return map[string]interface{}{
+					"message": "could not create user",
+				}, err
+			}
+
+			return map[string]interface{}{
+				"message":       "success",
+				"walletAddress": p.Args["walletAddress"].(string),
+				"firstName":     p.Args["firstName"].(string),
+				"lastName":      p.Args["lastName"].(string),
+			}, nil
 
 		},
 	}
-}
-
-func createUserRepo(appState app.AppState, dto *CreateDto) error {
-	result := appState.DB.Create(&database.User{
-		WalletAddress: dto.WalletAddress,
-		FirstName:     dto.FirstName,
-		LastName:      dto.LastName,
-	})
-
-	if result.Error != nil {
-		return result.Error
-	}
-
-	return nil
 }
