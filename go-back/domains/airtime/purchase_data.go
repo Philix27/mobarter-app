@@ -4,6 +4,7 @@ import (
 	"errors"
 	"mobarter/app"
 
+	"github.com/LNMMusic/optional"
 	"github.com/graphql-go/graphql"
 )
 
@@ -25,23 +26,49 @@ func PurchaseData(appState app.AppState) *graphql.Field {
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
-			"phone":           app.ArgString,
-			"amount":          app.ArgInt,
-			"transactionHash": app.ArgString,
-			"network":         app.ArgString,
-			"walletAddress":   app.ArgString,
-			"planId":          app.ArgString,
+			"input": &graphql.ArgumentConfig{
+				Type: graphql.NewInputObject(
+					graphql.InputObjectConfig{
+						Name: "PurchaseDataInput",
+						Fields: graphql.InputObjectConfigFieldMap{
+							"amount": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.Int),
+							},
+							"phone": &graphql.InputObjectFieldConfig{
+								Type: graphql.String,
+							},
+							"transactionHash": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"network": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"walletAddress": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"planId": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+						},
+					},
+				),
+			},
 		},
+
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			// ilog := log.New("Purchase airtime")
+			args, err := app.ValidateArg(optional.Some("input"), p)
+			if err != nil {
+				return nil, errors.New("Input required")
+			}
 
 			dto := &PurchaseDataDto{
-				amount:          p.Args["amount"].(int),
-				walletAddress:   p.Args["walletAddress"].(string),
-				phone:           p.Args["phone"].(string),
-				transactionHash: p.Args["transactionHash"].(string),
-				network:         p.Args["network"].(string),
-				planId:          p.Args["planId"].(string),
+				amount:          args["amount"].(int),
+				walletAddress:   args["walletAddress"].(string),
+				phone:           args["phone"].(string),
+				transactionHash: args["transactionHash"].(string),
+				network:         args["network"].(string),
+				planId:          args["planId"].(string),
 			}
 
 			if dto.amount < 100 {

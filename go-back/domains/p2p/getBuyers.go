@@ -18,7 +18,18 @@ func GetBuyers(appState app.AppState) *graphql.Field {
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
-			"paymentMethod": app.ArgString,
+			"input": &graphql.ArgumentConfig{
+				Type: graphql.NewInputObject(
+					graphql.InputObjectConfig{
+						Name: "GetBuyersInput",
+						Fields: graphql.InputObjectConfigFieldMap{
+							"paymentMethod": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.Int),
+							},
+						},
+					},
+				),
+			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			// Extract arguments from params

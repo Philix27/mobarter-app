@@ -1,6 +1,6 @@
 import type { OperationStore } from '@urql/svelte';
 import gql from 'graphql-tag';
-import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -38,6 +38,16 @@ export type CreateBankAccountResponse = {
 	message?: Maybe<Scalars['String']['output']>;
 };
 
+export type CreateVendorResponse = {
+	__typename?: 'CreateVendorResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type DeleteBankAccountResponse = {
+	__typename?: 'DeleteBankAccountResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
 export type GetBankAccountResponse = {
 	__typename?: 'GetBankAccountResponse';
 	dexId?: Maybe<Scalars['Int']['output']>;
@@ -48,6 +58,20 @@ export type GetBankAccountResponse = {
 	totalVotes?: Maybe<Scalars['Int']['output']>;
 	upVotes?: Maybe<Scalars['Int']['output']>;
 	winPercentage?: Maybe<Scalars['Float']['output']>;
+};
+
+export type GetP2PBuyersResponse = {
+	__typename?: 'GetP2PBuyersResponse';
+	accountName?: Maybe<Scalars['String']['output']>;
+	accountNo?: Maybe<Scalars['String']['output']>;
+	bankName?: Maybe<Scalars['String']['output']>;
+};
+
+export type GetP2PSellersResponse = {
+	__typename?: 'GetP2PSellersResponse';
+	amount?: Maybe<Scalars['String']['output']>;
+	name?: Maybe<Scalars['String']['output']>;
+	rate?: Maybe<Scalars['String']['output']>;
 };
 
 export type Kyc_GetLevelResponse = {
@@ -91,6 +115,8 @@ export type RootMutations = {
 	__typename?: 'RootMutations';
 	Auth_SentOtp?: Maybe<Auth_SentOtpResponse>;
 	BankAccount_Create?: Maybe<CreateBankAccountResponse>;
+	BankAccount_Delete?: Maybe<DeleteBankAccountResponse>;
+	CreateVendor?: Maybe<CreateVendorResponse>;
 	JoinWaitList?: Maybe<WaitListResponse>;
 	Kyc_VerifyBvn?: Maybe<Kyc_VerifyBvnResponse>;
 	Kyc_VerifyEmail?: Maybe<Kyc_VerifyEmailResponse>;
@@ -98,6 +124,7 @@ export type RootMutations = {
 	Kyc_VerifyPhone?: Maybe<Kyc_VerifyPhoneResponse>;
 	PurchaseAirtime?: Maybe<PurchaseAirtimeResponse>;
 	PurchaseData?: Maybe<PurchaseDataResponse>;
+	User_Create?: Maybe<User_CreateResponse>;
 };
 
 export type RootMutationsAuth_SentOtpArgs = {
@@ -112,6 +139,23 @@ export type RootMutationsBankAccount_CreateArgs = {
 	accountName: Scalars['String']['input'];
 	accountNo: Scalars['String']['input'];
 	bankName: Scalars['String']['input'];
+	name?: InputMaybe<Scalars['String']['input']>;
+	token: Scalars['String']['input'];
+	wallet: Scalars['String']['input'];
+};
+
+export type RootMutationsBankAccount_DeleteArgs = {
+	accountName: Scalars['String']['input'];
+	accountNo: Scalars['String']['input'];
+	bankName: Scalars['String']['input'];
+};
+
+export type RootMutationsCreateVendorArgs = {
+	accountName: Scalars['String']['input'];
+	accountNo: Scalars['String']['input'];
+	bankName: Scalars['String']['input'];
+	token: Scalars['String']['input'];
+	wallet: Scalars['String']['input'];
 };
 
 export type RootMutationsJoinWaitListArgs = {
@@ -142,11 +186,11 @@ export type RootMutationsKyc_VerifyPhoneArgs = {
 };
 
 export type RootMutationsPurchaseAirtimeArgs = {
-	amount: Scalars['String']['input'];
-	issuerAddress: Scalars['String']['input'];
+	amount: Scalars['Int']['input'];
 	network: Scalars['String']['input'];
 	phone: Scalars['String']['input'];
-	transactionHash: Scalars['Int']['input'];
+	transactionHash: Scalars['String']['input'];
+	walletAddress: Scalars['String']['input'];
 };
 
 export type RootMutationsPurchaseDataArgs = {
@@ -157,22 +201,52 @@ export type RootMutationsPurchaseDataArgs = {
 	transactionHash: Scalars['Int']['input'];
 };
 
+export type RootMutationsUser_CreateArgs = {
+	firstName: Scalars['String']['input'];
+	lastName: Scalars['String']['input'];
+	walletAddress: Scalars['String']['input'];
+};
+
 export type RootQuery = {
 	__typename?: 'RootQuery';
 	BankAccount_Get?: Maybe<GetBankAccountResponse>;
 	BankAccount_GetAll?: Maybe<GetAllBankAccountResponse>;
 	CountryList?: Maybe<CountryResponse>;
+	GetBuyers?: Maybe<GetP2PBuyersResponse>;
+	GetP2PSellers?: Maybe<GetP2PSellersResponse>;
 	Kyc_GetLevel?: Maybe<Kyc_GetLevelResponse>;
 	Transactions_GetAll?: Maybe<GetAllTransactionsResponse>;
-	Transactions_GetOne?: Maybe<GetAllTransactionsResponse>;
-	User_GetInfo?: Maybe<UserResponse>;
+	Transactions_GetOne?: Maybe<GetOneTransactionsResponse>;
+	User_GetInfo?: Maybe<User_GetInfoResponse>;
 };
 
-export type UserResponse = {
-	__typename?: 'UserResponse';
-	country?: Maybe<Scalars['String']['output']>;
+export type RootQueryGetBuyersArgs = {
+	paymentMethod: Scalars['String']['input'];
+};
+
+export type RootQueryGetP2PSellersArgs = {
+	paymentMethod: Scalars['String']['input'];
+};
+
+export type RootQueryUser_GetInfoArgs = {
+	walletAddress: Scalars['String']['input'];
+};
+
+export type User_CreateResponse = {
+	__typename?: 'User_CreateResponse';
 	firstName?: Maybe<Scalars['String']['output']>;
+	id?: Maybe<Scalars['String']['output']>;
 	lastName?: Maybe<Scalars['String']['output']>;
+	message?: Maybe<Scalars['String']['output']>;
+	walletAddress?: Maybe<Scalars['String']['output']>;
+};
+
+export type User_GetInfoResponse = {
+	__typename?: 'User_GetInfoResponse';
+	firstName?: Maybe<Scalars['String']['output']>;
+	id?: Maybe<Scalars['String']['output']>;
+	lastName?: Maybe<Scalars['String']['output']>;
+	message?: Maybe<Scalars['String']['output']>;
 	walletAddress?: Maybe<Scalars['String']['output']>;
 };
 
@@ -185,6 +259,14 @@ export type GetAllBankAccountResponse = {
 
 export type GetAllTransactionsResponse = {
 	__typename?: 'getAllTransactionsResponse';
+	country?: Maybe<Scalars['String']['output']>;
+	firstName?: Maybe<Scalars['String']['output']>;
+	lastName?: Maybe<Scalars['String']['output']>;
+	walletAddress?: Maybe<Scalars['String']['output']>;
+};
+
+export type GetOneTransactionsResponse = {
+	__typename?: 'getOneTransactionsResponse';
 	country?: Maybe<Scalars['String']['output']>;
 	firstName?: Maybe<Scalars['String']['output']>;
 	lastName?: Maybe<Scalars['String']['output']>;
@@ -212,4 +294,26 @@ export const GetCountryDocument = gql`
 `;
 export type GetCountryQueryStore = OperationStore<GetCountryQuery, GetCountryQueryVariables>;
 
-// export const GetCountryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCountry"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"CountryList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetCountryQuery, GetCountryQueryVariables>;
+export const GetCountryDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'GetCountry' },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'CountryList' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [{ kind: 'Field', name: { kind: 'Name', value: 'name' } }]
+						}
+					}
+				]
+			}
+		}
+	]
+} as unknown as DocumentNode<GetCountryQuery, GetCountryQueryVariables>;

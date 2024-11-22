@@ -25,10 +25,26 @@ func Create(appState app.AppState) *graphql.Field {
 				"id":            app.String,
 			},
 		}),
+
 		Args: graphql.FieldConfigArgument{
-			"walletAddress": app.ArgString,
-			"firstName":     app.ArgString,
-			"lastName":      app.ArgString,
+			"input": &graphql.ArgumentConfig{
+				Type: graphql.NewInputObject(
+					graphql.InputObjectConfig{
+						Name: "CreateUserInput",
+						Fields: graphql.InputObjectConfigFieldMap{
+							"walletAddress": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.Int),
+							},
+							"firstName": &graphql.InputObjectFieldConfig{
+								Type: graphql.String,
+							},
+							"lastName": &graphql.InputObjectFieldConfig{
+								Type: graphql.String,
+							},
+						},
+					},
+				),
+			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 

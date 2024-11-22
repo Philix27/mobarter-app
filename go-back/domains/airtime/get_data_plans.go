@@ -4,6 +4,7 @@ import (
 	"errors"
 	"mobarter/app"
 
+	"github.com/LNMMusic/optional"
 	"github.com/graphql-go/graphql"
 )
 
@@ -21,15 +22,33 @@ func GetDataPlans(appState app.AppState) *graphql.Field {
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
-			"network":  app.ArgString,
-			"category": app.ArgOptionalString,
+			"input": &graphql.ArgumentConfig{
+				Type: graphql.NewInputObject(
+					graphql.InputObjectConfig{
+						Name: "GetDataPlansInput",
+						Fields: graphql.InputObjectConfigFieldMap{
+
+							"network": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"category": &graphql.InputObjectFieldConfig{
+								Type: graphql.String,
+							},
+						},
+					},
+				),
+			},
 		},
+
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			// ilog := log.New("Purchase airtime")
-
+			args, err := app.ValidateArg(optional.Some("input"), p)
+			if err != nil {
+				return nil, errors.New("Input required")
+			}
 			dto := &GetDataPlansDto{
-				network:  p.Args["network"].(string),
-				category: p.Args["category"].(string),
+				network:  args["network"].(string),
+				category: args["category"].(string),
 			}
 
 			if !verifyNetwork(dto.network) {

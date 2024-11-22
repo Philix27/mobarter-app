@@ -2,7 +2,6 @@ package bank
 
 import (
 	"mobarter/app"
-	"mobarter/log"
 
 	"github.com/graphql-go/graphql"
 )
@@ -16,13 +15,33 @@ func DeleteBankAccount(appState app.AppState) *graphql.Field {
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
-			"accountName": app.ArgString,
-			"accountNo":   app.ArgString,
-			"bankName":    app.ArgString,
+			"input": &graphql.ArgumentConfig{
+				Type: graphql.NewInputObject(
+					graphql.InputObjectConfig{
+						Name: "DeleteBankAccountInput",
+						Fields: graphql.InputObjectConfigFieldMap{
+							"accountId": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"token": &graphql.InputObjectFieldConfig{
+								Type: graphql.String,
+							},
+							"wallet": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+						},
+					},
+				),
+			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			ilog := log.New("Delete bank account")
-			ilog.Trace("Deleted bank account")
+			// args, err := app.ValidateArg(optional.Some("input"), p)
+			// if err != nil {
+			// 	return nil, errors.New("Input required")
+			// }
+			// accountId := args["accountId"].(string)
+			// token := args["token"].(string)
+
 			return map[string]interface{}{
 				"name": "Meat Pie",
 			}, nil

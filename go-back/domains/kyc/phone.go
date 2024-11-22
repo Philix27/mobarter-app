@@ -14,10 +14,26 @@ func Kyc_VerifyPhone(appState app.AppState) *graphql.Field {
 				"message": app.String,
 			},
 		}),
+
 		Args: graphql.FieldConfigArgument{
-			"phone": app.ArgString,
-			"otp":   app.ArgString,
-			"token": app.ArgString,
+			"input": &graphql.ArgumentConfig{
+				Type: graphql.NewInputObject(
+					graphql.InputObjectConfig{
+						Name: "Kyc_VerifyPhoneInput",
+						Fields: graphql.InputObjectConfigFieldMap{
+							"phone": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"otp": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"nin": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+						},
+					},
+				),
+			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 

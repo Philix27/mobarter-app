@@ -19,8 +19,20 @@ func UserInfo(appState app.AppState) *graphql.Field {
 				"id":            app.String,
 			},
 		}),
+
 		Args: graphql.FieldConfigArgument{
-			"walletAddress": app.ArgString,
+			"input": &graphql.ArgumentConfig{
+				Type: graphql.NewInputObject(
+					graphql.InputObjectConfig{
+						Name: "GetUserInput",
+						Fields: graphql.InputObjectConfigFieldMap{
+							"walletAddress": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.Int),
+							},
+						},
+					},
+				),
+			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			// ilog := log.New("Get user info")

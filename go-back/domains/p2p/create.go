@@ -23,6 +23,7 @@ func CreateVendor(appState app.AppState) *graphql.Field {
 			"token":       app.ArgString,
 			"wallet":      app.ArgString,
 		},
+
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			// ilog := log.New("Create bank account")
 			// todo - verify user credentials

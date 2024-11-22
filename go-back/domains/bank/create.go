@@ -5,8 +5,14 @@ import (
 	"mobarter/app"
 	"mobarter/database"
 
+	"github.com/LNMMusic/optional"
 	"github.com/graphql-go/graphql"
 )
+
+var users = []map[string]interface{}{
+	{"id": "1", "name": "John Doe", "email": "john@example.com", "age": 30},
+	{"id": "2", "name": "Jane Smith", "email": "jane@example.com", "age": 25},
+}
 
 func CreateBankAccount(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
@@ -17,20 +23,43 @@ func CreateBankAccount(appState app.AppState) *graphql.Field {
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
-			"accountName": app.ArgString,
-			"accountNo":   app.ArgString,
-			"bankName":    app.ArgString,
-			"token":       app.ArgString,
-			"wallet":      app.ArgString,
+			"input": &graphql.ArgumentConfig{
+				Type: graphql.NewInputObject(
+					graphql.InputObjectConfig{
+						Name: "CreateBankAccountInput",
+						Fields: graphql.InputObjectConfigFieldMap{
+							"accountName": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"accountNo": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"bankName": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"token": &graphql.InputObjectFieldConfig{
+								Type: graphql.String,
+							},
+							"wallet": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+						},
+					},
+				),
+			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			// ilog := log.New("Create bank account")
 			//TODO -
 
+			args, err := app.ValidateArg(optional.Some("input"), p)
+			if err != nil {
+				return nil, errors.New("Input required")
+			}
+			
 			result := appState.DB.Create(&database.BankAccount{
-				Name:     p.Args["accountName"].(string),
-				No:       p.Args["accountNo"].(string),
-				BankName: p.Args["bankName"].(string),
+				Name:     args["accountName"].(string),
+				No:       args["accountNo"].(string),
+				BankName: args["bankName"].(string),
 			})
 
 			if result.Error != nil {

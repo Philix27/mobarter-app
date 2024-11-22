@@ -22,6 +22,7 @@ func GetDealer(appState app.AppState) *graphql.Field {
 				"lossPercentage": app.Float,
 			},
 		}),
+
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			ilog := log.New("Get bank account")
 			ilog.Trace("Get bank account")

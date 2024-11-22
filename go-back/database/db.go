@@ -29,7 +29,7 @@ func NewConnection(config *DbConfig) (*gorm.DB, error) {
 			LogLevel:                  logger.Silent, // Log level
 			IgnoreRecordNotFoundError: true,          // Ignore ErrRecordNotFound error for logger
 			ParameterizedQueries:      true,          // Don't include params in the SQL log
-			Colorful:                  false,         // Disable color
+			Colorful:                  true,          // Disable color
 		},
 	)
 
@@ -46,7 +46,6 @@ func NewConnection(config *DbConfig) (*gorm.DB, error) {
 		return db, err
 	} else {
 		log.Println("Database connection successful")
-		println("Database connection successful")
 		return db, nil
 	}
 

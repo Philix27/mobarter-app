@@ -33,13 +33,12 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"PurchaseAirtime":    airtime.PurchaseAirtime(appState),
 		"PurchaseData":       airtime.PurchaseData(appState),
 		"GetDataPlans":       airtime.GetDataPlans(appState),
-		"CreateVendor":       p2p.CreateVendor(appState),
 		"Kyc_VerifyNin":      kyc.Kyc_VerifyNin(appState),
 		"Kyc_VerifyBvn":      kyc.Kyc_VerifyBvn(appState),
 		"Kyc_VerifyEmail":    kyc.Kyc_VerifyEmail(appState),
 		"Kyc_VerifyPhone":    kyc.Kyc_VerifyPhone(appState),
 		"JoinWaitList":       JoinWaitList(appState),
-		"Auth_SentOtp":       Auth_SentOtp(appState),
+		// "Auth_SentOtp":       Auth_SentOtp(appState),
 	}
 
 }

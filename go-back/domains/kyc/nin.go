@@ -6,10 +6,10 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-func Kyc_VerifyEmail(appState app.AppState) *graphql.Field {
+func Kyc_VerifyNin(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "Kyc_VerifyEmailResponse",
+			Name: "Kyc_VerifyNinResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
 			},
@@ -19,14 +19,8 @@ func Kyc_VerifyEmail(appState app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "Kyc_VerifyEmailInput",
+						Name: "Kyc_VeriyNinInput",
 						Fields: graphql.InputObjectConfigFieldMap{
-							"email": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.String),
-							},
-							"otp": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.String),
-							},
 							"nin": &graphql.InputObjectFieldConfig{
 								Type: graphql.NewNonNull(graphql.String),
 							},
@@ -35,6 +29,7 @@ func Kyc_VerifyEmail(appState app.AppState) *graphql.Field {
 				),
 			},
 		},
+
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 
 			return map[string]interface{}{
