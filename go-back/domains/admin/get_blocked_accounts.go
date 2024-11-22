@@ -1,4 +1,4 @@
-package crm
+package admin
 
 import (
 	"mobarter/app"
@@ -49,7 +49,7 @@ func GetBlockedAccounts(appState app.AppState) *graphql.Field {
 			// 	return nil, errors.New("Could not create account")
 			// }
 			// ilog.Trace("Bank account added")
-            
+
 			return map[string]interface{}{
 				"message": "success",
 			}, nil

@@ -1,4 +1,4 @@
-package crm
+package admin
 
 import (
 	"mobarter/app"
@@ -53,7 +53,7 @@ func Login(appState app.AppState) *graphql.Field {
 			// ilog.Trace("Bank account added")
 			return map[string]interface{}{
 				"message": "success",
-				"token": "0903",
+				"token":   "0903",
 			}, nil
 		},
 	}

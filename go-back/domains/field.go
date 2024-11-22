@@ -2,6 +2,7 @@ package field
 
 import (
 	"mobarter/app"
+	"mobarter/domains/admin"
 	"mobarter/domains/airtime"
 	"mobarter/domains/bank"
 	"mobarter/domains/kyc"
@@ -13,16 +14,20 @@ import (
 
 func QueryFields(appState app.AppState) graphql.Fields {
 	return graphql.Fields{
-		"BankAccount_Get":      bank.GetBankAccount(appState),
-		"BankAccount_GetAll":   bank.GetAllBankAccount(appState),
-		"User_GetInfo":         user.UserInfo(appState),
-		"GetBuyers":            p2p.GetBuyers(appState),
-		"GetP2PSellers":        p2p.GetP2PSellers(appState),
-		"CountryList":          CountryList(appState),
-		"Transactions_GetAll":  GetAllTransactions(appState),
-		"Transactions_GetOne":  GetOneTransactions(appState),
-		"Kyc_GetLevel":         kyc.Kyc_GetLevel(appState),
-		"Airtime_GetDataPlans": airtime.GetDataPlans(appState),
+		"BankAccount_Get":           bank.GetBankAccount(appState),
+		"BankAccount_GetAll":        bank.GetAllBankAccount(appState),
+		"User_GetInfo":              user.UserInfo(appState),
+		"GetBuyers":                 p2p.GetBuyers(appState),
+		"GetP2PSellers":             p2p.GetP2PSellers(appState),
+		"CountryList":               CountryList(appState),
+		"Transactions_GetAll":       GetAllTransactions(appState),
+		"Transactions_GetOne":       GetOneTransactions(appState),
+		"Kyc_GetLevel":              kyc.Kyc_GetLevel(appState),
+		"Airtime_GetDataPlans":      airtime.GetDataPlans(appState),
+		"Admin_GetBlockedAccounts":  admin.GetBlockedAccounts(appState),
+		"Admin_GetUserBankAccounts": admin.GetUserBankAccounts(appState),
+		"Admin_GetUserTransactions": admin.GetUserTransactions(appState),
+		"Admin_GetUsers":            admin.GetUsers(appState),
 	}
 }
 
@@ -38,7 +43,17 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"Kyc_VerifyEmail":    kyc.Kyc_VerifyEmail(appState),
 		"Kyc_VerifyPhone":    kyc.Kyc_VerifyPhone(appState),
 		"JoinWaitList":       JoinWaitList(appState),
-		// "Auth_SentOtp":       Auth_SentOtp(appState),
+		"Auth_SentOtp":       Auth_SentOtp(appState),
+		//! Admin
+		"Admin_ApproveBvn":                admin.ApproveBvn(appState),
+		"Admin_ApproveNin":                admin.ApproveNin(appState),
+		"Admin_ApprovePassport":           admin.ApprovePassport(appState),
+		"Admin_ApproveResidentialAddress": admin.ApproveResidentialAddress(appState),
+		"Admin_BlockAccount":              admin.BlockAccount(appState),
+
+		"Admin_Login":     admin.Login(appState),
+		"Admin_SendEmail": admin.SendEmail(appState),
+		"Admin_SetRates":  admin.SetRates(appState),
 	}
 
 }

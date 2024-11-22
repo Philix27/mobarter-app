@@ -1,2 +1,1 @@
-package crm
-
+package admin
