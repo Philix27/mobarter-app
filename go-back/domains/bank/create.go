@@ -55,11 +55,14 @@ func CreateBankAccount(appState app.AppState) *graphql.Field {
 			if err != nil {
 				return nil, errors.New("Input required")
 			}
-			
+
+			//TODO - fetch user id
 			result := appState.DB.Create(&database.BankAccount{
 				Name:     args["accountName"].(string),
 				No:       args["accountNo"].(string),
 				BankName: args["bankName"].(string),
+				//TODO - use the user's id
+				UserID: 1,
 			})
 
 			if result.Error != nil {
