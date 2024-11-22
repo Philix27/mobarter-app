@@ -13,15 +13,16 @@ import (
 
 func QueryFields(appState app.AppState) graphql.Fields {
 	return graphql.Fields{
-		"BankAccount_Get":     bank.GetBankAccount(appState),
-		"BankAccount_GetAll":  bank.GetAllBankAccount(appState),
-		"User_GetInfo":        user.UserInfo(appState),
-		"GetBuyers":           p2p.GetBuyers(appState),
-		"GetP2PSellers":       p2p.GetP2PSellers(appState),
-		"CountryList":         CountryList(appState),
-		"Transactions_GetAll": GetAllTransactions(appState),
-		"Transactions_GetOne": GetOneTransactions(appState),
-		"Kyc_GetLevel":        kyc.Kyc_GetLevel(appState),
+		"BankAccount_Get":      bank.GetBankAccount(appState),
+		"BankAccount_GetAll":   bank.GetAllBankAccount(appState),
+		"User_GetInfo":         user.UserInfo(appState),
+		"GetBuyers":            p2p.GetBuyers(appState),
+		"GetP2PSellers":        p2p.GetP2PSellers(appState),
+		"CountryList":          CountryList(appState),
+		"Transactions_GetAll":  GetAllTransactions(appState),
+		"Transactions_GetOne":  GetOneTransactions(appState),
+		"Kyc_GetLevel":         kyc.Kyc_GetLevel(appState),
+		"Airtime_GetDataPlans": airtime.GetDataPlans(appState),
 	}
 }
 
@@ -32,7 +33,6 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"User_Create":        user.Create(appState),
 		"PurchaseAirtime":    airtime.PurchaseAirtime(appState),
 		"PurchaseData":       airtime.PurchaseData(appState),
-		"GetDataPlans":       airtime.GetDataPlans(appState),
 		"Kyc_VerifyNin":      kyc.Kyc_VerifyNin(appState),
 		"Kyc_VerifyBvn":      kyc.Kyc_VerifyBvn(appState),
 		"Kyc_VerifyEmail":    kyc.Kyc_VerifyEmail(appState),

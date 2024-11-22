@@ -31,24 +31,12 @@ func PurchaseData(appState app.AppState) *graphql.Field {
 					graphql.InputObjectConfig{
 						Name: "PurchaseDataInput",
 						Fields: graphql.InputObjectConfigFieldMap{
-							"amount": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.Int),
-							},
-							"phone": &graphql.InputObjectFieldConfig{
-								Type: graphql.String,
-							},
-							"transactionHash": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.String),
-							},
-							"network": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.String),
-							},
-							"walletAddress": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.String),
-							},
-							"planId": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.String),
-							},
+							"amount":          app.InputInt,
+							"phone":           app.InputStringOptional,
+							"transactionHash": app.InputString,
+							"network":         networkProvider,
+							"walletAddress":   app.InputString,
+							"planId":          app.InputString,
 						},
 					},
 				),

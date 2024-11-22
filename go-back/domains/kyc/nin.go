@@ -19,7 +19,7 @@ func Kyc_VerifyNin(appState app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "Kyc_VeriyNinInput",
+						Name: "Kyc_VerifyNinInput",
 						Fields: graphql.InputObjectConfigFieldMap{
 							"nin": &graphql.InputObjectFieldConfig{
 								Type: graphql.NewNonNull(graphql.String),

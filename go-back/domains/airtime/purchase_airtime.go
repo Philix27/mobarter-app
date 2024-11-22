@@ -16,12 +16,37 @@ type PurchaseAirtimeDto struct {
 	issuerAddress   string
 }
 
+var networkProvider = &graphql.InputObjectFieldConfig{
+	Type: graphql.NewEnum(
+		graphql.EnumConfig{
+			Name: "NetworkProviders",
+			Values: graphql.EnumValueConfigMap{
+				"MTN": &graphql.EnumValueConfig{
+					Value:       "ADMIN",
+					Description: "Administrator with full access",
+				},
+				"AIRTEL": &graphql.EnumValueConfig{
+					Value:       "USER",
+					Description: "Regular user with limited access",
+				},
+				"GLO": &graphql.EnumValueConfig{
+					Value:       "GUEST",
+					Description: "Guest user with minimal access",
+				},
+			},
+		},
+	),
+}
+
 func PurchaseAirtime(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
 			Name: "PurchaseAirtimeResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
+				"network": &graphql.Field{
+					Type: graphql.String,
+				},
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
@@ -30,21 +55,11 @@ func PurchaseAirtime(appState app.AppState) *graphql.Field {
 					graphql.InputObjectConfig{
 						Name: "PurchaseAirtimeInput",
 						Fields: graphql.InputObjectConfigFieldMap{
-							"amount": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.Int),
-							},
-							"phone": &graphql.InputObjectFieldConfig{
-								Type: graphql.String,
-							},
-							"transactionHash": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.String),
-							},
-							"network": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.String),
-							},
-							"walletAddress": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.String),
-							},
+							"amount":          app.InputInt,
+							"phone":           app.InputStringOptional,
+							"transactionHash": app.InputString,
+							"walletAddress":   app.InputString,
+							"network":         networkProvider,
 						},
 					},
 				),

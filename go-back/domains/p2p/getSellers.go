@@ -32,7 +32,6 @@ func GetP2PSellers(appState app.AppState) *graphql.Field {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
 			// Extract arguments from params
 			payMethod, ok := p.Args["paymentMethod"].(string)
 

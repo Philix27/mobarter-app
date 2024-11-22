@@ -87,12 +87,12 @@ var (
 	}
 )
 
-func SetInput(name string, fields map[string]*graphql.InputObjectFieldConfig) *graphql.ArgumentConfig {
+func SetInput(name string, fields *map[string]*graphql.InputObjectFieldConfig) *graphql.ArgumentConfig {
 	return &graphql.ArgumentConfig{
 		Type: graphql.NewInputObject(
 			graphql.InputObjectConfig{
 				Name:   name,
-				Fields: &fields,
+				Fields: fields,
 			},
 		),
 	}
