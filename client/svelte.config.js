@@ -15,6 +15,7 @@ const config = {
 		alias: {
 			'@/*': './path/to/lib/*',
 			'@/comps': './src/comps/*',
+			generated: 'src/generated',
 			components: 'src/components',
 			lib: 'src/lib',
 			wizard: 'src/routes/wizard'

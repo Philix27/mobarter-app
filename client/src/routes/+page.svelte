@@ -3,13 +3,27 @@
 	import { Button } from 'components';
 	import { browser } from '$app/environment';
 	import { queryStore, gql, getContextClient } from '@urql/svelte';
-	import type { GetCountryQuery } from '../generated/graphql';
+	import type {
+		GetCountryQuery,
+		GetDataPlansInput,
+		GetDataPlansResponse,
+		GetDataPlansQuery
+	} from '../generated/graphql';
 	// import { GetCountryDocument } from '../generated/graphql';
-	import { GetCountryDocument } from '../generated/graphql';
+	import { GetCountryDocument, GetDataPlansDocument, NetworkProviders } from '../generated/graphql';
 
-	const posts = queryStore<GetCountryQuery>({
+	const postsX = queryStore<GetCountryQuery>({
 		client: getContextClient(),
 		query: GetCountryDocument
+	});
+	$: dataPlans = queryStore<GetDataPlansQuery, GetDataPlansInput>({
+		client: getContextClient(),
+		query: GetDataPlansDocument,
+		variables: {
+			network: NetworkProviders.Mtn,
+			category: 'None'
+		},
+		pause: false
 	});
 
 	// const posts = queryStore<GetCountryQuery>({
@@ -52,19 +66,25 @@
 	}
 
 	function connectWallet() {
-		const yoe = $posts.data;
-		modal.open({ view: 'Connect' });
+		// dataPlans.resume()
+		const yoe = $postsX.data;
+		$dataPlans.data?.Airtime_GetDataPlans?.dataPlans?.map((val, i) => {
+			val?.network;
+		});
+		console.log('');
+		console.log('Afa');
+		// modal.open({ view: 'Connect' });
 	}
 </script>
 
 <section class="bg-primary h-screen flex flex-col items-center">
 	<img src="dollar.png" alt="Welcome" class="h-fit max-h-[300px] mt-[100px]" />
 	<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
-	{#if !$posts.data}
+	{#if !$postsX.data}
 		<p>Loading....</p>
-	{:else if $posts.data}
+	{:else if $postsX.data}
 		<!-- <p>{$posts.data}</p> -->
-		<p>{$posts.data.CountryList!.name}</p>
+		<p>{$postsX.data.CountryList!.name}</p>
 	{:else}
 		<p>Nothing...</p>
 	{/if}
@@ -76,5 +96,20 @@
 	{:else}
 		<Button variant="secondary" className="w-fit" onclick={connectWallet}>Connect</Button>
 		<!-- <button on:click={}>Connect</button> -->
+	{/if}
+	{#if $dataPlans.fetching}
+		<p>Loading dataPlans....</p>
+	{:else}
+		<div class="grid grid-cols-4 overflow-y-scroll scroll-smooth gap-4">
+			<!-- <p>{JSON.stringify($dataPlans.data.Airtime_GetDataPlans.dataPlans)}</p> -->
+			<!-- {JSON.stringify(dataPlans.data.Airtime_GetDataPlans.dataPlans)} -->
+			{#each $dataPlans.data!.Airtime_GetDataPlans!.dataPlans as item}
+				<p class="text-center">
+					{item.id}
+					{item.network}
+					{item.plan}
+				</p>
+			{/each}
+		</div>
 	{/if}
 </section>

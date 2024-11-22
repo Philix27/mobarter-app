@@ -1,7 +1,10 @@
 query getDataPlans($input: GetDataPlansInput) {
 	Airtime_GetDataPlans(input: $input) {
-		id
-		name
+		dataPlans {
+			plan
+			network
+			id
+		}
 	}
 }
 
@@ -52,6 +55,7 @@ query getP2pSellers($input: GetSellersInput) {
 query getP2pBuyers($input: GetBuyersInput) {
 	GetBuyers(input: $input) {
 		accountNo
+		accountName
 	}
 }
 

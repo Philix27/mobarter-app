@@ -7,9 +7,20 @@ import (
 )
 
 var dataPlans = []map[string]interface{}{
-	{"id": "1", "name": "John Doe"},
-	{"id": "2", "name": "Jane Smith"},
-	{"id": "3", "name": "Alice Johnson"},
+	{"id": "m1", "network": "MTN", "plan": "1gb #500 - 2days"},
+	{"id": "m2", "network": "MTN", "plan": "1.5gb #500 - 3days"},
+	{"id": "m3", "network": "MTN", "plan": "1gb #400 - 6days"},
+	{"id": "m4", "network": "MTN", "plan": "1gb #400 - 2 weeks"},
+	{"id": "m5", "network": "MTN", "plan": "1gb #400 - 10 days"},
+	{"id": "a1", "network": "AIRTEL", "plan": "1gb #500 - 2days"},
+	{"id": "a2", "network": "AIRTEL", "plan": "1gb #2500 - 2days"},
+	{"id": "a3", "network": "AIRTEL", "plan": "1gb #1500 - 2days"},
+	{"id": "a4", "network": "AIRTEL", "plan": "1gb #2000 - 2days"},
+	{"id": "a5", "network": "AIRTEL", "plan": "1gb #350 - 2days"},
+	{"id": "g1", "network": "GLO", "plan": "1gb #1500 - 1 week"},
+	{"id": "g2", "network": "GLO", "plan": "1gb #3500 - 1 week"},
+	{"id": "g3", "network": "GLO", "plan": "1gb #7500 - 1 week"},
+	{"id": "g4", "network": "GLO", "plan": "1gb #7500 - 1 week"},
 }
 
 type GetDataPlansDto struct {
@@ -22,16 +33,19 @@ func GetDataPlans(appState app.AppState) *graphql.Field {
 		Type: graphql.NewObject(graphql.ObjectConfig{
 			Name: "GetDataPlansResponse",
 			Fields: graphql.Fields{
-				// "message": app.String,
-				"id":   &graphql.Field{Type: graphql.String},
-				"name": &graphql.Field{Type: graphql.String},
 				"dataPlans": &graphql.Field{
-					Type: graphql.String,
-					Args: graphql.FieldConfigArgument{
-						"name": &graphql.ArgumentConfig{
-							Type: graphql.String,
-						},
-					},
+					Type: graphql.NewList(
+						graphql.NewObject(
+							graphql.ObjectConfig{
+								Name: "DataPlans",
+								Fields: graphql.Fields{
+									"id":      app.String,
+									"network": app.String,
+									"plan": app.String,
+								},
+							},
+						),
+					),
 				},
 			},
 		}),
@@ -67,7 +81,9 @@ func GetDataPlans(appState app.AppState) *graphql.Field {
 			// todo: log
 			// ilog.Debug("Recharged airtime for" + dto.phone)
 
-			return dataPlans, nil
+			return map[string]interface{}{
+				"dataPlans": dataPlans,
+			}, nil
 		},
 	}
 }

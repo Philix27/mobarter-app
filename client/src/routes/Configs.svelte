@@ -3,7 +3,7 @@
 	import { Client, cacheExchange, fetchExchange, setContextClient } from '@urql/svelte';
 
 	const urqlClient = new Client({
-		url: 'http://localhost:8080/graphql',
+		url: 'http://localhost:5566/graphql',
 		exchanges: [cacheExchange, fetchExchange]
 	});
 	setContextClient(urqlClient);

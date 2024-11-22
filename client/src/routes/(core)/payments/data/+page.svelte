@@ -3,6 +3,23 @@
 	import { AirtimeData } from 'lib/data.js';
 	import { cn } from 'lib/utils';
 	import { z } from 'zod';
+	import type {
+		GetCountryQuery,
+		GetDataPlansInput,
+		GetDataPlansResponse,
+		GetDataPlansQuery
+	} from 'generated/graphql';
+	import { GetCountryDocument, GetDataPlansDocument, NetworkProviders } from 'generated/graphql';
+
+	let dataPlans = $derived(queryStore<GetDataPlansQuery, GetDataPlansInput>({
+		client: getContextClient(),
+		query: GetDataPlansDocument,
+		variables: {
+			network: NetworkProviders.Mtn,
+			category: 'None'
+		},
+		pause: false
+	}))
 
 	const formSchema = z.object({
 		amountSelected: z.number({ message: 'Must be a number' }),
@@ -45,6 +62,7 @@
 	let phoneValue = $state('');
 
 	let showConfirm = $state(false);
+	let showDataPlans = $state(false);
 </script>
 
 <svelte:head>
@@ -103,6 +121,9 @@
 		bind:value={phoneValue}
 	/>
 	<!-- onclick={() => toast('Funds sent')} -->
+	<Button onclick={() => {
+		showDataPlans = false
+	}} btype="button">Select Plan</Button>
 	<Button onclick={handleSubmit} btype="submit">Buy</Button>
 </div>
 
@@ -156,4 +177,32 @@
 			networkSelected = 'GLO';
 		}}
 	/>
+</BottomSheet>
+<BottomSheet
+	bind:show={showDataPlans}
+	onClose={() => {
+		showDataPlans = false;
+	}}
+	title="Data Plans"
+>
+{#if $dataPlans.fetching}
+		<p>Loading dataPlans....</p>
+	{:else}
+		<div class="grid grid-cols-4 overflow-y-scroll scroll-smooth gap-4">
+			{#each $dataPlans.data!.Airtime_GetDataPlans!.dataPlans.filter((val) => val.network === networkSelected) as item}
+			<BottomRow
+		title={item.plan}
+		imgSrc={getImgPath('MTN')}
+		isActive={networkSelected === 'MTN'}
+		onClick={() => {
+			// item.id
+			// networkSelected = 'MTN';
+			console.log(item.id)
+		}}
+	/>
+				
+			{/each}
+		</div>
+	{/if}
+	
 </BottomSheet>
