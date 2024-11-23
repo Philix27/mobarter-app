@@ -11,6 +11,7 @@
 		theme?: string;
 		title?: string;
 		icon?: string;
+		isAdmin?: boolean;
 		isHome?: boolean;
 		showThemeToggle?: boolean;
 		isBack?: boolean;

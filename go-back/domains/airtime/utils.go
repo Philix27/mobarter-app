@@ -6,7 +6,8 @@ func verifyNetwork(provider string) bool {
 }
 
 func verifyTransactionHash(transactionHash string) bool {
-	//TODO -
+	//TODO - Ensure it has not been used before
+	//TODO - Ensure it is valid
 	return true
 }
 
