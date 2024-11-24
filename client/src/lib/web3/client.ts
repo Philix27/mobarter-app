@@ -112,16 +112,24 @@ export const provider = readable<unknown | undefined>(undefined, (set) =>
 	})
 );
 
-export const getBalance = (tokenAddress: `0x${string}`, userAddress: `0x${string}`) => {
+export const getBalance = (
+	tokenAddress: `0x${string}` | string,
+	userAddress: `0x${string}` | string
+) => {
 	// return readable(
 	// 	_getBalance(wagmiConfig, {
 	// 		address: userAddress,
 	// 		token: tokenAddress
 	// 	})
 	// );
+	if (tokenAddress.length < 2) {
+		return _getBalance(wagmiConfig, {
+			address: userAddress as `0x${string}`
+		});
+	}
 	return _getBalance(wagmiConfig, {
-		address: userAddress,
-		token: tokenAddress
+		address: userAddress as `0x${string}`,
+		token: tokenAddress as `0x${string}`
 	});
 };
 

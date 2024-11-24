@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Nav } from 'components';
+	import { Button, Nav } from 'components';
 	import ValueSection from './ValueSection.svelte';
 	import 'iconify-icon';
 </script>
@@ -11,8 +11,8 @@
 
 <div>
 	<Nav title="Swap" isBack />
-	<div class="w-full relative bg-background">
-		<div>
+	<div class="w-full relative bg-background flex flex-col items-center justify-center">
+		<div class="w-full">
 			<ValueSection
 				title="You send"
 				isReadOnly={false}
@@ -20,7 +20,7 @@
 				onTokenClick={() => {}}
 				onChange={(e) => {}}
 			/>
-			<div class="my-1 flex items-center justify-center absolute bottom-[40%] left-[45%]">
+			<div class="my-1 flex items-center justify-center absolute bottom-[50%] left-[45%]">
 				<div class="bg-card px-3 py-2 rounded-lg border-4 border-background">
 					<iconify-icon class="text-xl text-primary" icon="tdesign:swap" />
 				</div>
@@ -33,5 +33,6 @@
 				onChange={(e) => {}}
 			/>
 		</div>
+		<Button className="mt-4">Swap</Button>
 	</div>
 </div>

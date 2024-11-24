@@ -9,8 +9,8 @@
 		// { name: 'Sports', link: '/payments/sports', icon: 'solar:gamepad-outline' },
 		// { name: 'Travel', link: '/payments/travel', icon: 'hugeicons:bitcoin-withdraw' }
 		// { name: 'Savings', link: '/savings', icon: 'material-symbols-light:savings-outline' },
-		{ name: 'Buy', link: '/withdraw', icon: 'hugeicons:bitcoin-withdraw' },
-		{ name: 'Sell', link: '/withdraw', icon: 'hugeicons:bitcoin-withdraw' },
+		{ name: 'Buy', link: '/p2p/sellers', icon: 'hugeicons:bitcoin-withdraw' },
+		{ name: 'Sell', link: '/p2p/buyers', icon: 'hugeicons:bitcoin-withdraw' },
 		{ name: 'Withdraw', link: '/withdraw', icon: 'hugeicons:bitcoin-withdraw' },
 		{ name: 'Send', link: '/send', icon: 'majesticons:send-line' },
 		{ name: 'Swap', link: '/swap', icon: 'tdesign:swap' },

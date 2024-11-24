@@ -37,7 +37,8 @@
 	// 	`
 	// });
 
-	$: accountAddress = '';
+	$: accountAddress = $account.address;
+	// let accountAddress = $state($account.address);
 	$: isMiniPay = false;
 
 	if (browser) {
@@ -66,14 +67,13 @@
 	}
 
 	function connectWallet() {
-		// dataPlans.resume()
-		const yoe = $postsX.data;
-		$dataPlans.data?.Airtime_GetDataPlans?.dataPlans?.map((val, i) => {
-			val?.network;
-		});
-		console.log('');
-		console.log('Afa');
-		// modal.open({ view: 'Connect' });
+		// const yoe = $postsX.data;
+		// $dataPlans.data?.Airtime_GetDataPlans?.dataPlans?.map((val, i) => {
+		// 	val?.network;
+		// });
+		// console.log('');
+		// console.log('Afa');
+		modal.open({ view: 'Connect' });
 	}
 </script>
 

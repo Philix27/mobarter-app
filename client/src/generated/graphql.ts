@@ -1,5 +1,4 @@
-// import type { OperationStore } from '@urql/svelte';
-import gql from 'graphql-tag';
+import type { gql } from '@urql/svelte';
 // import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;

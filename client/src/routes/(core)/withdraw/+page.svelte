@@ -1,18 +1,11 @@
-<script>
-	import { Nav } from 'components';
+<script lang="ts">
+	import { Nav, Tabs } from 'components';
+	import ScreenBank from './ScreenBank.svelte';
 </script>
-
-<svelte:head>
-	<title>Receive Funds</title>
-	<meta name="description" content="About this app" />
-</svelte:head>
 
 <div>
 	<Nav title="Withdraw" isBack />
 	<div class="">
-		<div>Send Money</div>
+		<ScreenBank />
 	</div>
 </div>
-
-<style lang="postcss">
-</style>
