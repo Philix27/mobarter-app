@@ -1,6 +1,5 @@
 //#region imports
 import { defaultWagmiConfig, createWeb3Modal } from '@web3modal/wagmi';
-
 import {
 	getAccount,
 	getChainId,
@@ -10,34 +9,17 @@ import {
 	injected,
 	watchAccount as _watchAccount,
 	reconnect,
+	sendTransaction as _sendTransaction,
 	disconnect as _disconnect,
 	switchChain as _switchChain,
 	type CreateConnectorFn
 } from '@wagmi/core';
 import { readable, writable, type Writable } from 'svelte/store';
-
-import {
-	arbitrum,
-	aurora,
-	avalanche,
-	base,
-	bsc,
-	celo,
-	gnosis,
-	mainnet,
-	optimism,
-	polygon,
-	zkSync,
-	zora,
-	goerli,
-	ronin,
-	saigon,
-	celoAlfajores,
-	sepolia
-} from 'viem/chains';
+import { celo } from 'viem/chains';
 import { walletConnect } from '@wagmi/connectors';
 import { browser } from '$app/environment';
 import { chains, transports } from './chains';
+import { ethers } from 'ethers';
 // import { Web3AuthConnectorInstance } from './web3Connector';
 //#endregion
 
@@ -100,9 +82,11 @@ export const modal = createWeb3Modal({
 export const chainId = readable(getChainId(wagmiConfig), (set) =>
 	watchChainId(wagmiConfig, { onChange: set })
 );
+
 export const account = readable(getAccount(wagmiConfig), (set) =>
 	_watchAccount(wagmiConfig, { onChange: set })
 );
+
 export const provider = readable<unknown | undefined>(undefined, (set) =>
 	_watchAccount(wagmiConfig, {
 		onChange: async (account) => {
@@ -145,4 +129,10 @@ export function disconnect() {
 
 export function getChain(chainId: number) {
 	return chains.find(({ id }) => id === chainId);
+}
+export function sendTransaction(to: string, value: string) {
+	return _sendTransaction(wagmiConfig, {
+		to: to as `0x${string}`, 
+		value: ethers.parseEther(value),
+	});
 }

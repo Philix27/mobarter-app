@@ -47,12 +47,3 @@
 	</div>
 </div>
 
-<!-- activeTitle={$sendScreenState === 'BANK'
-	? 'Bank'
-	: $sendScreenState === 'PHONE'
-		? 'Phone'
-		: 'Wallet'} -->
-
-<!-- activeTitle={tabs
-				.filter((val) => val.title.toString() === $sendScreenState)[0]
-				.title.toString()} -->
