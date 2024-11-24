@@ -7,20 +7,20 @@ import (
 )
 
 var dataPlans = []map[string]interface{}{
-	{"id": "m1", "network": "MTN", "plan": "1gb #500 - 2days"},
-	{"id": "m2", "network": "MTN", "plan": "1.5gb #500 - 3days"},
-	{"id": "m3", "network": "MTN", "plan": "1gb #400 - 6days"},
-	{"id": "m4", "network": "MTN", "plan": "1gb #400 - 2 weeks"},
-	{"id": "m5", "network": "MTN", "plan": "1gb #400 - 10 days"},
-	{"id": "a1", "network": "AIRTEL", "plan": "1gb #500 - 2days"},
-	{"id": "a2", "network": "AIRTEL", "plan": "1gb #2500 - 2days"},
-	{"id": "a3", "network": "AIRTEL", "plan": "1gb #1500 - 2days"},
-	{"id": "a4", "network": "AIRTEL", "plan": "1gb #2000 - 2days"},
-	{"id": "a5", "network": "AIRTEL", "plan": "1gb #350 - 2days"},
-	{"id": "g1", "network": "GLO", "plan": "1gb #1500 - 1 week"},
-	{"id": "g2", "network": "GLO", "plan": "1gb #3500 - 1 week"},
-	{"id": "g3", "network": "GLO", "plan": "1gb #7500 - 1 week"},
-	{"id": "g4", "network": "GLO", "plan": "1gb #7500 - 1 week"},
+	{"id": "m1", "network": "MTN", "plan": "1gb #500 - 2days", "amount": "500"},
+	{"id": "m2", "network": "MTN", "plan": "1.5gb #500 - 3days", "amount": "500"},
+	{"id": "m3", "network": "MTN", "plan": "1gb #400 - 6days", "amount": "400"},
+	{"id": "m4", "network": "MTN", "plan": "1gb #400 - 2 weeks", "amount": "400"},
+	{"id": "m5", "network": "MTN", "plan": "1gb #400 - 10 days", "amount": "400"},
+	{"id": "a1", "network": "AIRTEL", "plan": "1gb #500 - 2days", "amount": "500"},
+	{"id": "a2", "network": "AIRTEL", "plan": "1gb #2500 - 2days", "amount": "2500"},
+	{"id": "a3", "network": "AIRTEL", "plan": "1gb #1500 - 2days", "amount": "1500"},
+	{"id": "a4", "network": "AIRTEL", "plan": "1gb #2000 - 2days", "amount": "200"},
+	{"id": "a5", "network": "AIRTEL", "plan": "1gb #350 - 2days", "amount": "350"},
+	{"id": "g1", "network": "GLO", "plan": "1gb #1500 - 1 week", "amount": "350"},
+	{"id": "g2", "network": "GLO", "plan": "1gb #3500 - 1 week", "amount": "3500"},
+	{"id": "g3", "network": "GLO", "plan": "1gb #7500 - 1 week", "amount": "7500"},
+	{"id": "g4", "network": "GLO", "plan": "1gb #7500 - 1 week", "amount": "7500"},
 }
 
 type GetDataPlansDto struct {
@@ -41,7 +41,8 @@ func GetDataPlans(appState app.AppState) *graphql.Field {
 								Fields: graphql.Fields{
 									"id":      app.String,
 									"network": app.String,
-									"plan": app.String,
+									"plan":    app.String,
+									"amount":  app.String,
 								},
 							},
 						),
