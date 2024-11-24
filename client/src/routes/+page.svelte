@@ -12,7 +12,7 @@
 	// import { GetCountryDocument } from '../generated/graphql';
 	import { GetCountryDocument, GetDataPlansDocument, NetworkProviders } from '../generated/graphql';
 
-	const postsX = queryStore<GetCountryQuery>({
+	$: postsX = queryStore<GetCountryQuery>({
 		client: getContextClient(),
 		query: GetCountryDocument
 	});

@@ -78,6 +78,7 @@
 		"bignumber.js": "^9.1.2",
 		"devalue": "^5.1.1",
 		"ethers": "^6.13.4",
+		"graphql-tag": "^2.12.6",
 		"svelte-persisted-store": "^0.12.0",
 		"svelte-qrcode-image": "^2.0.0-alpha.1",
 		"svelte-sonner": "^0.3.28",

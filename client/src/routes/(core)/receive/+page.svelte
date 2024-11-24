@@ -59,7 +59,7 @@
 
 	<div class="flex flex-col items-center justify-between">
 		<P>Wallet Address</P>
-		<div class="w-[70%] p-2 break-words my-4 text-wrap bg-primary rounded-md">
+		<div class="w-[70%] p-2 break-words my-4 text-wrap bg-card rounded-md">
 			<P
 				v="p5"
 				className={` 

@@ -13,6 +13,7 @@ export default {
 				'2xl': '1400px'
 			}
 		},
+		boxShadowColor: 'var(--ring)',
 		extend: {
 			colors: {
 				border: 'var(--border)',

@@ -3,6 +3,7 @@ query getDataPlans($input: GetDataPlansInput) {
 		dataPlans {
 			plan
 			network
+			amount
 			id
 		}
 	}

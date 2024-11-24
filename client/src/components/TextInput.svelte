@@ -4,6 +4,7 @@
 	import { P } from 'components';
 
 	export let isPassword: boolean = false;
+	export let isReadOnly: boolean = false;
 	export let required: boolean = false;
 	export let control: any = '';
 	/** name to be used as label */
@@ -52,6 +53,7 @@
 				pattern={inputType === 'number' && '[0-9]*'}
 				inputmode={inputType === 'number' && 'numeric'}
 				name={label}
+				readonly={isReadOnly}
 				required
 			/>
 			{#if isPassword}

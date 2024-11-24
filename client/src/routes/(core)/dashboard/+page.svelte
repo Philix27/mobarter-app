@@ -49,9 +49,10 @@
 					<P className="text-sm">Utilities</P>
 					<div></div>
 				</div>
-				<div class="max-h-[300px] overflow-y-scroll no-scrollbar">
+				<Categories />
+				<!-- <div class="max-h-[300px] overflow-y-scroll no-scrollbar">
 					<Categories />
-				</div>
+				</div> -->
 			</div>
 
 			<div>

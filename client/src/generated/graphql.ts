@@ -1,4 +1,5 @@
-import type { gql } from '@urql/svelte';
+// import type { OperationStore } from '@urql/svelte';
+import gql from 'graphql-tag';
 // import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -19,6 +20,133 @@ export type Scalars = {
 	Boolean: { input: boolean; output: boolean };
 	Int: { input: number; output: number };
 	Float: { input: number; output: number };
+};
+
+export type Admin_ApproveBvnInput = {
+	bvn: Scalars['String']['input'];
+	isApproved: Scalars['Boolean']['input'];
+	userId: Scalars['String']['input'];
+};
+
+export type Admin_ApproveBvnResponse = {
+	__typename?: 'Admin_ApproveBvnResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_ApproveNinInput = {
+	isApproved: Scalars['Boolean']['input'];
+	nin: Scalars['String']['input'];
+	userId: Scalars['String']['input'];
+};
+
+export type Admin_ApproveNinResponse = {
+	__typename?: 'Admin_ApproveNinResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_ApprovePassportInput = {
+	isApproved: Scalars['Boolean']['input'];
+	passport: Scalars['String']['input'];
+	userId: Scalars['String']['input'];
+};
+
+export type Admin_ApprovePassportResponse = {
+	__typename?: 'Admin_ApprovePassportResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_ApproveResidentialAddressInput = {
+	address: Scalars['String']['input'];
+	isApproved: Scalars['Boolean']['input'];
+	userId: Scalars['String']['input'];
+};
+
+export type Admin_ApproveResidentialAddressResponse = {
+	__typename?: 'Admin_ApproveResidentialAddressResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_BlockAccountInput = {
+	isBlocked: Scalars['Boolean']['input'];
+	reason: Scalars['String']['input'];
+	userId: Scalars['String']['input'];
+};
+
+export type Admin_BlockAccountResponse = {
+	__typename?: 'Admin_BlockAccountResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_GetBlockedAccountsInput = {
+	userId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Admin_GetBlockedAccountsResponse = {
+	__typename?: 'Admin_GetBlockedAccountsResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_GetUserBankAccountsInput = {
+	userId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Admin_GetUserBankAccountsResponse = {
+	__typename?: 'Admin_GetUserBankAccountsResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_GetUserTransactionsInput = {
+	userId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Admin_GetUserTransactionsResponse = {
+	__typename?: 'Admin_GetUserTransactionsResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_GetUsersInput = {
+	userId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Admin_GetUsersResponse = {
+	__typename?: 'Admin_GetUsersResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_LoginInput = {
+	email: Scalars['String']['input'];
+	password: Scalars['String']['input'];
+};
+
+export type Admin_LoginResponse = {
+	__typename?: 'Admin_LoginResponse';
+	message?: Maybe<Scalars['String']['output']>;
+	token?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_SendEmail = {
+	email: Scalars['String']['input'];
+	message: Scalars['String']['input'];
+};
+
+export type Admin_SendEmailResponse = {
+	__typename?: 'Admin_SendEmailResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Admin_SetRatesInput = {
+	email: Scalars['String']['input'];
+	message: Scalars['String']['input'];
+};
+
+export type Admin_SetRatesResponse = {
+	__typename?: 'Admin_SetRatesResponse';
+	message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Auth_SentOtpResponse = {
+	__typename?: 'Auth_SentOtpResponse';
+	message?: Maybe<Scalars['String']['output']>;
 };
 
 export type CountryResponse = {
@@ -48,6 +176,7 @@ export type CreateUserInput = {
 
 export type DataPlans = {
 	__typename?: 'DataPlans';
+	amount?: Maybe<Scalars['String']['output']>;
 	id?: Maybe<Scalars['String']['output']>;
 	network?: Maybe<Scalars['String']['output']>;
 	plan?: Maybe<Scalars['String']['output']>;
@@ -86,7 +215,6 @@ export type GetDataPlansInput = {
 };
 
 export type GetDataPlansResponse = {
-	[x: string]: any;
 	__typename?: 'GetDataPlansResponse';
 	dataPlans?: Maybe<Array<Maybe<DataPlans>>>;
 };
@@ -200,6 +328,15 @@ export type PurchaseDataResponse = {
 
 export type RootMutations = {
 	__typename?: 'RootMutations';
+	Admin_ApproveBvn?: Maybe<Admin_ApproveBvnResponse>;
+	Admin_ApproveNin?: Maybe<Admin_ApproveNinResponse>;
+	Admin_ApprovePassport?: Maybe<Admin_ApprovePassportResponse>;
+	Admin_ApproveResidentialAddress?: Maybe<Admin_ApproveResidentialAddressResponse>;
+	Admin_BlockAccount?: Maybe<Admin_BlockAccountResponse>;
+	Admin_Login?: Maybe<Admin_LoginResponse>;
+	Admin_SendEmail?: Maybe<Admin_SendEmailResponse>;
+	Admin_SetRates?: Maybe<Admin_SetRatesResponse>;
+	Auth_SentOtp?: Maybe<Auth_SentOtpResponse>;
 	BankAccount_Create?: Maybe<CreateBankAccountResponse>;
 	BankAccount_Delete?: Maybe<DeleteBankAccountResponse>;
 	JoinWaitList?: Maybe<WaitListResponse>;
@@ -210,6 +347,46 @@ export type RootMutations = {
 	PurchaseAirtime?: Maybe<PurchaseAirtimeResponse>;
 	PurchaseData?: Maybe<PurchaseDataResponse>;
 	User_Create?: Maybe<User_CreateResponse>;
+};
+
+export type RootMutationsAdmin_ApproveBvnArgs = {
+	input?: InputMaybe<Admin_ApproveBvnInput>;
+};
+
+export type RootMutationsAdmin_ApproveNinArgs = {
+	input?: InputMaybe<Admin_ApproveNinInput>;
+};
+
+export type RootMutationsAdmin_ApprovePassportArgs = {
+	input?: InputMaybe<Admin_ApprovePassportInput>;
+};
+
+export type RootMutationsAdmin_ApproveResidentialAddressArgs = {
+	input?: InputMaybe<Admin_ApproveResidentialAddressInput>;
+};
+
+export type RootMutationsAdmin_BlockAccountArgs = {
+	input?: InputMaybe<Admin_BlockAccountInput>;
+};
+
+export type RootMutationsAdmin_LoginArgs = {
+	input?: InputMaybe<Admin_LoginInput>;
+};
+
+export type RootMutationsAdmin_SendEmailArgs = {
+	input?: InputMaybe<Admin_SendEmail>;
+};
+
+export type RootMutationsAdmin_SetRatesArgs = {
+	input?: InputMaybe<Admin_SetRatesInput>;
+};
+
+export type RootMutationsAuth_SentOtpArgs = {
+	email: Scalars['String']['input'];
+	issuerAddress: Scalars['String']['input'];
+	network: Scalars['String']['input'];
+	phone: Scalars['String']['input'];
+	transactionHash: Scalars['Int']['input'];
 };
 
 export type RootMutationsBankAccount_CreateArgs = {
@@ -257,6 +434,10 @@ export type RootMutationsUser_CreateArgs = {
 
 export type RootQuery = {
 	__typename?: 'RootQuery';
+	Admin_GetBlockedAccounts?: Maybe<Admin_GetBlockedAccountsResponse>;
+	Admin_GetUserBankAccounts?: Maybe<Admin_GetUserBankAccountsResponse>;
+	Admin_GetUserTransactions?: Maybe<Admin_GetUserTransactionsResponse>;
+	Admin_GetUsers?: Maybe<Admin_GetUsersResponse>;
 	Airtime_GetDataPlans?: Maybe<GetDataPlansResponse>;
 	BankAccount_Get?: Maybe<GetBankAccountResponse>;
 	BankAccount_GetAll?: Maybe<GetAllBankAccountResponse>;
@@ -267,6 +448,22 @@ export type RootQuery = {
 	Transactions_GetAll?: Maybe<GetAllTransactionsResponse>;
 	Transactions_GetOne?: Maybe<GetOneTransactionsResponse>;
 	User_GetInfo?: Maybe<User_GetInfoResponse>;
+};
+
+export type RootQueryAdmin_GetBlockedAccountsArgs = {
+	input?: InputMaybe<Admin_GetBlockedAccountsInput>;
+};
+
+export type RootQueryAdmin_GetUserBankAccountsArgs = {
+	input?: InputMaybe<Admin_GetUserBankAccountsInput>;
+};
+
+export type RootQueryAdmin_GetUserTransactionsArgs = {
+	input?: InputMaybe<Admin_GetUserTransactionsInput>;
+};
+
+export type RootQueryAdmin_GetUsersArgs = {
+	input?: InputMaybe<Admin_GetUsersInput>;
 };
 
 export type RootQueryAirtime_GetDataPlansArgs = {
@@ -361,6 +558,7 @@ export type GetDataPlansQuery = {
 			__typename?: 'DataPlans';
 			plan?: string | null;
 			network?: string | null;
+			amount?: string | null;
 			id?: string | null;
 		} | null> | null;
 	} | null;
@@ -492,6 +690,7 @@ export const GetDataPlansDocument = gql`
 			dataPlans {
 				plan
 				network
+				amount
 				id
 			}
 		}
@@ -616,7 +815,7 @@ export type CreateUserMutationStore = OperationStore<
 >;
 
 // export const GetCountryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCountry"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"CountryList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetCountryQuery, GetCountryQueryVariables>;
-// export const GetDataPlansDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getDataPlans"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"GetDataPlansInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Airtime_GetDataPlans"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataPlans"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"plan"}},{"kind":"Field","name":{"kind":"Name","value":"network"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetDataPlansQuery, GetDataPlansQueryVariables>;
+// export const GetDataPlansDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getDataPlans"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"GetDataPlansInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Airtime_GetDataPlans"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataPlans"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"plan"}},{"kind":"Field","name":{"kind":"Name","value":"network"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetDataPlansQuery, GetDataPlansQueryVariables>;
 // export const KycVerifyBvnDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"kycVerifyBvn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Kyc_VerifyBvnInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Kyc_VerifyBvn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<KycVerifyBvnMutation, KycVerifyBvnMutationVariables>;
 // export const KycVerifyNinDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"kycVerifyNin"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Kyc_VerifyNinInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Kyc_VerifyNin"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<KycVerifyNinMutation, KycVerifyNinMutationVariables>;
 // export const PurchaseDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"purchaseData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PurchaseDataInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"PurchaseData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<PurchaseDataMutation, PurchaseDataMutationVariables>;

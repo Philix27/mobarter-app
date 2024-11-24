@@ -3,23 +3,21 @@
 	import { AirtimeData } from 'lib/data.js';
 	import { cn } from 'lib/utils';
 	import { z } from 'zod';
-	import type {
-		GetCountryQuery,
-		GetDataPlansInput,
-		GetDataPlansResponse,
-		GetDataPlansQuery
-	} from 'generated/graphql';
-	import { GetCountryDocument, GetDataPlansDocument, NetworkProviders } from 'generated/graphql';
+	import type { GetDataPlansInput, GetDataPlansQuery } from 'generated/graphql';
+	import { GetDataPlansDocument, NetworkProviders } from 'generated/graphql';
+	import { getContextClient, queryStore } from '@urql/svelte';
 
-	let dataPlans = $derived(queryStore<GetDataPlansQuery, GetDataPlansInput>({
-		client: getContextClient(),
-		query: GetDataPlansDocument,
-		variables: {
-			network: NetworkProviders.Mtn,
-			category: 'None'
-		},
-		pause: false
-	}))
+	let dataPlans = $derived(
+		queryStore<GetDataPlansQuery, GetDataPlansInput>({
+			client: getContextClient(),
+			query: GetDataPlansDocument,
+			variables: {
+				network: NetworkProviders.Mtn,
+				category: 'None'
+			},
+			pause: false
+		})
+	);
 
 	const formSchema = z.object({
 		amountSelected: z.number({ message: 'Must be a number' }),
@@ -57,6 +55,7 @@
 	let { data, form } = $props();
 
 	let networkSelected: INetwork = $state('MTN');
+	let dataPlanSelected: string = $state('');
 	let showNetwork = $state(false);
 	let amountSelected = $state(100);
 	let phoneValue = $state('');
@@ -82,33 +81,23 @@
 		<P className="text-sm">Select Network</P>
 		<img src={getImgPath(networkSelected)} alt="" height={35} width={35} />
 	</div>
-	<div class="w-full grid grid-cols-4 gap-2 my-4">
-		<!-- svelte-ignore legacy_code -->
-		{#each AirtimeData['Nigeria'].amount as val}
-			<!-- svelte-ignore legacy_code -->
-			<!-- svelte-ignore a11y_click_events_have_key_events -->
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
-			<div
-				class={cn(
-					`py-4 bg-secondary border-secondary 
-					border rounded-md flex items-center justify-center`,
-					amountSelected === val && 'border-primary '
-				)}
-				onclick={() => {
-					amountSelected = val;
-				}}
-			>
-				<P className="text-[14px] font-semibold"
-					>{`${AirtimeData['Nigeria'].symbol}${val.toString()}`}</P
-				>
-			</div>
-		{/each}
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div
+		onclick={() => {
+			showDataPlans = true;
+		}}
+		class="flex w-full items-center justify-between bg-secondary py-4 px-3 rounded-md"
+	>
+		<P className="text-sm">Select Plan</P>
+		<P className="text-sm font-semibold ">{dataPlanSelected}</P>
 	</div>
 
 	<TextInput
 		place="Amount"
 		inputType="number"
 		label="Amount"
+		isReadOnly
 		required
 		bind:value={amountSelected}
 	/>
@@ -121,9 +110,6 @@
 		bind:value={phoneValue}
 	/>
 	<!-- onclick={() => toast('Funds sent')} -->
-	<Button onclick={() => {
-		showDataPlans = false
-	}} btype="button">Select Plan</Button>
 	<Button onclick={handleSubmit} btype="submit">Buy</Button>
 </div>
 
@@ -185,24 +171,21 @@
 	}}
 	title="Data Plans"
 >
-{#if $dataPlans.fetching}
+	{#if $dataPlans.fetching}
 		<p>Loading dataPlans....</p>
 	{:else}
-		<div class="grid grid-cols-4 overflow-y-scroll scroll-smooth gap-4">
-			{#each $dataPlans.data!.Airtime_GetDataPlans!.dataPlans.filter((val) => val.network === networkSelected) as item}
-			<BottomRow
-		title={item.plan}
-		imgSrc={getImgPath('MTN')}
-		isActive={networkSelected === 'MTN'}
-		onClick={() => {
-			// item.id
-			// networkSelected = 'MTN';
-			console.log(item.id)
-		}}
-	/>
-				
+		<div class="flex flex-col overflow-y-scroll scroll-smooth gap-4">
+			{#each $dataPlans.data!.Airtime_GetDataPlans!.dataPlans!.filter((val) => val!.network === networkSelected) as item}
+				<BottomRow
+					title={item!.plan!}
+					imgSrc={getImgPath(networkSelected)}
+					isActive={dataPlanSelected === item?.plan}
+					onClick={() => {
+						dataPlanSelected = item!.plan!;
+						amountSelected = parseInt(item!.amount!);
+					}}
+				/>
 			{/each}
 		</div>
 	{/if}
-	
 </BottomSheet>
