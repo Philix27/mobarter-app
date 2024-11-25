@@ -83,6 +83,13 @@ export const chainId = readable(getChainId(wagmiConfig), (set) =>
 	watchChainId(wagmiConfig, { onChange: set })
 );
 
+export function getActiveChain(num: number) {
+	if (num === 42220) return 'celo';
+	if (num === 44787) return 'alfajores';
+	if (num === 62320) return 'baklava';
+	return 'celo';
+}
+
 export const account = readable(getAccount(wagmiConfig), (set) =>
 	_watchAccount(wagmiConfig, { onChange: set })
 );
@@ -106,7 +113,7 @@ export const getBalance = (
 	// 		token: tokenAddress
 	// 	})
 	// );
-	if (tokenAddress.length < 2) {
+	if (tokenAddress === '0x000') {
 		return _getBalance(wagmiConfig, {
 			address: userAddress as `0x${string}`
 		});
@@ -132,7 +139,7 @@ export function getChain(chainId: number) {
 }
 export function sendTransaction(to: string, value: string) {
 	return _sendTransaction(wagmiConfig, {
-		to: to as `0x${string}`, 
-		value: ethers.parseEther(value),
+		to: to as `0x${string}`,
+		value: ethers.parseEther(value)
 	});
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { getBalance, account } from 'lib/web3';
+	import { getBalance, account, formatEtherRounded } from 'lib/web3';
 	import { P } from 'components';
 	import { TokenList } from 'celo-kit';
 
@@ -54,7 +54,7 @@
 				<p>...</p>
 			{:then data}
 				<P className="text-sm text-primary">
-					{data.value}
+					{formatEtherRounded(data.value)}
 					{props.symbol}</P
 				>
 			{/await}

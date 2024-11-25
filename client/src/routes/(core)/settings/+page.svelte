@@ -15,14 +15,9 @@
 			icon: 'mdi:account'
 		},
 		{
-			title: 'Wallet Address',
-			link: '/settings/profile',
-			icon: 'mdi:wallet'
-		},
-		{
 			title: 'Verification',
 			subtitle: 'KYC verification',
-			link: '/settings/secure',
+			link: '/settings/kyc',
 			icon: 'mdi:account'
 		},
 		{
@@ -60,16 +55,20 @@
 <Nav title="Settings" isBack icon="mdi:dollar" />
 <div class="">
 	{#each sections as item}
-		<div class="flex items-center p-2 w-full bg-card mb-[2px] rounded-md">
-			<div class="h-[40px] w-[50px] bg-background rounded-full flex items-center justify-center mr-2">
-				<iconify-icon icon={item.icon} class="text-xl" />
+		<a href={item.link}>
+			<div class="flex items-center p-2 w-full bg-card mb-[2px] rounded-md cursor-pointer">
+				<div
+					class="h-[40px] w-[50px] bg-background rounded-full flex items-center justify-center mr-2"
+				>
+					<iconify-icon icon={item.icon} class="text-xl" />
+				</div>
+				<div class="flex flex-col items-start p-2 w-full">
+					<P>{item.title.toString()}</P>
+					{#if item.subtitle}
+						<P className="text-muted text-xs mt-1 font-thin">{item.subtitle}</P>
+					{/if}
+				</div>
 			</div>
-			<div class="flex flex-col items-start p-2 w-full">
-				<P>{item.title.toString()}</P>
-				{#if item.subtitle}
-					<P className="text-muted text-xs mt-1 font-thin">{item.subtitle}</P>
-				{/if}
-			</div>
-		</div>
+		</a>
 	{/each}
 </div>

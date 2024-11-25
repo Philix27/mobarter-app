@@ -3,8 +3,8 @@
 	import { TokenList, CELO } from 'celo-kit';
 	import { browser } from '$app/environment';
 	import TokenRow from './TokenRow.svelte';
+	import { chainId } from 'lib/web3';
 
-	$: accountAddress = '';
 	$: isMiniPay = false;
 
 	if (browser) {
@@ -23,6 +23,13 @@
 			}
 		}
 	}
+
+	function getActiveChain() {
+		if ($chainId === 42220) return 'celo';
+		if ($chainId === 44787) return 'alfajores';
+		if ($chainId === 62320) return 'baklava';
+		return 'celo';
+	}
 </script>
 
 <svelte:head>
@@ -34,9 +41,13 @@
 	<Nav title="Balance" isBack />
 
 	<div>
-		<TokenRow symbol={CELO.symbol} tokenAddress={''} name={CELO.name} />
+		<TokenRow symbol={CELO.symbol} tokenAddress={'0x000'} name={CELO.name} />
 		{#each TokenList.filter((val) => val.symbol.toUpperCase() !== 'CELO') as item}
-			<TokenRow symbol={item.symbol} tokenAddress={item.address.celo} name={item.name} />
+			<TokenRow
+				symbol={item.symbol}
+				tokenAddress={item.address[getActiveChain()]}
+				name={item.name}
+			/>
 		{/each}
 	</div>
 </div>

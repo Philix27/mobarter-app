@@ -3,29 +3,45 @@
 	import { Nav, P } from 'components';
 	import QuickActions from './QuickActions.svelte';
 	import Categories from './Categories.svelte';
-	import { account, getBalance } from 'lib/web3';
 	import type { PageData } from './$types';
 	import { cUSD } from 'celo-kit';
-	import { onMount } from 'svelte';
 	import Transactions from '../transactions/Transactions.svelte';
+	import { getBalance, account, formatEtherRounded, getActiveChain, chainId } from 'lib/web3';
+	import { browser } from '$app/environment';
 
-	export let data: PageData;
-
+	let props = $props<{ data: PageData }>();
 	const clickIcon = () => {
 		goto('/notify');
 	};
 
-	let balance: number = 0;
+	let isMiniPay = $state(false);
+	let accountAddress = $state($account.address);
+	if (browser) {
+		if (window && window.ethereum) {
+			// User has a injected wallet
 
-	onMount(() => {
-		getBalance(cUSD.address.alfajores as `0x${string}`, $account.address as `0x${string}`)
-			.then((val) => {
-				balance = parseInt(val.value.toString());
-			})
-			.catch((e) => {
-				balance = 0.0;
-			});
-	});
+			if (window.ethereum.isMiniPay) {
+				// User is using Minipay
+				isMiniPay = true;
+				// Requesting account addresses
+				let accounts = window.ethereum.request({
+					method: 'eth_requestAccounts',
+					params: []
+				});
+
+				// Injected wallets inject all available addresses,
+				// to comply with API Minipay injects one address but in the form of array
+				console.log(accounts[0]);
+				// @ts-ignore
+				// accountAddress = $account.address;
+				accountAddress = accounts[0];
+			}
+
+			// User is not using MiniPay
+		}
+	}
+
+	let balance: number = 0;
 </script>
 
 <svelte:head>
@@ -33,10 +49,14 @@
 </svelte:head>
 
 <div>
-	<Nav theme={data.theme} showThemeToggle />
+	<Nav theme={props.data.theme} showThemeToggle />
 	<div class="">
 		<div class="flex items-center justify-between mb-3 mx-4">
-			<P className="text-3xl font-extralight">${balance}</P>
+			{#await getBalance(cUSD.address[getActiveChain($chainId)], $account.address ?? accountAddress!)}
+				<p>...</p>
+			{:then data}
+				<P className="text-3xl font-extralight">${formatEtherRounded(data.value)} {cUSD.symbol}</P>
+			{/await}
 
 			<a href="/balances">
 				<P className="text-primary text-sm">Balances</P>
