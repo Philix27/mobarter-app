@@ -891,6 +891,26 @@
     ethereum-cryptography "^2.0.0"
     micro-ftch "^0.3.1"
 
+"@floating-ui/core@^1.3.1", "@floating-ui/core@^1.6.0":
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.6.8.tgz#aa43561be075815879305965020f492cdb43da12"
+  integrity sha512-7XJ9cPU+yI2QeLS+FCSlqNFZJq8arvswefkZrYI1yQBbftw6FyrZOxYSh+9S7z7TpeWlRt9zJ5IhM1WIL334jA==
+  dependencies:
+    "@floating-ui/utils" "^0.2.8"
+
+"@floating-ui/dom@^1.4.5":
+  version "1.6.12"
+  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.6.12.tgz#6333dcb5a8ead3b2bf82f33d6bc410e95f54e556"
+  integrity sha512-NP83c0HjokcGVEMeoStg317VD9W7eDlGK7457dMBANbKA6GJZdc7rjujdgqzTaz93jkGgc5P/jeWbaCHnMNc+w==
+  dependencies:
+    "@floating-ui/core" "^1.6.0"
+    "@floating-ui/utils" "^0.2.8"
+
+"@floating-ui/utils@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.8.tgz#21a907684723bbbaa5f0974cf7730bd797eb8e62"
+  integrity sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==
+
 "@fontsource/fira-mono@^5.0.0":
   version "5.1.0"
   resolved "https://registry.npmjs.org/@fontsource/fira-mono/-/fira-mono-5.1.0.tgz"
@@ -1496,6 +1516,13 @@
     local-pkg "^0.5.0"
     mlly "^1.7.1"
 
+"@internationalized/date@^3.5.0", "@internationalized/date@^3.5.1":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@internationalized/date/-/date-3.6.0.tgz#b30d43030bfed1855f20c9503606926d75bfdf64"
+  integrity sha512-+z6ti+CcJnRlLHok/emGEsWQhe7kfSmEW+/6qCzvKY67YPh7YOBfvc7+/+NXq+zJlbArg30tYpqLjNgcAYv2YQ==
+  dependencies:
+    "@swc/helpers" "^0.5.0"
+
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
   resolved "https://registry.npmjs.org/@isaacs/cliui/-/cliui-8.0.2.tgz"
@@ -1563,6 +1590,18 @@
   integrity sha512-GFn91inaUa2oHLak8awSIigYz0cU0Payr1rcFsrkf5OJ5eSPxElyZfKh0f2p9FsTiZWXQdWGJeXZICEfXXYSXQ==
   dependencies:
     "@lit-labs/ssr-dom-shim" "^1.2.0"
+
+"@melt-ui/svelte@0.76.2":
+  version "0.76.2"
+  resolved "https://registry.yarnpkg.com/@melt-ui/svelte/-/svelte-0.76.2.tgz#9d6a578695ac257e34710fdeff3c8a40c8c25f31"
+  integrity sha512-7SbOa11tXUS95T3fReL+dwDs5FyJtCEqrqG3inRziDws346SYLsxOQ6HmX+4BkIsQh1R8U3XNa+EMmdMt38lMA==
+  dependencies:
+    "@floating-ui/core" "^1.3.1"
+    "@floating-ui/dom" "^1.4.5"
+    "@internationalized/date" "^3.5.0"
+    dequal "^2.0.3"
+    focus-trap "^7.5.2"
+    nanoid "^5.0.4"
 
 "@mento-protocol/mento-core-ts@^0.2.0":
   version "0.2.3"
@@ -2394,6 +2433,13 @@
   version "1.6.0"
   resolved "https://registry.npmjs.org/@sveltestack/svelte-query/-/svelte-query-1.6.0.tgz"
   integrity sha512-C0wWuh6av1zu3Pzwrg6EQmX3BhDZQ4gMAdYu6Tfv4bjbEZTB00uEDz52z92IZdONh+iUKuyo0xRZ2e16k2Xifg==
+
+"@swc/helpers@^0.5.0":
+  version "0.5.15"
+  resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.5.15.tgz#79efab344c5819ecf83a43f3f9f811fc84b516d7"
+  integrity sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==
+  dependencies:
+    tslib "^2.8.0"
 
 "@types/conventional-commits-parser@^5.0.0":
   version "5.0.0"
@@ -3530,6 +3576,15 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.3.0.tgz"
   integrity sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==
 
+bits-ui@^0.21.16:
+  version "0.21.16"
+  resolved "https://registry.yarnpkg.com/bits-ui/-/bits-ui-0.21.16.tgz#cec1a93d79b25555e89747999630af93fab6b6e1"
+  integrity sha512-XFZ7/bK7j/K+5iktxX/ZpmoFHjYjpPzP5EOO/4bWiaFg5TG1iMcfjDhlBTQnJxD6BoVoHuqeZPHZvaTgF4Iv3Q==
+  dependencies:
+    "@internationalized/date" "^3.5.1"
+    "@melt-ui/svelte" "0.76.2"
+    nanoid "^5.0.5"
+
 bl@^4.1.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/bl/-/bl-4.1.0.tgz"
@@ -4006,7 +4061,7 @@ clsx@^1.2.1:
 
 clsx@^2.1.1:
   version "2.1.1"
-  resolved "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.1.1.tgz#eed397c9fd8bd882bfb18deab7102049a2f32999"
   integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
 
 color-convert@^2.0.1:
@@ -4355,6 +4410,11 @@ dependency-graph@^0.11.0:
   version "0.11.0"
   resolved "https://registry.npmjs.org/dependency-graph/-/dependency-graph-0.11.0.tgz"
   integrity sha512-JeMq7fEshyepOWDfcfHK06N3MhyPhz++vtqWhMT5O9A3K42rdsEDpfdVqjaqaAhsw6a+ZqeDvQVtD0hFHQWrzg==
+
+dequal@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.3.tgz#2644214f1997d39ed0ee0ece72335490a7ac67be"
+  integrity sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==
 
 des.js@^1.0.0:
   version "1.1.0"
@@ -5055,6 +5115,13 @@ flatted@^3.2.9:
   version "3.3.1"
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.3.1.tgz"
   integrity sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==
+
+focus-trap@^7.5.2:
+  version "7.6.2"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-7.6.2.tgz#a501988821ca23d0150a7229eb7a20a3695bdf0e"
+  integrity sha512-9FhUxK1hVju2+AiQIDJ5Dd//9R2n2RAfJ0qfhF4IHGHgcoEUTMpbTeG/zbEuwaiYXfuAH6XE0/aCyxDdRM+W5w==
+  dependencies:
+    tabbable "^6.2.0"
 
 follow-redirects@^1.15.6:
   version "1.15.9"
@@ -6172,6 +6239,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+lucide-svelte@^0.461.0:
+  version "0.461.0"
+  resolved "https://registry.yarnpkg.com/lucide-svelte/-/lucide-svelte-0.461.0.tgz#eafd71893beba182cbb139ebc83bdd289a1462f7"
+  integrity sha512-WGC4Vn6khO7r+ZqanCEkAkFUtN0jV+VfRiuMDtKUBxLmeaPRZFLUNJ43oCMehqokDZzC00dJI8BxI9oAmdt53g==
+
 magic-string@^0.30.11, magic-string@^0.30.12, magic-string@^0.30.3, magic-string@^0.30.5:
   version "0.30.12"
   resolved "https://registry.npmjs.org/magic-string/-/magic-string-0.30.12.tgz"
@@ -6360,6 +6432,11 @@ nanoid@^3.3.7:
   version "3.3.7"
   resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.7.tgz"
   integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
+
+nanoid@^5.0.4, nanoid@^5.0.5:
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-5.0.8.tgz#7610003f6b3b761b5c244bb342c112c5312512bf"
+  integrity sha512-TcJPw+9RV9dibz1hHUzlLVy8N4X9TnwirAjrU08Juo6BNKggzVfP2ZJ/3ZUSq15Xl5i85i+Z89XBO90pB2PghQ==
 
 napi-wasm@^1.1.0:
   version "1.1.3"
@@ -7842,14 +7919,24 @@ system-architecture@^0.1.0:
   resolved "https://registry.npmjs.org/system-architecture/-/system-architecture-0.1.0.tgz"
   integrity sha512-ulAk51I9UVUyJgxlv9M6lFot2WP3e7t8Kz9+IS6D4rVba1tR9kON+Ey69f+1R4Q8cd45Lod6a4IcJIxnzGc/zA==
 
+tabbable@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.2.0.tgz#732fb62bc0175cfcec257330be187dcfba1f3b97"
+  integrity sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==
+
 tailwind-merge@^2.5.4:
   version "2.5.4"
   resolved "https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-2.5.4.tgz"
   integrity sha512-0q8cfZHMu9nuYP/b5Shb7Y7Sh1B7Nnl5GqNr1U+n2p6+mybvRtayrQ+0042Z5byvTA8ihjlP8Odo8/VnHbZu4Q==
 
+tailwind-merge@^2.5.5:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-2.5.5.tgz#98167859b856a2a6b8d2baf038ee171b9d814e39"
+  integrity sha512-0LXunzzAZzo0tEPxV3I297ffKZPlKDrjj7NXphC8V5ak9yHC5zRmxnOe2m/Rd/7ivsOMJe3JZ2JVocoDdQTRBA==
+
 tailwind-variants@^0.3.0:
   version "0.3.0"
-  resolved "https://registry.npmjs.org/tailwind-variants/-/tailwind-variants-0.3.0.tgz"
+  resolved "https://registry.yarnpkg.com/tailwind-variants/-/tailwind-variants-0.3.0.tgz#481f53031cd4e91f92e0c078bbfd9fe453162e0b"
   integrity sha512-ho2k5kn+LB1fT5XdNS3Clb96zieWxbStE9wNLK7D0AV64kdZMaYzAKo0fWl6fXLPY99ffF9oBJnIj5escEl/8A==
   dependencies:
     tailwind-merge "^2.5.4"
@@ -8039,7 +8126,7 @@ tslib@2.7.0:
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.7.0.tgz"
   integrity sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==
 
-tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.5.0, tslib@^2.6.3, tslib@^2.8.1:
+tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.5.0, tslib@^2.6.3, tslib@^2.8.0, tslib@^2.8.1:
   version "2.8.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==

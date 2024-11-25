@@ -55,7 +55,7 @@
 			{#await getBalance(cUSD.address[getActiveChain($chainId)], $account.address ?? accountAddress!)}
 				<p>...</p>
 			{:then data}
-				<P className="text-3xl font-extralight">{formatEtherRounded(data.value)} {cUSD.symbol}</P>
+				<P className="text-xl font-extralight">{formatEtherRounded(data.value)} {cUSD.symbol}</P>
 			{/await}
 
 			<a href="/balances">

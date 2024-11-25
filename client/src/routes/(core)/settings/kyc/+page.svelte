@@ -2,27 +2,34 @@
 	import { Nav } from 'components';
 	import Bvn from './Bvn.svelte';
 	import type { Component } from 'svelte';
-
-	const stages: {
-		title: string;
-		Comp: Component;
-	}[] = [
-		{ title: 'Phone', Comp: Bvn },
-		{ title: 'Email', Comp: Bvn },
-		{ title: 'BVN', Comp: Bvn },
-		{ title: 'NIN', Comp: Bvn },
-		{ title: 'Passport', Comp: Bvn }
-	];
-
-	const ll = Bvn;
+	import Email from './Email.svelte';
+	import * as Accordion from '$lib/components/ui/accordion';
+	import Wrapper from './Wrapper.svelte';
+	import Nin from './Nin.svelte';
+	import Phone from './Phone.svelte';
 </script>
 
 <div>
 	<Nav title="Verification" isBack />
-	<div class="">
-		{#each stages as { title, Comp }}
-			<div>{title}</div>
-			<Comp />
-		{/each}
+	<div class="overflow-y-scroll max-h-screen scroll-smooth no-scrollbar">
+		<Accordion.Root>
+			<Bvn />
+			<Email />
+			<Nin />
+			<Phone />
+		</Accordion.Root>
 	</div>
 </div>
+
+<style>
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+</style>

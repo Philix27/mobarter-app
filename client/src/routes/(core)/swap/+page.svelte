@@ -2,6 +2,22 @@
 	import { Button, Nav } from 'components';
 	import ValueSection from './ValueSection.svelte';
 	import 'iconify-icon';
+
+	// import { Mento } from '@mento-protocol/mento-sdk';
+	// import { account } from 'lib/web3';
+	import { JsonRpcProvider } from 'ethers';
+
+	const getPairs = async () => {
+
+		// const provider = new BrowserProvider('https://alfajores-forno.celo-testnet.org');
+		// const provider = $account.connector?.getProvider();
+		// const provider = new JsonRpcProvider('https://alfajores-forno.celo-testnet.org');
+		// const mento = await Mento.create(provider);
+
+		// const pairs = await mento.getTradeablePairs();
+		// console.log('pairs', pairs);
+	};
+
 </script>
 
 <svelte:head>
@@ -11,6 +27,7 @@
 
 <div>
 	<Nav title="Swap" isBack />
+	<!-- <Button onclick={() => {getPairs()}}>Try get pair</Button> -->
 	<div class="w-full relative bg-background flex flex-col items-center justify-center">
 		<div class="w-full">
 			<ValueSection

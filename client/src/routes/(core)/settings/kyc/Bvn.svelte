@@ -1,11 +1,13 @@
-<script>
-	import { Button, TextInput } from 'components';
+<script lang="ts">
+	import { Button, P, TextInput } from 'components';
+	import Wrapper from './Wrapper.svelte';
 
-	let amountSelected = $state();
+	let amountSelected = $state('');
+	let props = $props<{ }>();
 </script>
 
-<div>
+<Wrapper title={"BVN Verification"}>
 	<TextInput place="Bvn" inputType="number" label="BVN No." required bind:value={amountSelected} />
 
-	<Button>Submit</Button>
-</div>
+	<Button className="my-2">Submit</Button>
+</Wrapper>
