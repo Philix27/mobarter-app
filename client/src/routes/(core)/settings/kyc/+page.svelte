@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { Nav } from 'components';
 	import Bvn from './Bvn.svelte';
-	import type { Component } from 'svelte';
 	import Email from './Email.svelte';
 	import * as Accordion from '$lib/components/ui/accordion';
-	import Wrapper from './Wrapper.svelte';
 	import Nin from './Nin.svelte';
 	import Phone from './Phone.svelte';
 </script>
