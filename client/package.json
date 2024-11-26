@@ -65,10 +65,13 @@
 		"unplugin-icons": "^0.20.1",
 		"vite": "^5.4.11",
 		"vite-plugin-node-polyfills": "^0.22.0",
-		"vitest": "^2.1.5"
+		"vitest": "^2.1.5",
+		"@capacitor/cli": "^6.2.0",
+		"embla-carousel-autoplay": "^8.5.1"
 	},
 	"type": "module",
 	"dependencies": {
+		"@capacitor/core": "^6.2.0",
 		"@graphql-codegen/introspection": "^4.0.3",
 		"@graphql-codegen/typed-document-node": "^5.0.11",
 		"@graphql-codegen/urql-svelte-operations-store": "^2.0.0",
@@ -81,7 +84,6 @@
 		"axios": "^1.7.7",
 		"bignumber.js": "^9.1.2",
 		"devalue": "^5.1.1",
-		"embla-carousel-autoplay": "^8.5.1",
 		"ethers": "^6.13.4",
 		"graphql-tag": "^2.12.6",
 		"svelte-persisted-store": "^0.12.0",

@@ -1,24 +1,9 @@
 <script lang="ts">
-	import { Nav, P, Tabs, getTitle } from 'components';
+	import { Nav, P } from 'components';
 	import { receiveState, type IReceiveTabs } from './store';
 	import { QRCodeImage } from 'svelte-qrcode-image';
 	import { browser } from '$app/environment';
 	import { account } from 'lib/web3';
-
-	const tabs: { title: IReceiveTabs; onClick: VoidFunction }[] = [
-		{
-			title: 'Wallet',
-			onClick: () => {
-				$receiveState = 'Wallet';
-			}
-		},
-		{
-			title: 'Buy',
-			onClick: () => {
-				$receiveState = 'Buy';
-			}
-		}
-	];
 
 	let isMiniPay = $state(false);
 	let accountAddress = $state($account.address);
@@ -50,7 +35,6 @@
 
 <Nav title="Receive" isBack />
 <div class="">
-	<!-- <Tabs {tabs} activeTitle={getTitle(tabs, $receiveState)} /> -->
 	<div class="w-full flex items-center justify-center">
 		<div class="size-[300px] bg-white p-2 rounded-lg my-5">
 			<QRCodeImage text="0x20F50b8832f87104853df3FdDA47Dd464f885a49" width={200} />
