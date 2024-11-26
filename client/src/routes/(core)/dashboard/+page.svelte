@@ -7,6 +7,7 @@
 	import { getBalance, account, formatEtherRounded, getActiveChain, chainId } from 'lib/web3';
 	import { browser } from '$app/environment';
 	import { utilityCategories } from 'lib/category';
+	import Carousel from './Carousel.svelte';
 
 	let props = $props<{ data: PageData }>();
 	const clickIcon = () => {
@@ -89,6 +90,7 @@
 		</div>
 		<div class=" min-h-screen h-screen overflow-y-scroll no-scrollbar scroll-smooth">
 			<QuickActions items={quickActions} />
+			<Carousel />
 			<div class="">
 				<div class="flex items-center justify-between mt-5 mb-3 mx-2">
 					<P className="text-sm">Utilities</P>

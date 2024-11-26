@@ -2,12 +2,18 @@
 	import { Button, P, TextInput } from 'components';
 	import Wrapper from './Wrapper.svelte';
 
-	let amountSelected = $state('');
-	let props = $props<{ }>();
+	let ninNum = $state('');
+	let props = $props<{}>();
 </script>
 
-<Wrapper title={"Nin Verification"}>
-	<TextInput place="Bvn" inputType="number" label="BVN No." required bind:value={amountSelected} />
+<Wrapper title={'Nin Verification'}>
+	<TextInput
+		place="Nin no."
+		inputType="number"
+		label="National Identity Number"
+		required
+		bind:value={ninNum}
+	/>
 
-	<Button className="my-2">Submit</Button>
+	<Button size="sm" className="my-2 w-fit">Submit</Button>
 </Wrapper>

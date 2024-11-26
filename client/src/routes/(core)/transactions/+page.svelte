@@ -1,33 +1,19 @@
 <script lang="ts">
-	import { getTitle, Nav, P, Tabs } from 'components';
+	import { Nav } from 'components';
 	import Transactions from './Transactions.svelte';
-	import type { ITransactionsTabs } from './store';
-	import { transactionsState } from './store';
-
-	const tabs: { title: ITransactionsTabs; onClick: VoidFunction }[] = [
-		{
-			title: 'Wallet',
-			onClick: () => {
-				$transactionsState = 'Wallet';
-			}
-		},
-		{
-			title: 'Swap',
-			onClick: () => {
-				$transactionsState = 'Swap';
-			}
-		},
-		{
-			title: 'Airtime',
-			onClick: () => {
-				$transactionsState = 'Airtime';
-			}
-		}
-	];
+	import * as Tabs from '$lib/components/ui/tabs';
 </script>
 
 <div>
 	<Nav title="Transactions" isBack />
-	<Tabs {tabs} activeTitle={getTitle(tabs, $transactionsState)} />
-	<Transactions />
+	<Tabs.Root value="Wallet" class="w-full ">
+		<Tabs.List>
+			<Tabs.Trigger value="Wallet">Wallet</Tabs.Trigger>
+			<Tabs.Trigger value="Swap">Swap</Tabs.Trigger>
+			<Tabs.Trigger value="Airtime">Airtime</Tabs.Trigger>
+		</Tabs.List>
+		<Tabs.Content value="Wallet"><Transactions /></Tabs.Content>
+		<Tabs.Content value="Swap"><Transactions /></Tabs.Content>
+		<Tabs.Content value="Airtime"><Transactions /></Tabs.Content>
+	</Tabs.Root>
 </div>

@@ -9,5 +9,5 @@
 <Wrapper title={"BVN Verification"}>
 	<TextInput place="Bvn" inputType="number" label="BVN No." required bind:value={amountSelected} />
 
-	<Button className="my-2">Submit</Button>
+	<Button size="sm" className="my-2 w-fit">Submit</Button>
 </Wrapper>
