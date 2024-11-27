@@ -1,41 +1,7 @@
 <script lang="ts">
-	import { account, chainId, modal, getBalance } from 'lib/web3';
+	import { account, modal, getBalance } from 'lib/web3';
 	import { Button } from 'components';
 	import { browser } from '$app/environment';
-	import { queryStore, gql, getContextClient } from '@urql/svelte';
-	import type {
-		GetCountryQuery,
-		GetDataPlansInput,
-		GetDataPlansResponse,
-		GetDataPlansQuery
-	} from '../generated/graphql';
-	// import { GetCountryDocument } from '../generated/graphql';
-	import { GetCountryDocument, GetDataPlansDocument, NetworkProviders } from '../generated/graphql';
-
-	$: postsX = queryStore<GetCountryQuery>({
-		client: getContextClient(),
-		query: GetCountryDocument
-	});
-	$: dataPlans = queryStore<GetDataPlansQuery, GetDataPlansInput>({
-		client: getContextClient(),
-		query: GetDataPlansDocument,
-		variables: {
-			network: NetworkProviders.Mtn,
-			category: 'None'
-		},
-		pause: false
-	});
-
-	// const posts = queryStore<GetCountryQuery>({
-	// 	client: getContextClient(),
-	// 	query: gql`
-	// 		query GetCountry {
-	// 			CountryList {
-	// 				name
-	// 			}
-	// 		}
-	// 	`
-	// });
 
 	$: accountAddress = $account.address;
 	// let accountAddress = $state($account.address);
@@ -79,37 +45,11 @@
 
 <section class="bg-primary h-screen flex flex-col items-center">
 	<img src="dollar.png" alt="Welcome" class="h-fit max-h-[300px] mt-[100px]" />
-	<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
-	{#if !$postsX.data}
-		<p>Loading....</p>
-	{:else if $postsX.data}
-		<!-- <p>{$posts.data}</p> -->
-		<p>{$postsX.data.CountryList!.name}</p>
-	{:else}
-		<p>Nothing...</p>
-	{/if}
-	<p>Address: {accountAddress}</p>
-	<p>Address Wag: {$account.address}</p>
 
-	{#if $account.isConnected}
-		<p>Already Connected</p>
+	{#if $account.isConnected || isMiniPay}
+		<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
 	{:else}
 		<Button variant="secondary" className="w-fit" onclick={connectWallet}>Connect</Button>
 		<!-- <button on:click={}>Connect</button> -->
-	{/if}
-	{#if $dataPlans.fetching}
-		<p>Loading dataPlans....</p>
-	{:else}
-		<div class="grid grid-cols-4 overflow-y-scroll scroll-smooth gap-4">
-			<!-- <p>{JSON.stringify($dataPlans.data.Airtime_GetDataPlans.dataPlans)}</p> -->
-			<!-- {JSON.stringify(dataPlans.data.Airtime_GetDataPlans.dataPlans)} -->
-			{#each $dataPlans.data!.Airtime_GetDataPlans!.dataPlans as item}
-				<p class="text-center">
-					{item.id}
-					{item.network}
-					{item.plan}
-				</p>
-			{/each}
-		</div>
 	{/if}
 </section>
