@@ -17,9 +17,13 @@ INSERT INTO ads (
 )
 RETURNING *;
 
--- name: GetAds :one
+-- name: ListAds :many
 SELECT * FROM ads
 WHERE ad_status = $1 LIMIT 20;
+
+-- name: GetAd :one
+SELECT * FROM ads
+WHERE id = $1 LIMIT 1;
 
 -- name: UpdateAd :exec
 UPDATE ads

@@ -3,7 +3,7 @@ sql:
   - engine: "postgresql"
     # uri: "postgres://locahost:5432/postgres?sslmode=disable"
     queries: "db/*.sql"
-    schema: "dbs/db_schema.sql"
+    schema: "db/db_schema.sql"
     gen:
       go:
         package: "db"

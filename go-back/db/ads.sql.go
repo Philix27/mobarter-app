@@ -73,13 +73,13 @@ func (q *Queries) DeleteAd(ctx context.Context, id int64) error {
 	return err
 }
 
-const getAds = `-- name: GetAds :one
+const getAd = `-- name: GetAd :one
 SELECT id, agent_id, payment_method_id, ad_status, currency_pair, limit_upper, limit_lower, rate, instructions, created_at, updated_at FROM ads
-WHERE ad_status = $1 LIMIT 20
+WHERE id = $1 LIMIT 1
 `
 
-func (q *Queries) GetAds(ctx context.Context, adStatus NullAdsstatus) (Ad, error) {
-	row := q.db.QueryRow(ctx, getAds, adStatus)
+func (q *Queries) GetAd(ctx context.Context, id int64) (Ad, error) {
+	row := q.db.QueryRow(ctx, getAd, id)
 	var i Ad
 	err := row.Scan(
 		&i.ID,
@@ -95,6 +95,43 @@ func (q *Queries) GetAds(ctx context.Context, adStatus NullAdsstatus) (Ad, error
 		&i.UpdatedAt,
 	)
 	return i, err
+}
+
+const listAds = `-- name: ListAds :many
+SELECT id, agent_id, payment_method_id, ad_status, currency_pair, limit_upper, limit_lower, rate, instructions, created_at, updated_at FROM ads
+WHERE ad_status = $1 LIMIT 20
+`
+
+func (q *Queries) ListAds(ctx context.Context, adStatus NullAdsstatus) ([]Ad, error) {
+	rows, err := q.db.Query(ctx, listAds, adStatus)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Ad
+	for rows.Next() {
+		var i Ad
+		if err := rows.Scan(
+			&i.ID,
+			&i.AgentID,
+			&i.PaymentMethodID,
+			&i.AdStatus,
+			&i.CurrencyPair,
+			&i.LimitUpper,
+			&i.LimitLower,
+			&i.Rate,
+			&i.Instructions,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }
 
 const updateAd = `-- name: UpdateAd :exec

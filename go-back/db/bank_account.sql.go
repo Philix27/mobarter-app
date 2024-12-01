@@ -11,6 +11,58 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+const createBankAccount = `-- name: CreateBankAccount :one
+INSERT INTO bank_account (
+  user_id,
+  bank_name,  
+  account_name, 
+  account_no
+) VALUES (
+  $1,
+  $2,
+  $3,
+  $4
+)
+RETURNING id, bank_name, account_name, account_no, user_id, created_at, updated_at
+`
+
+type CreateBankAccountParams struct {
+	UserID      pgtype.Int4
+	BankName    string
+	AccountName string
+	AccountNo   int32
+}
+
+func (q *Queries) CreateBankAccount(ctx context.Context, arg CreateBankAccountParams) (BankAccount, error) {
+	row := q.db.QueryRow(ctx, createBankAccount,
+		arg.UserID,
+		arg.BankName,
+		arg.AccountName,
+		arg.AccountNo,
+	)
+	var i BankAccount
+	err := row.Scan(
+		&i.ID,
+		&i.BankName,
+		&i.AccountName,
+		&i.AccountNo,
+		&i.UserID,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
+const deleteBankAccount = `-- name: DeleteBankAccount :exec
+DELETE FROM bank_account
+WHERE id = $1
+`
+
+func (q *Queries) DeleteBankAccount(ctx context.Context, id int64) error {
+	_, err := q.db.Exec(ctx, deleteBankAccount, id)
+	return err
+}
+
 const getBankAccount = `-- name: GetBankAccount :one
 SELECT id, bank_name, account_name, account_no, user_id, created_at, updated_at FROM bank_account
 WHERE id = $1 LIMIT 1
