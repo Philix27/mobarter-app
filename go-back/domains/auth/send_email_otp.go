@@ -3,6 +3,7 @@ package auth
 import (
 	"errors"
 	"mobarter/app"
+	"mobarter/domains/crypto"
 	"mobarter/domains/notification"
 
 	"github.com/graphql-go/graphql"
@@ -45,14 +46,21 @@ func Auth_SendEmailOtp(appState app.AppState) *graphql.Field {
 				Email: args["email"].(string),
 			}
 
-			println("After DT:", dto.Email)
+			otpValue := crypto.GenerateOTP()
+			token, err := crypto.CreateJWTToken(otpValue)
 
-			if notification.SendEmailOtp(dto.Email) != nil {
+			if err != nil {
+				return nil, errors.New("Could not generate token")
+			}
+
+			println("Otp value", otpValue)
+			if notification.SendEmailOtp(dto.Email, otpValue) != nil {
 				return nil, errors.New("Could not send otp")
 			}
 
 			return map[string]interface{}{
 				"message": "success",
+				"token":   token,
 			}, nil
 
 		},

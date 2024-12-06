@@ -8,29 +8,32 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-type VerifyOtpInput struct {
-	Token string
-	Otp   string
+type LoginInput struct {
+	Email    string
+	Password string
 }
 
-func Auth_VerifyOtp(appState app.AppState) *graphql.Field {
+func Auth_Login(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "Auth_VerifyOtpResponse",
+			Name: "Auth_LoginResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
+				"user_id": app.String,
+				"token":   app.String,
 			},
 		}),
+
 		Args: graphql.FieldConfigArgument{
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "Auth_VerifyOtpInput",
+						Name: "Auth_LoginInput",
 						Fields: graphql.InputObjectConfigFieldMap{
-							"token": &graphql.InputObjectFieldConfig{
+							"email": &graphql.InputObjectFieldConfig{
 								Type: graphql.NewNonNull(graphql.String),
 							},
-							"otp": &graphql.InputObjectFieldConfig{
+							"password": &graphql.InputObjectFieldConfig{
 								Type: graphql.NewNonNull(graphql.String),
 							},
 						},
@@ -39,21 +42,15 @@ func Auth_VerifyOtp(appState app.AppState) *graphql.Field {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			args, err := app.ValidateArg("input", p)
-
-			if err != nil {
-				return nil, errors.New("Input required")
+			dto := LoginInput{
+				Email:    p.Args["email"].(string),
+				Password: p.Args["password"].(string),
 			}
 
-			dto := VerifyOtpInput{
-				Otp:   args["otp"].(string),
-				Token: args["token"].(string),
-			}
-
-			err = crypto.ValidateToken(dto.Token, dto.Otp)
+			err := crypto.VerifyEmailPassword(dto.Email, dto.Password)
 
 			if err != nil {
-				return nil, errors.New("OTP is invalid")
+				return nil, errors.New("Invalid credentials")
 			}
 
 			return map[string]interface{}{
@@ -62,4 +59,3 @@ func Auth_VerifyOtp(appState app.AppState) *graphql.Field {
 		},
 	}
 }
-
