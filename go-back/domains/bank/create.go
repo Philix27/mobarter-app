@@ -5,7 +5,6 @@ import (
 	"mobarter/app"
 	"mobarter/database"
 
-	"github.com/LNMMusic/optional"
 	"github.com/graphql-go/graphql"
 )
 
@@ -51,7 +50,7 @@ func CreateBankAccount(appState app.AppState) *graphql.Field {
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			//TODO -
 
-			args, err := app.ValidateArg(optional.Some("input"), p)
+			args, err := app.ValidateArg("input", p)
 			if err != nil {
 				return nil, errors.New("Input required")
 			}

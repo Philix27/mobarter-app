@@ -37,7 +37,7 @@ func main() {
 		app.ErrorPanic(err, "Cannot connect to db")
 	}
 
-	database.RunMigrations(db)
+	// database.RunMigrations(db)
 	// // Slog
 	handlerOpt := &slog.HandlerOptions{
 		Level:     slog.LevelDebug,

@@ -4,7 +4,6 @@ import (
 	"errors"
 	"mobarter/app"
 
-	"github.com/LNMMusic/optional"
 	"github.com/graphql-go/graphql"
 )
 
@@ -45,7 +44,7 @@ func PurchaseData(appState app.AppState) *graphql.Field {
 
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			// ilog := log.New("Purchase airtime")
-			args, err := app.ValidateArg(optional.Some("input"), p)
+			args, err := app.ValidateArg("input", p)
 			if err != nil {
 				return nil, errors.New("Input required")
 			}

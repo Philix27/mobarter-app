@@ -98,12 +98,12 @@ func SetInput(name string, fields *map[string]*graphql.InputObjectFieldConfig) *
 	}
 }
 
-func ValidateArg(argName optional.Option[string], p graphql.ResolveParams) (map[string]interface{}, error) {
+func ValidateArg(argName string, p graphql.ResolveParams) (map[string]interface{}, error) {
 
-	filterArg, filterProvided := p.Args[getInput(argName)].(map[string]interface{})
+	filterArg, filterProvided := p.Args[argName].(map[string]interface{})
 	if !filterProvided {
 
-		return nil, errors.New("")
+		return nil, errors.New(argName + "not found")
 
 	}
 

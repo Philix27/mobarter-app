@@ -4,6 +4,7 @@ import (
 	"mobarter/app"
 	"mobarter/domains/admin"
 	"mobarter/domains/airtime"
+	"mobarter/domains/auth"
 	"mobarter/domains/bank"
 	"mobarter/domains/kyc"
 	"mobarter/domains/p2p"
@@ -57,6 +58,10 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"Admin_Login":                     admin.Login(appState),
 		"Admin_SendEmail":                 admin.SendEmail(appState),
 		"Admin_SetRates":                  admin.SetRates(appState),
+		// ! Auth
+		"Auth_SendEmailOtp": auth.Auth_SendEmailOtp(appState),
+		"Auth_SendPhoneOtp": auth.Auth_SendPhoneOtp(appState),
+		"Auth_VerifyOtp":    auth.Auth_VerifyOtp(appState),
 	}
 
 }
