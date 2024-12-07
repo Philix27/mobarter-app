@@ -5,9 +5,7 @@
 
 <div>
 	<Nav title="P2P Buyers" isBack />
-	<div class="">
-		<div>P2P Buyers</div>
-	</div>
+	
 	<Tabs.Root value="account" class="w-full ">
 		<Tabs.List>
 			<Tabs.Trigger value="account">Account</Tabs.Trigger>
