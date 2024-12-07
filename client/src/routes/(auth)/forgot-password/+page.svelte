@@ -3,7 +3,7 @@
 	import AuthWrapper from '../AuthWrapper.svelte';
 	import SendOtp from '../comps/SendOtp.svelte';
 	import VerifyOtp from '../comps/VerifyOtp.svelte';
-	import EnterPassword from './EnterPassword.svelte';
+	import EnterPassword from '../comps/EnterPassword.svelte';
 
 	let activeScreen: 'sendOtp' | 'verifyOtp' | 'enterPassword' = 'sendOtp';
 </script>

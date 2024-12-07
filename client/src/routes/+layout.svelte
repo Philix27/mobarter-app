@@ -20,17 +20,18 @@
 		<slot />
 	</html>
 </svelte:head> -->
-
-<div class="flex flex-col min-h-screen">
-	<Configs>
-		<!-- <WagmiProvider {config}> -->
-		<main>
-			{#if $drawerState}
-				<Drawer />
-			{/if}
-			<slot />
-			<Toaster position="top-center" />
-		</main>
-		<!-- </WagmiProvider> -->
-	</Configs>
+<div class="flex flex-col min-h-screen w-full items-center justify-center">
+	<div class=" min-h-screen max-w-[400px] w-[400px] bg-background">
+		<Configs>
+			<!-- <WagmiProvider {config}> -->
+			<main>
+				{#if $drawerState}
+					<Drawer />
+				{/if}
+				<slot />
+				<Toaster position="top-center" />
+			</main>
+			<!-- </WagmiProvider> -->
+		</Configs>
+	</div>
 </div>

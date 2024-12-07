@@ -4,7 +4,8 @@
 </script>
 
 <div class="flex flex-col items-center w-full gap-y-4">
-	<TextInput label="New password" />
+	<TextInput label="Password" />
+	<TextInput label="Confirm password" />
 
 	<Button onclick={props.onSuccess}>Reset password</Button>
 </div>
