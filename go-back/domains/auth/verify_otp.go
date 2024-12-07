@@ -19,6 +19,7 @@ func Auth_VerifyOtp(appState app.AppState) *graphql.Field {
 			Name: "Auth_VerifyOtpResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
+				"token":   app.String,
 			},
 		}),
 		Args: graphql.FieldConfigArgument{
@@ -51,15 +52,19 @@ func Auth_VerifyOtp(appState app.AppState) *graphql.Field {
 			}
 
 			err = crypto.ValidateToken(dto.Token, dto.Otp)
-
 			if err != nil {
 				return nil, errors.New("OTP is invalid")
 			}
 
+			accessToken, err := crypto.CreateJWTToken("userId")
+			if err != nil {
+				return nil, errors.New("Could not get access token")
+			}
+
 			return map[string]interface{}{
 				"message": "success",
+				"token":   accessToken,
 			}, nil
 		},
 	}
 }
-

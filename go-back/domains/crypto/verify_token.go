@@ -1,8 +1,8 @@
 package crypto
 
 import (
+	"errors"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
@@ -10,7 +10,6 @@ import (
 
 // ValidateJWTToken validates a JWT token and checks if a specific claim matches the expected value
 func ValidateToken(tokenString string, expectedValue string) error {
-	log.Fatalf("ValidateToken:")
 	// Parse and validate the token
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		// Ensure the signing method is what you expect (HMAC-SHA256 in this case)
@@ -21,7 +20,7 @@ func ValidateToken(tokenString string, expectedValue string) error {
 	})
 
 	if err != nil {
-		return fmt.Errorf("invalid token: %w", err)
+		return errors.New("invalid token")
 	}
 
 	// Check if the token is valid
@@ -43,13 +42,11 @@ func ValidateToken(tokenString string, expectedValue string) error {
 	}
 
 	// Check if the expected claim exists and matches the expected value
-	if claimValue, ok := claims["payload"].(string); ok {
-		if claimValue != expectedValue {
-			return fmt.Errorf("claim '%s' value '%s' does not match expected value '%s'", claimValue, expectedValue)
-		}
-	} else {
-		return fmt.Errorf("payload not found or not a string")
+	claimValue, ok := claims["payload"].(string)
+	if claimValue != expectedValue {
+		return fmt.Errorf("claim '%s' value '%s' does not match expected value '%s'", claimValue, expectedValue)
 	}
 
+	// Return the claims as a map
 	return nil
 }
