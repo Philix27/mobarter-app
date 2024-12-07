@@ -17,6 +17,7 @@
 		"test:unit": "vitest"
 	},
 	"devDependencies": {
+		"@capacitor/cli": "^6.2.0",
 		"@commitlint/cli": "^19.5.0",
 		"@commitlint/config-conventional": "^19.5.0",
 		"@fontsource/fira-mono": "^5.0.0",
@@ -38,6 +39,7 @@
 		"celo-kit": "^0.0.4",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
+		"embla-carousel-autoplay": "^8.5.1",
 		"embla-carousel-svelte": "^8.5.1",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -65,9 +67,7 @@
 		"unplugin-icons": "^0.20.1",
 		"vite": "^5.4.11",
 		"vite-plugin-node-polyfills": "^0.22.0",
-		"vitest": "^2.1.5",
-		"@capacitor/cli": "^6.2.0",
-		"embla-carousel-autoplay": "^8.5.1"
+		"vitest": "^2.1.5"
 	},
 	"type": "module",
 	"dependencies": {
@@ -76,6 +76,8 @@
 		"@graphql-codegen/typed-document-node": "^5.0.11",
 		"@graphql-codegen/urql-svelte-operations-store": "^2.0.0",
 		"@mento-protocol/mento-sdk": "^1.0.1",
+		"@reown/appkit": "^1.5.2",
+		"@reown/appkit-adapter-wagmi": "^1.5.2",
 		"@sveltestack/svelte-query": "^1.6.0",
 		"@urql/svelte": "^4.2.2",
 		"@wagmi/connectors": "^5.3.9",
@@ -90,6 +92,7 @@
 		"svelte-qrcode-image": "^2.0.0-alpha.1",
 		"svelte-sonner": "^0.3.28",
 		"viem": "2.7.6",
+		"wagmi": "^2.13.4",
 		"zod": "^3.23.8"
 	}
 }

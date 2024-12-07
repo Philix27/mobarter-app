@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/web-manifest-combined.json",
-	"id": "cat-me-if-you-can",
+	"id": "mobarter",
 	"name": "Mobarter",
 	"short_name": "Mobarter",
 	"start_url": "/",

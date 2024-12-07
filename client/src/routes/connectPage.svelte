@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { account, modal, getBalance } from 'lib/web3';
-	import { Button, H } from 'components';
+	import { Button } from 'components';
 	import { browser } from '$app/environment';
 	import ActionButtonList from './ActionButtonList.svelte';
-	import { goto } from '$app/navigation';
 
 	$: accountAddress = $account.address;
 	// let accountAddress = $state($account.address);
@@ -27,8 +26,6 @@
 					method: 'eth_requestAccounts',
 					params: []
 				});
-
-				goto('/dashboard');
 
 				// Injected wallets inject all available addresses,
 				// to comply with API Minipay injects one address but in the form of array
@@ -55,28 +52,14 @@
 	}
 </script>
 
-<section class="h-screen flex flex-col items-center px-5">
+<section class="bg-primary h-screen flex flex-col items-center">
 	<img src="dollar.png" alt="Welcome" class="h-fit max-h-[300px] mt-[100px]" />
-	<div class="w-full flex items-center justify-center flex-col">
-		<p class="text-2xl font-bold">Exchange like breezy</p>
-		<p class="text-base text-muted text-center my-4">
-			If you are new to mobile development, the easiest way to get started is with Expo Go. Expo is
-			a set of tools.
-		</p>
-	</div>
-	<div class="mt-5 px-5 flex flex-col gap-y-5 items-center justify-between w-[80%] gap-x-4">
-		<Button
-			className="w-full"
-			onclick={() => {
-				goto('/login');
-			}}>Login</Button
-		>
-		<Button
-			variant="secondary"
-			className="w-full"
-			onclick={() => {
-				goto('/create-account');
-			}}>Create Account</Button
-		>
-	</div>
+
+	{#if $account.isConnected || isMiniPay}
+		<a href="/dashboard" class="my-4"><p>Dashboard</p></a>
+	{:else}
+		<Button variant="secondary" className="w-fit" onclick={connectWallet}>Connect</Button>
+		<!-- <button on:click={}>Connect</button> -->
+	{/if}
+	<!-- <ActionButtonList /> -->
 </section>

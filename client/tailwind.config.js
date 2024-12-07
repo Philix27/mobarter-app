@@ -3,9 +3,6 @@ export default {
 	darkMode: ['class'],
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		// backgroundImage: {
-		//   "hero": "url('/public/grento/sky.jpg')",
-		// },
 		container: {
 			center: true,
 			padding: '2rem',
@@ -31,7 +28,7 @@ export default {
 				},
 				destructive: {
 					DEFAULT: 'var(--destructive)',
-					foreground: 'hsl(var(--destructive-foreground))'
+					foreground: 'var(--destructive-foreground)'
 				},
 				muted: {
 					DEFAULT: 'var(--muted)',
@@ -43,7 +40,7 @@ export default {
 				},
 				popover: {
 					DEFAULT: 'var(--popover)',
-					foreground: 'hsl(var(--popover-foreground))'
+					foreground: 'var(--popover-foreground)'
 				},
 				card: {
 					DEFAULT: 'var(--card)',

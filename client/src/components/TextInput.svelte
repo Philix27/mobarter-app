@@ -14,11 +14,14 @@
 	export let value: string | number = '';
 	/** Description */
 	export let desc: string = '';
+	export let icon: string = '';
 	export let label: string = '';
 	export let inputType: 'text' | 'number' | 'date' | 'file' | 'password' = 'text';
 	export let errorMessage: string = '';
 	export let className: string = '';
-	export let showPassword: boolean = false;
+	// export let showPassword: boolean = false;
+
+	$: togglePassword = true;
 </script>
 
 <div class={cn('flex-[1] w-full mb-2', className)}>
@@ -37,14 +40,14 @@
 				errorMessage && 'border-red-600'
 			)}
 		>
-			{#if isPassword}
-				<iconify-icon class={cn('mx-2', errorMessage && 'text-red-600')} icon="mdi:lock" />
+			{#if icon}
+				<iconify-icon class={cn('mx-2', errorMessage && 'text-red-600')} {icon} />
 			{/if}
 			<input
 				{...control}
 				placeholder={place}
 				{value}
-				type={isPassword ? 'password' : !showPassword && inputType}
+				type={isPassword && togglePassword ? 'password' : inputType}
 				class={cn(
 					`flex h-10 w-full rounded-md
              border-none outline-none bg-background text-foreground active::bg-transparent
@@ -57,23 +60,13 @@
 				required
 			/>
 			{#if isPassword}
-				{#if showPassword}
-					<iconify-icon
-						icon="mdi:eye"
-						on:click={() => {
-							// Todo
-							// setToggle -> false
-						}}
-					/>
-				{:else}
-					<iconify-icon
-						icon="mdi:close"
-						on:click={() => {
-							// Todo
-							// setToggle -> true
-						}}
-					/>
-				{/if}
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<iconify-icon
+					icon={togglePassword ? 'mdi:eye' : 'mdi:close'}
+					on:click={() => {
+						togglePassword = !togglePassword;
+					}}
+				/>
 			{/if}
 		</div>
 
