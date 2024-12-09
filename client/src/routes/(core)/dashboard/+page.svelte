@@ -42,8 +42,9 @@
 	}
 
 	let quickActions = [
-		{ name: 'Buy', link: '/p2p/sellers', icon: 'hugeicons:bitcoin-withdraw' },
-		{ name: 'Sell', link: '/p2p/buyers', icon: 'hugeicons:bitcoin-withdraw' },
+		{ name: 'Buy', link: '/p2p/buy', icon: 'hugeicons:bitcoin-withdraw' },
+		{ name: 'Sell', link: '/p2p/sell', icon: 'hugeicons:bitcoin-withdraw' },
+		{ name: 'Order', link: '/p2p/orders', icon: 'tdesign:swap' },
 		{ name: 'Withdraw', link: '/withdraw', icon: 'hugeicons:bitcoin-withdraw' },
 		{ name: 'Send', link: '/send', icon: 'majesticons:send-line' },
 		{ name: 'Swap', link: '/swap', icon: 'tdesign:swap' },

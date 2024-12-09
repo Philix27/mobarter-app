@@ -17,6 +17,7 @@ const config = {
 			'@/comps': './src/comps/*',
 			generated: 'src/generated',
 			components: 'src/components',
+			types: 'src/types',
 			lib: 'src/lib',
 			wizard: 'src/routes/wizard'
 		},
