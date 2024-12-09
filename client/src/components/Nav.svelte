@@ -15,6 +15,7 @@
 		isHome?: boolean;
 		showThemeToggle?: boolean;
 		isBack?: boolean;
+		gotoUrl?: string;
 		onIconClick?: () => void;
 	}>();
 	/**
@@ -25,13 +26,14 @@
 	// 	goto(`/${route}`, { replaceState });
 	// }
 
-	function goBack(defaultRoute = '/dashboard') {
+	function goBack() {
+		const url = props.gotoUrl || '/dashboard';
 		// function goBack() {
 		if (props.isBack) {
 			const ref = document.referrer;
 			// console.log('Cliecked backe', { ref });
 			// goto(ref.length > 0 ? ref : defaultRoute);
-			goto('/dashboard');
+			goto(url);
 		}
 	}
 
@@ -70,24 +72,23 @@
         z-10 bg-background px-5
       `}
 >
+	<!-- svelte-ignore a11y_interactive_supports_focus -->
 	{#if props.isBack}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-interactive-supports-focus -->
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<iconify-icon
 			class="text-foreground text-[20px]"
 			icon="mingcute:left-line"
-			on:click={goBack}
+			onclick={goBack}
 			role="button"
-		/>
+		></iconify-icon>
 	{:else}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-interactive-supports-focus -->
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<iconify-icon
 			class="text-foreground text-[20px]"
 			icon="mdi:menu"
-			on:click={onShowDrawer}
+			onclick={onShowDrawer}
 			role="button"
-		/>
+		></iconify-icon>
 	{/if}
 
 	{#if props.title}
@@ -98,41 +99,48 @@
 		>
 	{/if}
 
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<div class="flex items-center">
 		{#if props.showThemeToggle}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-interactive-supports-focus -->
 			<form action="" method="POST" use:enhance={submitUpdateTheme}>
 				{#if props.theme === 'light'}
+					<!-- svelte-ignore a11y_consider_explicit_label -->
 					<button
 						formaction="/?/setTheme&theme=dark&redirectTo={$page.url.pathname}"
 						class="outline-none border-none p-0 mt-1 mr-4"
 					>
-						<iconify-icon icon="tabler:moon" class="text-xl text-foreground" />
+						<iconify-icon icon="tabler:moon" class="text-xl text-foreground"> </iconify-icon>
 					</button>
 				{:else}
+					<!-- svelte-ignore a11y_consider_explicit_label -->
 					<button
 						class="outline-none border-none p-0 mt-1 mr-4"
 						formaction="/?/setTheme&theme=light&redirectTo={$page.url.pathname}"
 					>
-						<iconify-icon icon="lets-icons:sun-light" class="text-xl text-foreground" />
+						<iconify-icon icon="lets-icons:sun-light" class="text-xl text-foreground">
+						</iconify-icon>
 					</button>
 				{/if}
 			</form>
 		{/if}
+		<!-- svelte-ignore a11y_interactive_supports_focus -->
 		{#if props.isHome}
+			<!-- svelte-ignore a11y_interactive_supports_focus -->
 			<iconify-icon
 				class="text-xl text-foreground mr-2"
 				icon="system-uicons:bell"
-				on:click={props.onIconClick}
-			/>
+				role="button"
+				onclick={props.onIconClick}
+			></iconify-icon>
 		{/if}
 		{#if props.icon}
 			<iconify-icon
 				class="text-xl text-foreground mr-2"
 				icon={props.icon}
-				on:click={props.onIconClick}
-			/>
+				onclick={props.onIconClick}
+			></iconify-icon>
 		{/if}
 	</div>
 </div>

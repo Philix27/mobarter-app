@@ -56,7 +56,7 @@
 </svelte:head>
 
 <div>
-	<Nav theme={props.data.theme} showThemeToggle />
+	<Nav theme={props.data.theme} showThemeToggle gotoUrl="/login" />
 	<div class="">
 		<div class="bg-primary px-3 py-2 mb-4 rounded-md">
 			<div class="flex items-center justify-between">
@@ -75,7 +75,7 @@
 				{/await}
 
 				<div class="flex flex-col items-end justify-between">
-					<a href="/balances" class="mb-4">
+					<a href="/balances" class="mb-8">
 						<P className="text-white text-sm">Balances</P>
 					</a>
 					<a href="/transactions">

@@ -6,15 +6,6 @@ import (
 )
 
 func createUserRepo(appState app.AppState, dto *CreateDto) error {
-	result := appState.DB.Create(&database.User{
-		WalletAddress: dto.WalletAddress,
-		FirstName:     dto.FirstName,
-		LastName:      dto.LastName,
-	})
-
-	if result.Error != nil {
-		return result.Error
-	}
 
 	return nil
 }
