@@ -35,7 +35,7 @@
 		<Carousel.Content>
 			{#each ['banner/merry.png', 'banner/merryO.png', 'banner/merryW.png', 'banner/coming.png'] as url, i (i)}
 				<Carousel.Item>
-					<div class="bg-primary w-full h-[60px] rounded-md">
+					<div class="bg-primary w-full h-[70px] rounded-md">
 						<img src={url} alt="img" class="w-full h-full object-cover rounded-md" />
 					</div>
 				</Carousel.Item>

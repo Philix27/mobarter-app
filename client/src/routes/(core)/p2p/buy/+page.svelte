@@ -7,7 +7,7 @@
 <div>
 	<Nav title="Buy coin" isBack />
 
-	<Tabs.Root value="account" class="w-full" >
+	<Tabs.Root value="CUSD" class="w-full" >
 		<Tabs.List>
 			<Tabs.Trigger value="CUSD">CUSD</Tabs.Trigger>
 			<Tabs.Trigger value="USDT">USDT</Tabs.Trigger>

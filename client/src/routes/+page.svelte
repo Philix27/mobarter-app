@@ -4,6 +4,7 @@
 	import { browser } from '$app/environment';
 	import ActionButtonList from './ActionButtonList.svelte';
 	import { goto } from '$app/navigation';
+	import { globalStore } from 'lib/store';
 
 	$: accountAddress = $account.address;
 	// let accountAddress = $state($account.address);
@@ -22,6 +23,8 @@
 			if (window.ethereum.isMiniPay) {
 				// User is using Minipay
 				isMiniPay = true;
+
+				$globalStore.env = "MINIPAY"
 				// Requesting account addresses
 				let accounts = window.ethereum.request({
 					method: 'eth_requestAccounts',

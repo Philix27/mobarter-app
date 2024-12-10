@@ -13,6 +13,7 @@
 
 	// Inject the Analytics functionality
 	inject({ mode: dev ? 'development' : 'production' });
+
 </script>
 
 <!-- <svelte:head>

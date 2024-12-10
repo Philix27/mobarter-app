@@ -1,35 +1,16 @@
 <script lang="ts">
 	import { Nav, P } from 'components';
-	import { TokenList, CELO } from 'celo-kit';
-	import { browser } from '$app/environment';
-	import TokenRow from './TokenRow.svelte';
-	import { chainId } from 'lib/web3';
+	import { globalStore } from 'lib/store';
+	import * as Tabs from '$lib/components/ui/tabs';
+	import Celo from './Celo.svelte';
 
-	$: isMiniPay = false;
-
-	if (browser) {
-		if (window && window.ethereum) {
-			if (window.ethereum.isMiniPay) {
-				isMiniPay = true;
-
-				let accounts = window.ethereum.request({
-					method: 'eth_requestAccounts',
-					params: []
-				});
-
-				console.log(accounts[0]);
-				// @ts-ignore
-				accountAddress = accounts[0];
-			}
-		}
-	}
-
-	function getActiveChain() {
-		if ($chainId === 42220) return 'celo';
-		if ($chainId === 44787) return 'alfajores';
-		if ($chainId === 62320) return 'baklava';
-		return 'celo';
-	}
+	const TabKeys = {
+		celo: 'Celo',
+		eth: 'Ethereum',
+		abitrium: 'Abitrium',
+		optimism: 'Optimisim',
+		starknet: 'Starknet'
+	};
 </script>
 
 <svelte:head>
@@ -40,14 +21,33 @@
 <div>
 	<Nav title="Balance" isBack />
 
-	<div>
-		<TokenRow symbol={CELO.symbol} tokenAddress={'0x000'} name={CELO.name} />
-		{#each TokenList.filter((val) => val.symbol.toUpperCase() !== 'CELO') as item}
-			<TokenRow
-				symbol={item.symbol}
-				tokenAddress={item.address[getActiveChain()]}
-				name={item.name}
-			/>
-		{/each}
-	</div>
+	<Tabs.Root value={TabKeys.celo} class="w-full">
+		<Tabs.List>
+			<Tabs.Trigger value={TabKeys.celo}>{TabKeys.celo}</Tabs.Trigger>
+			<Tabs.Trigger value={TabKeys.eth}>{TabKeys.eth}</Tabs.Trigger>
+			{#if $globalStore.env !== 'MINIPAY'}
+				<Tabs.Trigger value={TabKeys.optimism}>{TabKeys.optimism}</Tabs.Trigger>
+			{/if}
+			{#if $globalStore.env !== 'MINIPAY'}
+				<Tabs.Trigger value={TabKeys.starknet}>{TabKeys.starknet}</Tabs.Trigger>
+			{/if}
+		</Tabs.List>
+		<Tabs.Content value={TabKeys.celo}>
+			<Celo />
+		</Tabs.Content>
+		<Tabs.Content value={TabKeys.eth}>
+			<div>eth</div>
+		</Tabs.Content>
+
+		{#if $globalStore.env !== 'MINIPAY'}
+			<Tabs.Content value={TabKeys.optimism}>
+				<div>optimism</div>
+			</Tabs.Content>
+		{/if}
+		{#if $globalStore.env !== 'MINIPAY'}
+			<Tabs.Content value={TabKeys.starknet}>
+				<div>starknet</div>
+			</Tabs.Content>
+		{/if}
+	</Tabs.Root>
 </div>

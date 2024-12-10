@@ -1,26 +1,37 @@
-<script>
+<script lang="ts">
 	import { Nav } from 'components';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import Content from '../comps/Content.svelte';
+
+	const TabKeys = {
+		completed: 'All',
+		success: 'Success',
+		pending: 'Pending',
+		failed: 'Failed'
+	};
 </script>
 
 <div>
 	<Nav title="Orders" isBack />
 
-	<Tabs.Root value="CUSD" class="w-full">
+	<Tabs.Root value={TabKeys.completed} class="w-full">
 		<Tabs.List>
-			<Tabs.Trigger value="CUSD">CUSD</Tabs.Trigger>
-			<Tabs.Trigger value="USDT">USDT</Tabs.Trigger>
-			<Tabs.Trigger value="CELO">CELO</Tabs.Trigger>
+			<Tabs.Trigger value={TabKeys.completed}>{TabKeys.completed}</Tabs.Trigger>
+			<Tabs.Trigger value={TabKeys.success}>{TabKeys.success}</Tabs.Trigger>
+			<Tabs.Trigger value={TabKeys.failed}>{TabKeys.failed}</Tabs.Trigger>
+			<Tabs.Trigger value={TabKeys.pending}>{TabKeys.pending}</Tabs.Trigger>
 		</Tabs.List>
-		<Tabs.Content value="CUSD">
-			<Content token="CUSD" tradeType="BUY" />
+		<Tabs.Content value={TabKeys.completed}>
+			<div>Completed</div>
 		</Tabs.Content>
-		<Tabs.Content value="USDT">
-			<Content token="USDT" tradeType="BUY" />
+		<Tabs.Content value={TabKeys.success}>
+			<div>Success</div>
 		</Tabs.Content>
-		<Tabs.Content value="CELO">
-			<Content token="CELO" tradeType="BUY" />
+		<Tabs.Content value={TabKeys.pending}>
+			<div>Pending</div>
+		</Tabs.Content>
+		<Tabs.Content value={TabKeys.failed}>
+			<div>Failed</div>
 		</Tabs.Content>
 	</Tabs.Root>
 </div>

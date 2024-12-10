@@ -76,7 +76,7 @@
 				{/await}
 
 				<div class="flex flex-col items-end justify-between">
-					<a href="/balances" class="mb-8">
+					<a href="/balances" class="mb-6">
 						<P className="text-white text-sm">Balances</P>
 					</a>
 					<a href="/transactions">
