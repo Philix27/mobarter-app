@@ -24,7 +24,8 @@
 				// User is using Minipay
 				isMiniPay = true;
 
-				$globalStore.env = "MINIPAY"
+				$globalStore.env = 'MINIPAY';
+
 				// Requesting account addresses
 				let accounts = window.ethereum.request({
 					method: 'eth_requestAccounts',
@@ -35,10 +36,10 @@
 
 				// Injected wallets inject all available addresses,
 				// to comply with API Minipay injects one address but in the form of array
-				console.log(accounts[0]);
 				// @ts-ignore
 				// accountAddress = $account.address;
 				accountAddress = accounts[0];
+				$globalStore.walletAddress = accounts[0];
 			}
 
 			// User is not using MiniPay

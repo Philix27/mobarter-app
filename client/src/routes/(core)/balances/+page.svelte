@@ -11,6 +11,15 @@
 		optimism: 'Optimisim',
 		starknet: 'Starknet'
 	};
+
+	function getList() {
+		const list = [TabKeys.celo, TabKeys.eth];
+		if ($globalStore.env !== 'MINIPAY') {
+			list.push(TabKeys.optimism, TabKeys.starknet);
+		}
+
+		return list;
+	}
 </script>
 
 <svelte:head>
@@ -23,14 +32,7 @@
 
 	<Tabs.Root value={TabKeys.celo} class="w-full">
 		<Tabs.List>
-			<Tabs.Trigger value={TabKeys.celo}>{TabKeys.celo}</Tabs.Trigger>
-			<Tabs.Trigger value={TabKeys.eth}>{TabKeys.eth}</Tabs.Trigger>
-			{#if $globalStore.env !== 'MINIPAY'}
-				<Tabs.Trigger value={TabKeys.optimism}>{TabKeys.optimism}</Tabs.Trigger>
-			{/if}
-			{#if $globalStore.env !== 'MINIPAY'}
-				<Tabs.Trigger value={TabKeys.starknet}>{TabKeys.starknet}</Tabs.Trigger>
-			{/if}
+			<Tabs.Head list={getList()} />
 		</Tabs.List>
 		<Tabs.Content value={TabKeys.celo}>
 			<Celo />

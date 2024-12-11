@@ -50,8 +50,6 @@
 		return '/networks/mtn2.png';
 	};
 
-	let { data, form } = $props();
-
 	let networkSelected: INetwork = $state('MTN');
 	let dataPlanSelected: string = $state('');
 	let showNetwork = $state(false);
@@ -62,12 +60,7 @@
 	let showDataPlans = $state(false);
 </script>
 
-<svelte:head>
-	<title>Data Plans</title>
-</svelte:head>
-
-<div class="w-full flex flex-col items-center justify-center gap-y-4">
-	<Nav title="Data Plans" isBack />
+<div class="w-full flex flex-col items-center justify-center gap-y-4 px-3">
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div

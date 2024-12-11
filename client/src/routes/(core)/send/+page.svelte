@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { Nav, Tabs } from 'components';
+	import { Nav } from 'components';
 	import { sendScreenState, type ISendTabs } from './store';
 	import ScreenBank from './ScreenBank.svelte';
-	import ScreenWallet from './ScreenWallet.svelte';
 	import ScreenPhone from './ScreenPhone.svelte';
-	import { getTitle } from 'components/TabTitle';
+	import * as Tabs from '$lib/components/ui/tabs';
 
 	const tabs: { title: ISendTabs; onClick: VoidFunction }[] = [
 		{
@@ -29,21 +28,26 @@
 </script>
 
 <svelte:head>
-	<title>About</title>
-	<meta name="description" content="About this app" />
+	<title>Send money</title>
+	<meta name="description" content="Send money" />
 </svelte:head>
 
 <div>
 	<Nav title="Send" isBack />
+
 	<div class="">
-		<Tabs {tabs} activeTitle={getTitle(tabs, $sendScreenState)} />
-		{#if $sendScreenState === 'Bank'}
-			<ScreenBank />
-		{:else if $sendScreenState === 'Phone'}
-			<ScreenPhone />
-		{:else if $sendScreenState === 'Wallet'}
-			<ScreenWallet />
-		{/if}
+		<Tabs.Root value="Wallet" class="w-full">
+			<Tabs.Head list={['Wallet', 'Bank', 'Phone']} />
+
+			<Tabs.Content value="Wallet">
+				<ScreenBank />
+			</Tabs.Content>
+			<Tabs.Content value="Bank">
+				<ScreenPhone />
+			</Tabs.Content>
+			<Tabs.Content value="Phone">
+				<ScreenPhone />
+			</Tabs.Content>
+		</Tabs.Root>
 	</div>
 </div>
-

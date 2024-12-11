@@ -1,22 +1,7 @@
 <script lang="ts">
 	import TokenRow from './TokenRow.svelte';
 	import { TokenList, CELO } from 'celo-kit';
-	import { browser } from '$app/environment';
-	import { account, chainId } from 'lib/web3';
-
-	let accountAddress = $state($account.address);
-	if (browser) {
-		if (window && window.ethereum) {
-			let accounts = window.ethereum.request({
-				method: 'eth_requestAccounts',
-				params: []
-			});
-
-			console.log(accounts[0]);
-			// @ts-ignore
-			accountAddress = accounts[0];
-		}
-	}
+	import { chainId } from 'lib/web3';
 
 	function getActiveChain() {
 		if ($chainId === 42220) return 'celo';

@@ -1,6 +1,6 @@
 <script>
 	import { P } from 'components';
-	import { utilityCategories } from 'lib/category';
+	import { utilityCategories } from './category';
 
 	// const newObj = structuredClone(oldObj);
 </script>

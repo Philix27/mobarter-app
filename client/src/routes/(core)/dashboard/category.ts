@@ -17,15 +17,6 @@ export const utilityCategories: {
 		icon: 'fluent:call-32-regular'
 	},
 	{
-		id: 2,
-		name: 'Data',
-		code: 'MOBILEDATA',
-		description: 'Mobile Data Service',
-		country_code: 'NG',
-		link: '/payments/data',
-		icon: 'gg:data'
-	},
-	{
 		id: 3,
 		name: 'Cable',
 		code: 'CABLEBILLS',

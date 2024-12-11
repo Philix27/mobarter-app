@@ -1,21 +1,8 @@
 <script lang="ts">
-	import { BottomSheet, Button, Nav, P, TextInput, BottomRow } from 'components';
+	import { BottomSheet, Button, P, TextInput, BottomRow } from 'components';
+	import { AirtimeData } from 'lib/data.js';
+	import { cn } from 'lib/utils';
 	import { z } from 'zod';
-	import type { GetDataPlansInput, GetDataPlansQuery } from 'generated/graphql';
-	import { GetDataPlansDocument, NetworkProviders } from 'generated/graphql';
-	import { getContextClient, queryStore } from '@urql/svelte';
-
-	let dataPlans = $derived(
-		queryStore<GetDataPlansQuery, GetDataPlansInput>({
-			client: getContextClient(),
-			query: GetDataPlansDocument,
-			variables: {
-				network: NetworkProviders.Mtn,
-				category: 'None'
-			},
-			pause: false
-		})
-	);
 
 	const formSchema = z.object({
 		amountSelected: z.number({ message: 'Must be a number' }),
@@ -50,52 +37,53 @@
 		return '/networks/mtn2.png';
 	};
 
-	let { data, form } = $props();
-
 	let networkSelected: INetwork = $state('MTN');
-	let dataPlanSelected: string = $state('');
 	let showNetwork = $state(false);
 	let amountSelected = $state(100);
 	let phoneValue = $state('');
 
 	let showConfirm = $state(false);
-	let showDataPlans = $state(false);
 </script>
 
-<svelte:head>
-	<title>Data Plans</title>
-</svelte:head>
-
-<div class="w-full flex flex-col items-center justify-center gap-y-4">
-	<Nav title="Data Plans" isBack />
+<div class="w-full flex flex-col items-center justify-center gap-y-4 px-3">
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
 		onclick={() => {
 			showNetwork = true;
 		}}
-		class="flex w-full items-center justify-between bg-secondary py-2 px-3 rounded-md"
+		class="flex w-full items-center justify-between bg-card py-2 px-3 rounded-md"
 	>
 		<P className="text-sm">Select Network</P>
 		<img src={getImgPath(networkSelected)} alt="" height={35} width={35} />
 	</div>
-	<!-- svelte-ignore a11y_click_events_have_key_events -->
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div
-		onclick={() => {
-			showDataPlans = true;
-		}}
-		class="flex w-full items-center justify-between bg-secondary py-4 px-3 rounded-md"
-	>
-		<P className="text-sm">Select Plan</P>
-		<P className="text-sm font-semibold ">{dataPlanSelected}</P>
+	<div class="w-full grid grid-cols-4 gap-2 my-4">
+		<!-- svelte-ignore legacy_code -->
+		{#each AirtimeData['Nigeria'].amount as val}
+			<!-- svelte-ignore legacy_code -->
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
+			<div
+				class={cn(
+					`py-4 bg-card border-secondary 
+					border rounded-md flex items-center justify-center`,
+					amountSelected === val && 'border-primary '
+				)}
+				onclick={() => {
+					amountSelected = val;
+				}}
+			>
+				<P className="text-[14px] font-semibold"
+					>{`${AirtimeData['Nigeria'].symbol}${val.toString()}`}</P
+				>
+			</div>
+		{/each}
 	</div>
 
 	<TextInput
 		place="Amount"
 		inputType="number"
 		label="Amount"
-		isReadOnly
 		required
 		bind:value={amountSelected}
 	/>
@@ -161,29 +149,4 @@
 			networkSelected = 'GLO';
 		}}
 	/>
-</BottomSheet>
-<BottomSheet
-	bind:show={showDataPlans}
-	onClose={() => {
-		showDataPlans = false;
-	}}
-	title="Data Plans"
->
-	{#if $dataPlans.fetching}
-		<p>Loading dataPlans....</p>
-	{:else}
-		<div class="flex flex-col overflow-y-scroll scroll-smooth gap-4">
-			{#each $dataPlans.data!.Airtime_GetDataPlans!.dataPlans!.filter((val) => val!.network === networkSelected) as item}
-				<BottomRow
-					title={item!.plan!}
-					imgSrc={getImgPath(networkSelected)}
-					isActive={dataPlanSelected === item?.plan}
-					onClick={() => {
-						dataPlanSelected = item!.plan!;
-						amountSelected = parseInt(item!.amount!);
-					}}
-				/>
-			{/each}
-		</div>
-	{/if}
 </BottomSheet>

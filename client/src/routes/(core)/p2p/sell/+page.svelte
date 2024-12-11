@@ -8,11 +8,8 @@
 	<Nav title="Sell your token" isBack />
 
 	<Tabs.Root value="CUSD" class="w-full ">
-		<Tabs.List>
-			<Tabs.Trigger value="CUSD">CUSD</Tabs.Trigger>
-			<Tabs.Trigger value="USDT">USDT</Tabs.Trigger>
-			<Tabs.Trigger value="CELO">CELO</Tabs.Trigger>
-		</Tabs.List>
+		<Tabs.Head list={['CUSD', 'USDT', 'CELO']} />
+
 		<Tabs.Content value="CUSD">
 			<Content token="CUSD" tradeType="SELL" />
 		</Tabs.Content>

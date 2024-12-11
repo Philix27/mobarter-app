@@ -15,12 +15,7 @@
 	<Nav title="Orders" isBack />
 
 	<Tabs.Root value={TabKeys.completed} class="w-full">
-		<Tabs.List>
-			<Tabs.Trigger value={TabKeys.completed}>{TabKeys.completed}</Tabs.Trigger>
-			<Tabs.Trigger value={TabKeys.success}>{TabKeys.success}</Tabs.Trigger>
-			<Tabs.Trigger value={TabKeys.failed}>{TabKeys.failed}</Tabs.Trigger>
-			<Tabs.Trigger value={TabKeys.pending}>{TabKeys.pending}</Tabs.Trigger>
-		</Tabs.List>
+		<Tabs.Head list={[TabKeys.completed, TabKeys.success, TabKeys.failed, TabKeys.pending]} />
 		<Tabs.Content value={TabKeys.completed}>
 			<div>Completed</div>
 		</Tabs.Content>

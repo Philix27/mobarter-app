@@ -6,7 +6,7 @@
 	import { cUSD } from 'celo-kit';
 	import { getBalance, account, formatEtherRounded, getActiveChain, chainId } from 'lib/web3';
 	import { browser } from '$app/environment';
-	import { utilityCategories } from 'lib/category';
+	import { utilityCategories } from './category';
 	import Carousel from './Carousel.svelte';
 
 	let props = $props<{ data: PageData }>();
