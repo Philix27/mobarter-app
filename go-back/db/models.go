@@ -434,6 +434,11 @@ type DataPlan struct {
 	UpdatedAt   pgtype.Timestamp
 }
 
+type Kana struct {
+	ID       int32
+	Username string
+}
+
 type KycCredential struct {
 	ID                           int32
 	UserID                       int32

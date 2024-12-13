@@ -2,8 +2,8 @@ version: "2"
 sql:
   - engine: "postgresql"
     # uri: "postgres://locahost:5432/postgres?sslmode=disable"
-    queries: "db/*.sql"
-    schema: "db/db_schema.sql"
+    queries: "db/queries/*.sql"
+    schema: "db/migrations/*.sql"
     gen:
       go:
         package: "db"

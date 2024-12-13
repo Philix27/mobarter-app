@@ -18,6 +18,7 @@ type DbConfig struct {
 	User     string
 	DbName   string
 	SSLMode  string
+	DbUrl    string
 }
 
 func NewConnection(config *DbConfig) (*gorm.DB, error) {

@@ -11,7 +11,7 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-const createOrders = `-- name: CreateOrders :one
+const createOrder = `-- name: CreateOrder :one
 INSERT INTO orders (
   user_id,
   agent_id,
@@ -30,7 +30,7 @@ INSERT INTO orders (
 RETURNING id, user_id, agent_id, order_type, order_status, currency_pair, amount, rate, created_at, updated_at
 `
 
-type CreateOrdersParams struct {
+type CreateOrderParams struct {
 	UserID       pgtype.Int4
 	AgentID      pgtype.Int4
 	CurrencyPair NullCurrencypair
@@ -39,8 +39,8 @@ type CreateOrdersParams struct {
 	OrderType    NullOrdertype
 }
 
-func (q *Queries) CreateOrders(ctx context.Context, arg CreateOrdersParams) (Order, error) {
-	row := q.db.QueryRow(ctx, createOrders,
+func (q *Queries) CreateOrder(ctx context.Context, arg CreateOrderParams) (Order, error) {
+	row := q.db.QueryRow(ctx, createOrder,
 		arg.UserID,
 		arg.AgentID,
 		arg.CurrencyPair,
@@ -70,7 +70,6 @@ WHERE user_id = $1
 ORDER BY created_at DESC
 `
 
-// ! #SECTION Newsletter
 func (q *Queries) ListOrders(ctx context.Context, userID pgtype.Int4) ([]Order, error) {
 	rows, err := q.db.Query(ctx, listOrders, userID)
 	if err != nil {

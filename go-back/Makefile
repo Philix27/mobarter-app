@@ -1,3 +1,6 @@
+include .env
+export $(shell sed 's/=.*//' .env)
+
 # Variables
 GO_CMD=go
 GO_BUILD=$(GO_CMD) build
@@ -50,8 +53,20 @@ check: fmt vet test
 gen: 
 	$(GO_RUN_DEV) ./libs/helper/gen.go
 
+db_new: 
+	migrate create -ext sql -dir db/migrations -seq $(name) 
+# make db_new name=enums
+
+db_push: 
+	migrate -database ${DB_URL} -path db/migrations up
+# make db_push    
+
+db_down: 
+	migrate -database ${DB_URL} -path db/migrations down
+# make db_push    
 
 
 
 # Shortcuts
 .PHONY: build clean run deps test fmt vet check
+

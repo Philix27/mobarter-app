@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { account, modal, getBalance } from 'lib/web3';
-	import { Button, H } from 'components';
+	import { account, modal } from 'lib/web3';
+	import { Button } from 'components';
 	import { browser } from '$app/environment';
-	import ActionButtonList from './ActionButtonList.svelte';
 	import { goto } from '$app/navigation';
 	import { globalStore } from 'lib/store';
 
@@ -62,10 +61,9 @@
 <section class="h-screen flex flex-col items-center px-5">
 	<img src="dollar.png" alt="Welcome" class="h-fit max-h-[300px] mt-[100px]" />
 	<div class="w-full flex items-center justify-center flex-col">
-		<p class="text-2xl font-bold">Exchange like breezy</p>
+		<p class="text-2xl font-bold">Seamless Crypto Trading</p>
 		<p class="text-base text-muted text-center my-4">
-			If you are new to mobile development, the easiest way to get started is with Expo Go. Expo is
-			a set of tools.
+			An easy, secure, and reliable way to trade crypto for local currency.
 		</p>
 	</div>
 	<div class="mt-5 px-5 flex flex-col gap-y-5 items-center justify-between w-[80%] gap-x-4">

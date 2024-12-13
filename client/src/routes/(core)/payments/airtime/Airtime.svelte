@@ -45,7 +45,7 @@
 	let showConfirm = $state(false);
 </script>
 
-<div class="w-full flex flex-col items-center justify-center gap-y-4 px-3">
+<div class="w-full flex flex-col items-center justify-center gap-y-4">
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div

@@ -50,14 +50,14 @@ export type ConfiguredChainId = ConfiguredChain['id'];
 const connectors: CreateConnectorFn[] = ssr
 	? []
 	: [walletConnect({ projectId, metadata, showQrModal: false }), injected()];
-// : [Web3AuthConnectorInstance([celoAlfajores, fhenixConfig, celo, sepolia]), injected()];
+// : [Web3AuthConnectorInstance([celoAlfajores, celo, sepolia]), injected()];
 
-const wgConfig = createConfig({
-	chains,
-	transports,
-	ssr: true,
-	connectors
-});
+// const wgConfig = createConfig({
+// 	chains,
+// 	transports,
+// 	ssr: true,
+// 	connectors
+// });
 
 reconnect(wagmiConfig);
 
