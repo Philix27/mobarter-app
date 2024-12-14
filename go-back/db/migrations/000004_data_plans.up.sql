@@ -1,0 +1,11 @@
+CREATE TABLE data_plans (
+  id   BIGSERIAL PRIMARY KEY,
+  network TEXT      NOT NULL,
+  country  TEXT NOT NULL,
+  amount  INTEGER NOT NULL,
+  duration  TEXT NOT NULL,
+  plan  TEXT NOT NULL,
+  is_supported  TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

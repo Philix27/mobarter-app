@@ -15,7 +15,7 @@ type AppState struct {
 	logger    *slog.JSONHandler
 	Logger    *slog.Logger
 	DbQueries *db.Queries
-	Ctx       *context.Context
+	Ctx       context.Context
 }
 
 func (app AppState) NewApp() *fiber.App {

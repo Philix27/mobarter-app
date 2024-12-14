@@ -1,6 +1,7 @@
 package user
 
 import (
+	"errors"
 	"mobarter/app"
 
 	"github.com/graphql-go/graphql"
@@ -36,12 +37,25 @@ func Create(appState app.AppState) *graphql.Field {
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 
-			dto := CreateDto{
-				Email: p.Args["email"].(string),
+			args, err := app.ValidateArg("input", p)
+			if err != nil {
+				return nil, errors.New("Input required")
 			}
 
-			appState.DbQueries.User_Create(*appState.Ctx, dto.Email)
+			email := args["email"].(string)
 
+			// dto := CreateDto{
+			// 	Email: p.Args["email"].(string),
+			// }
+
+			user, err := appState.DbQueries.User_Create(appState.Ctx, email)
+
+			if err != nil {
+
+				println("Oops an error occurred " + email)
+				println("Errox: " + err.Error())
+			}
+			println("Hello user " + email)
 			// db.CreateUser()
 			// todo: check if wallet already exist
 
@@ -52,7 +66,7 @@ func Create(appState app.AppState) *graphql.Field {
 			// }
 
 			return map[string]interface{}{
-				"message": "success",
+				"message": "success " + user.Email,
 			}, nil
 
 		},

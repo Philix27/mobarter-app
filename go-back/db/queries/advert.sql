@@ -1,8 +1,8 @@
 
 -- ! #SECTION Ads
 
--- name: CreateAd :one
-INSERT INTO ads (
+-- name: Advert_Create :one
+INSERT INTO adverts (
   rate,  
   limit_lower, 
   limit_upper,
@@ -17,16 +17,16 @@ INSERT INTO ads (
 )
 RETURNING *;
 
--- name: ListAds :many
-SELECT * FROM ads
+-- name: Advert_List :many
+SELECT * FROM adverts
 WHERE ad_status = $1 LIMIT 20;
 
--- name: GetAd :one
-SELECT * FROM ads
+-- name: GetAdvert :one
+SELECT * FROM adverts
 WHERE id = $1 LIMIT 1;
 
--- name: UpdateAd :exec
-UPDATE ads
+-- name: Advert_Update :exec
+UPDATE adverts
   SET currency_pair = $2,
   limit_upper = $3,
   limit_lower = $4,
@@ -34,6 +34,6 @@ UPDATE ads
   instructions = $6
 WHERE id = $1;
 
--- name: DeleteAd :exec
-DELETE FROM ads
+-- name: Advert_Delete :exec
+DELETE FROM adverts
 WHERE id = $1;

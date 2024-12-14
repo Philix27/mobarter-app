@@ -32,12 +32,14 @@ func main() {
 
 	slog.SetDefault(logger)
 
-	queries, ctx := db.Connect(config.DbUrl)
+	queries, ctx, conn := db.Connect(config.DbUrl)
+	
+	defer conn.Close(ctx)
 
 	appState := app.AppState{
 		Logger:    logger,
 		DbQueries: queries,
-		Ctx:       &ctx,
+		Ctx:       ctx,
 	}
 
 	// fields := fieldsRegistry
@@ -53,7 +55,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to create new schema, error: %v", err)
 	}
-	
+
 	// handler
 	h := handler.New(&handler.Config{
 		Schema:     &schema,

@@ -1,6 +1,0 @@
-DROP TABLE IF EXISTS waitlist;
-DROP TABLE IF EXISTS country;
-DROP TABLE IF EXISTS airtime;
-DROP TABLE IF EXISTS data_plans;
-
-

@@ -1,0 +1,11 @@
+CREATE TABLE users (
+  id   BIGSERIAL PRIMARY KEY,
+  wallets TEXT[],
+  first_name TEXT,
+  last_name TEXT,
+  dob TIMESTAMP,
+  email TEXT  UNIQUE  NOT NULL,
+  phone TEXT  UNIQUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

@@ -357,7 +357,7 @@ func (ns NullTransactionpurpose) Value() (driver.Value, error) {
 	return string(ns.Transactionpurpose), nil
 }
 
-type Ad struct {
+type Advert struct {
 	ID              int64
 	AgentID         pgtype.Int4
 	PaymentMethodID pgtype.Int4
@@ -390,12 +390,6 @@ type Airtime struct {
 	UpdatedAt pgtype.Timestamp
 }
 
-type Author struct {
-	ID   int64
-	Name string
-	Bio  pgtype.Text
-}
-
 type BankAccount struct {
 	ID          int64
 	BankName    string
@@ -409,15 +403,6 @@ type BankAccount struct {
 type Country struct {
 	ID        int64
 	Name      string
-	CreatedAt pgtype.Timestamp
-	UpdatedAt pgtype.Timestamp
-}
-
-type CustomerCare struct {
-	ID        int64
-	Message   string
-	UserID    pgtype.Text
-	RoomID    pgtype.Text
 	CreatedAt pgtype.Timestamp
 	UpdatedAt pgtype.Timestamp
 }
@@ -453,8 +438,6 @@ type KycCredential struct {
 	UtilityBillStatus            NullKycvalidationstatus
 	UtilityBillVerificationDate  pgtype.Timestamp
 	UtilityBillVerifiedBy        pgtype.Text
-	CreatedAt                    pgtype.Timestamp
-	UpdatedAt                    pgtype.Timestamp
 }
 
 type Newsletter struct {
@@ -479,6 +462,7 @@ type Order struct {
 
 type Transaction struct {
 	ID        int64
+	UserID    pgtype.Int4
 	Name      string
 	Purpose   Transactionpurpose
 	Amount    int32

@@ -1,0 +1,20 @@
+CREATE TABLE kyc_credentials (
+    id SERIAL PRIMARY KEY,
+    user_id INT UNIQUE NOT NULL REFERENCES users (id),
+    bvn TEXT,
+    bvn_status KycValidationStatus,
+    bvn_verification_date TIMESTAMP,
+    bvn_verified_by TEXT,
+    nin TEXT,
+    nin_status KycValidationStatus,
+    nin_verification_date TIMESTAMP,
+    nin_verified_by TEXT,
+    house_address TEXT,
+    house_address_status KycValidationStatus,
+    house_address_verification_date TIMESTAMP,
+    house_address_verified_by TEXT,
+    utility_bill TEXT,
+    utility_bill_status KycValidationStatus,
+    utility_bill_verification_date TIMESTAMP,
+    utility_bill_verified_by TEXT
+);

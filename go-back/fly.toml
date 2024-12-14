@@ -1,0 +1,31 @@
+# fly.toml app configuration file generated for go-back on 2024-12-14T10:11:05+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'mobarter'
+primary_region = 'lhr'
+
+[build]
+  [build.args]
+    GO_VERSION = '1.21.5'
+
+[http_service]
+  internal_port = 5566
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[env]
+  PORT = '8080'
+
+
+
+
