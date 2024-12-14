@@ -3,7 +3,6 @@ package field
 import (
 	"fmt"
 	"mobarter/app"
-	"mobarter/database"
 
 	"github.com/graphql-go/graphql"
 )
@@ -24,23 +23,23 @@ func JoinWaitList(app app.AppState) *graphql.Field {
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			fmt.Println("Hit waitlist list")
-			result := app.DB.Create(&database.Waitlist{
-				Email:     p.Args["email"].(string),
-				FirstName: p.Args["firstName"].(string),
-				LastName:  p.Args["lastName"].(string),
-			})
+			// result := app.DB.Create(&database.Waitlist{
+			// 	Email:     p.Args["email"].(string),
+			// 	FirstName: p.Args["firstName"].(string),
+			// 	LastName:  p.Args["lastName"].(string),
+			// })
 
-			println("We put it all")
+			// println("We put it all")
 
-			if result.Error != nil {
-				println(result.Error)
+			// if result.Error != nil {
+			// 	println(result.Error)
 
-				return map[string]interface{}{
-					"error": result.Error,
-				}, result.Error
-			}
+			// 	return map[string]interface{}{
+			// 		"error": result.Error,
+			// 	}, result.Error
+			// }
 
-			// return nil
+			// // return nil
 
 			return map[string]interface{}{
 				"message": "success",

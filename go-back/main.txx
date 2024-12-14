@@ -21,7 +21,7 @@ func main() {
 	if err := godotenv.Load(".env"); err != nil {
 		app.ErrorPanic(err, "Could not load env")
 	}
-
+db.Queries
 	config := &database.DbConfig{
 		Host:     os.Getenv("DB_HOST"),
 		Port:     os.Getenv("DB_PORT"),

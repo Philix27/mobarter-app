@@ -1,6 +1,9 @@
 package app
 
 import (
+	"context"
+	"mobarter/db"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"golang.org/x/exp/slog"
@@ -8,9 +11,11 @@ import (
 )
 
 type AppState struct {
-	DB     *gorm.DB
-	logger *slog.JSONHandler
-	Logger *slog.Logger
+	DB        *gorm.DB
+	logger    *slog.JSONHandler
+	Logger    *slog.Logger
+	DbQueries *db.Queries
+	Ctx       *context.Context
 }
 
 func (app AppState) NewApp() *fiber.App {

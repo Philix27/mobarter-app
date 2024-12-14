@@ -1,9 +1,7 @@
 package bank
 
 import (
-	"errors"
 	"mobarter/app"
-	"mobarter/database"
 
 	"github.com/graphql-go/graphql"
 )
@@ -50,25 +48,25 @@ func CreateBankAccount(appState app.AppState) *graphql.Field {
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			//TODO -
 
-			args, err := app.ValidateArg("input", p)
-			if err != nil {
-				return nil, errors.New("Input required")
-			}
+			// args, err := app.ValidateArg("input", p)
+			// if err != nil {
+			// 	return nil, errors.New("Input required")
+			// }
 
 			//TODO - fetch user id
-			result := appState.DB.Create(&database.BankAccount{
-				Name:     args["accountName"].(string),
-				No:       args["accountNo"].(string),
-				BankName: args["bankName"].(string),
-				//TODO - use the user's id
-				UserID: 1,
-			})
+			// result := appState.DB.Create(&database.BankAccount{
+			// 	Name:     args["accountName"].(string),
+			// 	No:       args["accountNo"].(string),
+			// 	BankName: args["bankName"].(string),
+			// 	//TODO - use the user's id
+			// 	UserID: 1,
+			// })
 
-			if result.Error != nil {
-				println(result.Error)
+			// if result.Error != nil {
+			// 	println(result.Error)
 
-				return nil, errors.New("Could not create account")
-			}
+			// 	return nil, errors.New("Could not create account")
+			// }
 			// ilog.Trace("Bank account added")
 			return map[string]interface{}{
 				"message": "success",

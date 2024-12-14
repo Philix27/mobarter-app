@@ -27,7 +27,7 @@ func Create(appState app.AppState) *graphql.Field {
 						Name: "CreateUserInput",
 						Fields: graphql.InputObjectConfigFieldMap{
 							"email": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.Int),
+								Type: graphql.NewNonNull(graphql.String),
 							},
 						},
 					},
@@ -40,6 +40,9 @@ func Create(appState app.AppState) *graphql.Field {
 				Email: p.Args["email"].(string),
 			}
 
+			appState.DbQueries.User_Create(*appState.Ctx, dto.Email)
+
+			// db.CreateUser()
 			// todo: check if wallet already exist
 
 			// err = createUserRepo(appState, &dto)
@@ -50,7 +53,6 @@ func Create(appState app.AppState) *graphql.Field {
 
 			return map[string]interface{}{
 				"message": "success",
-				"email":   dto.Email,
 			}, nil
 
 		},

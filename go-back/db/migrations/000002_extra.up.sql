@@ -147,22 +147,3 @@ CREATE TABLE kyc_credentials (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
---! FUnctions
-
--- Create a function to update `updated_at`
-CREATE OR REPLACE FUNCTION update_updated_at_column()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at = CURRENT_TIMESTAMP;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--- Create a trigger to call the function on updates
-CREATE TRIGGER set_updated_at
-BEFORE UPDATE ON table_name
-FOR EACH ROW
-EXECUTE FUNCTION update_updated_at_column();
-
-

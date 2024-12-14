@@ -53,6 +53,9 @@ check: fmt vet test
 gen: 
 	$(GO_RUN_DEV) ./libs/helper/gen.go
 
+db_gen: 
+	sqlc generate
+
 db_new: 
 	migrate create -ext sql -dir db/migrations -seq $(name) 
 # make db_new name=enums

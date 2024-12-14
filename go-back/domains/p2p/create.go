@@ -1,9 +1,7 @@
 package p2p
 
 import (
-	"errors"
 	"mobarter/app"
-	"mobarter/database"
 
 	"github.com/graphql-go/graphql"
 )
@@ -28,19 +26,19 @@ func CreateVendor(appState app.AppState) *graphql.Field {
 			// ilog := log.New("Create bank account")
 			// todo - verify user credentials
 
-			result := appState.DB.Create(&database.BankAccount{
-				Name:     p.Args["accountName"].(string),
-				No:       p.Args["accountNo"].(string),
-				BankName: p.Args["bankName"].(string),
-			})
+			// result := appState.DB.Create(&database.BankAccount{
+			// 	Name:     p.Args["accountName"].(string),
+			// 	No:       p.Args["accountNo"].(string),
+			// 	BankName: p.Args["bankName"].(string),
+			// })
 
-			if result.Error != nil {
-				println(result.Error)
+			// if result.Error != nil {
+			// 	println(result.Error)
 
-				return map[string]interface{}{
-					"error": "Could not create user",
-				}, errors.New("Could not create user")
-			}
+			// 	return map[string]interface{}{
+			// 		"error": "Could not create user",
+			// 	}, errors.New("Could not create user")
+			// }
 
 			// ilog.Trace("Bank account added")
 			return map[string]interface{}{

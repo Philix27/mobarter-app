@@ -11,57 +11,7 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-const createUser = `-- name: CreateUser :one
-INSERT INTO users (
-  email 
-) VALUES (
-  $1
-)
-RETURNING id, wallets, first_name, last_name, dob, email, phone, created_at, updated_at
-`
-
-func (q *Queries) CreateUser(ctx context.Context, email string) (User, error) {
-	row := q.db.QueryRow(ctx, createUser, email)
-	var i User
-	err := row.Scan(
-		&i.ID,
-		&i.Wallets,
-		&i.FirstName,
-		&i.LastName,
-		&i.Dob,
-		&i.Email,
-		&i.Phone,
-		&i.CreatedAt,
-		&i.UpdatedAt,
-	)
-	return i, err
-}
-
-const getUserById = `-- name: GetUserById :one
-
-SELECT id, wallets, first_name, last_name, dob, email, phone, created_at, updated_at FROM users
-WHERE id = $1 LIMIT 1
-`
-
-// ! #SECTION user
-func (q *Queries) GetUserById(ctx context.Context, id int64) (User, error) {
-	row := q.db.QueryRow(ctx, getUserById, id)
-	var i User
-	err := row.Scan(
-		&i.ID,
-		&i.Wallets,
-		&i.FirstName,
-		&i.LastName,
-		&i.Dob,
-		&i.Email,
-		&i.Phone,
-		&i.CreatedAt,
-		&i.UpdatedAt,
-	)
-	return i, err
-}
-
-const updateKyc_credentials = `-- name: UpdateKyc_credentials :exec
+const kyc_UpdateCredentials = `-- name: Kyc_UpdateCredentials :exec
 UPDATE users
   SET first_name = $2,
   last_name = $3,
@@ -69,15 +19,15 @@ UPDATE users
 WHERE id = $1
 `
 
-type UpdateKyc_credentialsParams struct {
+type Kyc_UpdateCredentialsParams struct {
 	ID        int64
 	FirstName pgtype.Text
 	LastName  pgtype.Text
 	Phone     pgtype.Text
 }
 
-func (q *Queries) UpdateKyc_credentials(ctx context.Context, arg UpdateKyc_credentialsParams) error {
-	_, err := q.db.Exec(ctx, updateKyc_credentials,
+func (q *Queries) Kyc_UpdateCredentials(ctx context.Context, arg Kyc_UpdateCredentialsParams) error {
+	_, err := q.db.Exec(ctx, kyc_UpdateCredentials,
 		arg.ID,
 		arg.FirstName,
 		arg.LastName,
@@ -86,7 +36,57 @@ func (q *Queries) UpdateKyc_credentials(ctx context.Context, arg UpdateKyc_crede
 	return err
 }
 
-const updateUser = `-- name: UpdateUser :exec
+const user_Create = `-- name: User_Create :one
+INSERT INTO users (
+  email 
+) VALUES (
+  $1
+)
+RETURNING id, wallets, first_name, last_name, dob, email, phone, created_at, updated_at
+`
+
+func (q *Queries) User_Create(ctx context.Context, email string) (User, error) {
+	row := q.db.QueryRow(ctx, user_Create, email)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Wallets,
+		&i.FirstName,
+		&i.LastName,
+		&i.Dob,
+		&i.Email,
+		&i.Phone,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
+const user_GetById = `-- name: User_GetById :one
+
+SELECT id, wallets, first_name, last_name, dob, email, phone, created_at, updated_at FROM users
+WHERE id = $1 LIMIT 1
+`
+
+// ! #SECTION user
+func (q *Queries) User_GetById(ctx context.Context, id int64) (User, error) {
+	row := q.db.QueryRow(ctx, user_GetById, id)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Wallets,
+		&i.FirstName,
+		&i.LastName,
+		&i.Dob,
+		&i.Email,
+		&i.Phone,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
+const user_Update = `-- name: User_Update :exec
 UPDATE users
   SET first_name = $2,
   last_name = $3,
@@ -94,15 +94,15 @@ UPDATE users
 WHERE id = $1
 `
 
-type UpdateUserParams struct {
+type User_UpdateParams struct {
 	ID        int64
 	FirstName pgtype.Text
 	LastName  pgtype.Text
 	Phone     pgtype.Text
 }
 
-func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) error {
-	_, err := q.db.Exec(ctx, updateUser,
+func (q *Queries) User_Update(ctx context.Context, arg User_UpdateParams) error {
+	_, err := q.db.Exec(ctx, user_Update,
 		arg.ID,
 		arg.FirstName,
 		arg.LastName,

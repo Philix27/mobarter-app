@@ -1,6 +1,6 @@
-DROP TABLE waitlist;
-DROP TABLE country;
-DROP TABLE airtime;
-DROP TABLE data_plans;
+DROP TABLE IF EXISTS waitlist;
+DROP TABLE IF EXISTS country;
+DROP TABLE IF EXISTS airtime;
+DROP TABLE IF EXISTS data_plans;
 
-COMMIT;
+

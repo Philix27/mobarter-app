@@ -1,10 +1,10 @@
 -- ! #SECTION user
 
--- name: GetUserById :one
+-- name: User_GetById :one
 SELECT * FROM users
 WHERE id = $1 LIMIT 1;
 
--- name: CreateUser :one
+-- name: User_Create :one
 INSERT INTO users (
   email 
 ) VALUES (
@@ -12,14 +12,14 @@ INSERT INTO users (
 )
 RETURNING *;
 
--- name: UpdateUser :exec
+-- name: User_Update :exec
 UPDATE users
   SET first_name = $2,
   last_name = $3,
   phone = $4
 WHERE id = $1;
 
--- name: UpdateKyc_credentials :exec
+-- name: Kyc_UpdateCredentials :exec
 UPDATE users
   SET first_name = $2,
   last_name = $3,

@@ -44,11 +44,11 @@ func UserInfo(appState app.AppState) *graphql.Field {
 			}
 
 			return map[string]interface{}{
-				"message":       "success",
-				"id":            res.ID,
-				"walletAddress": res.WalletAddress,
-				"firstName":     res.FirstName,
-				"lastName":      res.LastName,
+				"message": "success",
+				"id":      res.ID,
+				// "walletAddress": res.WalletAddress,
+				"firstName": res.FirstName,
+				"lastName":  res.LastName,
 			}, nil
 		},
 	}
