@@ -8,23 +8,27 @@ import (
 )
 
 type AppEnv struct {
-	Host     string
-	Port     string
-	Password string
-	User     string
-	SSLMode  string
-	DbName   string
-	DbUrl    string
+	Host         string
+	Port         string
+	Password     string
+	User         string
+	SSLMode      string
+	DbName       string
+	DbUrl        string
+	ResendKey    string
+	ResendDomain string
 }
 
-var DbParams = AppEnv{
-	Host:     os.Getenv("DB_HOST"),
-	Port:     os.Getenv("DB_PORT"),
-	Password: os.Getenv("DB_PASSWORD"),
-	User:     os.Getenv("DB_USER"),
-	SSLMode:  os.Getenv("DB_SSLMODE"),
-	DbName:   os.Getenv("DB_NAME"),
-	DbUrl:    os.Getenv("DB_URL"),
+var EnvValues = AppEnv{
+	Host:         os.Getenv("DB_HOST"),
+	Port:         os.Getenv("DB_PORT"),
+	Password:     os.Getenv("DB_PASSWORD"),
+	User:         os.Getenv("DB_USER"),
+	SSLMode:      os.Getenv("DB_SSLMODE"),
+	DbName:       os.Getenv("DB_NAME"),
+	DbUrl:        os.Getenv("DB_URL"),
+	ResendKey:    os.Getenv("RESEND_API_KEY"),
+	ResendDomain: os.Getenv("RESEND_DOMAIN"),
 }
 
 func SetupEnv() *AppEnv {
@@ -33,13 +37,15 @@ func SetupEnv() *AppEnv {
 	}
 
 	config := &AppEnv{
-		Host:     os.Getenv("DB_HOST"),
-		Port:     os.Getenv("DB_PORT"),
-		Password: os.Getenv("DB_PASSWORD"),
-		User:     os.Getenv("DB_USER"),
-		SSLMode:  os.Getenv("DB_SSLMODE"),
-		DbName:   os.Getenv("DB_NAME"),
-		DbUrl:    os.Getenv("DB_URL"),
+		Host:         os.Getenv("DB_HOST"),
+		Port:         os.Getenv("DB_PORT"),
+		Password:     os.Getenv("DB_PASSWORD"),
+		User:         os.Getenv("DB_USER"),
+		SSLMode:      os.Getenv("DB_SSLMODE"),
+		DbName:       os.Getenv("DB_NAME"),
+		DbUrl:        os.Getenv("DB_URL"),
+		ResendKey:    os.Getenv("RESEND_API_KEY"),
+		ResendDomain: os.Getenv("RESEND_DOMAIN"),
 	}
 	return config
 }

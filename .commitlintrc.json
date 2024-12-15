@@ -12,6 +12,8 @@
         "backend(perf)",
         "backend(refactor)",
         "backend(ci)",
+        "backend",
+        "client",
         "clean",
         "frontend",
         "ci",
