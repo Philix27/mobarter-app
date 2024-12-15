@@ -6,9 +6,11 @@ WHERE id = $1 LIMIT 1;
 
 -- name: User_Create :one
 INSERT INTO users (
-  email 
+  email,
+  hashed_password 
 ) VALUES (
-  $1
+  $1,
+  $2
 )
 RETURNING *;
 

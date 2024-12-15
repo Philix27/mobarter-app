@@ -471,15 +471,16 @@ type Transaction struct {
 }
 
 type User struct {
-	ID        int64
-	Wallets   []string
-	FirstName pgtype.Text
-	LastName  pgtype.Text
-	Dob       pgtype.Timestamp
-	Email     string
-	Phone     pgtype.Text
-	CreatedAt pgtype.Timestamp
-	UpdatedAt pgtype.Timestamp
+	ID             int64
+	Wallets        []string
+	FirstName      pgtype.Text
+	LastName       pgtype.Text
+	Dob            pgtype.Timestamp
+	Email          string
+	Phone          pgtype.Text
+	HashedPassword string
+	CreatedAt      pgtype.Timestamp
+	UpdatedAt      pgtype.Timestamp
 }
 
 type Waitlist struct {

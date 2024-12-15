@@ -7,11 +7,11 @@ import (
 )
 
 // CreateJWTToken creates a JWT token with the OTP as payload
-func CreateJWTToken(value string) (string, error) {
+func CreateJWTToken(value string, d time.Duration) (string, error) {
 	// Define the claims
 	claims := jwt.MapClaims{
 		"payload": value,
-		"exp":     time.Now().Add(time.Minute * 10).Unix(), // Token expiration in 10 minutes
+		"exp":     time.Now().Add(d).Unix(), // Token expiration in 10 minutes
 		"iat":     time.Now().Unix(),                       // Issued at time
 	}
 

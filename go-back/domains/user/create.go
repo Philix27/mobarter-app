@@ -3,6 +3,8 @@ package user
 import (
 	"errors"
 	"mobarter/app"
+	"mobarter/db"
+	"mobarter/domains/crypto"
 
 	"github.com/graphql-go/graphql"
 )
@@ -30,6 +32,12 @@ func Create(appState app.AppState) *graphql.Field {
 							"email": &graphql.InputObjectFieldConfig{
 								Type: graphql.NewNonNull(graphql.String),
 							},
+							"password": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
+							"token": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
 						},
 					},
 				),
@@ -43,27 +51,24 @@ func Create(appState app.AppState) *graphql.Field {
 			}
 
 			email := args["email"].(string)
+			password := args["password"].(string)
+			token := args["token"].(string)
 
-			// dto := CreateDto{
-			// 	Email: p.Args["email"].(string),
-			// }
-
-			user, err := appState.DbQueries.User_Create(appState.Ctx, email)
+			err = crypto.ValidateToken(token, email)
 
 			if err != nil {
-
-				println("Oops an error occurred " + email)
-				println("Errox: " + err.Error())
+				return nil, errors.New("Invalid token")
 			}
-			println("Hello user " + email)
-			// db.CreateUser()
-			// todo: check if wallet already exist
 
-			// err = createUserRepo(appState, &dto)
+			user, err := appState.DbQueries.User_Create(appState.Ctx, db.User_CreateParams{
+				Email:          email,
+				HashedPassword: password,
+			})
 
-			// if err != nil {
-			// 	return nil, errors.New("Could not create user")
-			// }
+			if err != nil {
+				println("Errox: " + err.Error())
+				return nil, errors.New("User account could not be created")
+			}
 
 			return map[string]interface{}{
 				"message": "success " + user.Email,

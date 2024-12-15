@@ -4,6 +4,7 @@ import (
 	"errors"
 	"mobarter/app"
 	"mobarter/domains/crypto"
+	"time"
 
 	"github.com/graphql-go/graphql"
 )
@@ -34,6 +35,9 @@ func Auth_VerifyOtp(appState app.AppState) *graphql.Field {
 							"otp": &graphql.InputObjectFieldConfig{
 								Type: graphql.NewNonNull(graphql.String),
 							},
+							"email": &graphql.InputObjectFieldConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
 						},
 					},
 				),
@@ -46,6 +50,8 @@ func Auth_VerifyOtp(appState app.AppState) *graphql.Field {
 				return nil, errors.New("Input required")
 			}
 
+			email := args["email"].(string)
+
 			dto := VerifyOtpInput{
 				Otp:   args["otp"].(string),
 				Token: args["token"].(string),
@@ -56,7 +62,7 @@ func Auth_VerifyOtp(appState app.AppState) *graphql.Field {
 				return nil, errors.New("OTP is invalid")
 			}
 
-			accessToken, err := crypto.CreateJWTToken("userId")
+			accessToken, err := crypto.CreateJWTToken(email, time.Minute*30)
 			if err != nil {
 				return nil, errors.New("Could not get access token")
 			}

@@ -38,15 +38,22 @@ func (q *Queries) Kyc_UpdateCredentials(ctx context.Context, arg Kyc_UpdateCrede
 
 const user_Create = `-- name: User_Create :one
 INSERT INTO users (
-  email 
+  email,
+  hashed_password 
 ) VALUES (
-  $1
+  $1,
+  $2
 )
-RETURNING id, wallets, first_name, last_name, dob, email, phone, created_at, updated_at
+RETURNING id, wallets, first_name, last_name, dob, email, phone, hashed_password, created_at, updated_at
 `
 
-func (q *Queries) User_Create(ctx context.Context, email string) (User, error) {
-	row := q.db.QueryRow(ctx, user_Create, email)
+type User_CreateParams struct {
+	Email          string
+	HashedPassword string
+}
+
+func (q *Queries) User_Create(ctx context.Context, arg User_CreateParams) (User, error) {
+	row := q.db.QueryRow(ctx, user_Create, arg.Email, arg.HashedPassword)
 	var i User
 	err := row.Scan(
 		&i.ID,
@@ -56,6 +63,7 @@ func (q *Queries) User_Create(ctx context.Context, email string) (User, error) {
 		&i.Dob,
 		&i.Email,
 		&i.Phone,
+		&i.HashedPassword,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 	)
@@ -64,7 +72,7 @@ func (q *Queries) User_Create(ctx context.Context, email string) (User, error) {
 
 const user_GetById = `-- name: User_GetById :one
 
-SELECT id, wallets, first_name, last_name, dob, email, phone, created_at, updated_at FROM users
+SELECT id, wallets, first_name, last_name, dob, email, phone, hashed_password, created_at, updated_at FROM users
 WHERE id = $1 LIMIT 1
 `
 
@@ -80,6 +88,7 @@ func (q *Queries) User_GetById(ctx context.Context, id int64) (User, error) {
 		&i.Dob,
 		&i.Email,
 		&i.Phone,
+		&i.HashedPassword,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 	)

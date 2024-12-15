@@ -6,6 +6,7 @@ import (
 	"mobarter/domains/crypto"
 	"mobarter/domains/notification"
 	"mobarter/utils"
+	"time"
 
 	"github.com/graphql-go/graphql"
 )
@@ -52,7 +53,7 @@ func Auth_SendEmailOtp(appState app.AppState) *graphql.Field {
 			}
 
 			otpValue := crypto.GenerateOTP()
-			token, err := crypto.CreateJWTToken(otpValue)
+			token, err := crypto.CreateJWTToken(otpValue, time.Minute*10)
 
 			if err != nil {
 				return nil, errors.New("Could not generate token")
