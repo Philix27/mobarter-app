@@ -4,6 +4,10 @@
 SELECT * FROM users
 WHERE id = $1 LIMIT 1;
 
+-- name: User_GetByEmail :one
+SELECT * FROM users
+WHERE email = $1 LIMIT 1;
+
 -- name: User_Create :one
 INSERT INTO users (
   email,

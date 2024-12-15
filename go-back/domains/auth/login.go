@@ -4,6 +4,8 @@ import (
 	"errors"
 	"mobarter/app"
 	"mobarter/domains/crypto"
+	"strconv"
+	"time"
 
 	"github.com/graphql-go/graphql"
 )
@@ -42,19 +44,34 @@ func Auth_Login(appState app.AppState) *graphql.Field {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			dto := LoginInput{
-				Email:    p.Args["email"].(string),
-				Password: p.Args["password"].(string),
-			}
-
-			err := crypto.VerifyEmailPassword(dto.Email, dto.Password)
+			args, err := app.ValidateArg("input", p)
 
 			if err != nil {
+				return nil, errors.New("Input required")
+			}
+
+			email := args["email"].(string)
+			password := args["password"].(string)
+
+			user, err := appState.DbQueries.User_GetByEmail(appState.Ctx, email)
+
+			if err != nil {
+				return nil, errors.New("Invalid email and password")
+			}
+
+			if crypto.ComparePassword(password, user.HashedPassword) {
 				return nil, errors.New("Invalid credentials")
+			}
+
+			token, err := crypto.CreateJWTToken(strconv.Itoa(int(user.ID)), time.Hour*24*7)
+
+			if err != nil {
+				return nil, errors.New("Could not generate token")
 			}
 
 			return map[string]interface{}{
 				"message": "success",
+				"token":   token,
 			}, nil
 		},
 	}

@@ -13,7 +13,7 @@ type CreateDto struct {
 	Email string
 }
 
-func Create(appState app.AppState) *graphql.Field {
+func Create(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
 			Name: "User_CreateResponse",
@@ -55,14 +55,18 @@ func Create(appState app.AppState) *graphql.Field {
 			token := args["token"].(string)
 
 			err = crypto.ValidateToken(token, email)
-
 			if err != nil {
 				return nil, errors.New("Invalid token")
 			}
 
-			user, err := appState.DbQueries.User_Create(appState.Ctx, db.User_CreateParams{
+			hash, err := crypto.HashPassword(password)
+			if err != nil {
+				return nil, errors.New("Could not hash password")
+			}
+
+			user, err := ap.DbQueries.User_Create(ap.Ctx, db.User_CreateParams{
 				Email:          email,
-				HashedPassword: password,
+				HashedPassword: hash,
 			})
 
 			if err != nil {
