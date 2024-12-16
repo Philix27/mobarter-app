@@ -64,6 +64,8 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		// ! User
 		"User_Create":        user.Create(appState),
 		"User_ResetPassword": user.ResetPassword(appState),
+		"UserAddNin":         user.AddNin(appState),
+		"UserAddBvn":         user.AddBvn(appState),
 	}
 
 }

@@ -22,7 +22,7 @@ func ResetPassword(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "ResetPasswordInput",
+						Name: "User_ResetPasswordInput",
 						Fields: graphql.InputObjectConfigFieldMap{
 							"email":    app.InputString,
 							"password": app.InputString,

@@ -24,7 +24,7 @@ func AddNin(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "ResetPasswordInput",
+						Name: "User_AddNinInput",
 						Fields: graphql.InputObjectConfigFieldMap{
 							"nin":   app.InputString,
 							"token": app.InputString,

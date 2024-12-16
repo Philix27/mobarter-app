@@ -24,7 +24,7 @@ func AddBvn(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "ResetPasswordInput",
+						Name: "User_AddBvnInput",
 						Fields: graphql.InputObjectConfigFieldMap{
 							"bvn":   app.InputString,
 							"token": app.InputString,
