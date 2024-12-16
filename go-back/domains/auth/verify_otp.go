@@ -57,8 +57,7 @@ func Auth_VerifyOtp(appState app.AppState) *graphql.Field {
 				Token: args["token"].(string),
 			}
 
-			err = crypto.ValidateToken(dto.Token, dto.Otp)
-			if err != nil {
+			if crypto.ValidateToken(dto.Token, dto.Otp) {
 				return nil, errors.New("OTP is invalid")
 			}
 

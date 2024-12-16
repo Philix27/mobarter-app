@@ -44,7 +44,7 @@ INSERT INTO users (
   $1,
   $2
 )
-RETURNING id, wallets, first_name, last_name, dob, email, phone, hashed_password, created_at, updated_at
+RETURNING id, wallets, first_name, last_name, middle_name, dob, email, phone, hashed_password, created_at, updated_at
 `
 
 type User_CreateParams struct {
@@ -60,6 +60,7 @@ func (q *Queries) User_Create(ctx context.Context, arg User_CreateParams) (User,
 		&i.Wallets,
 		&i.FirstName,
 		&i.LastName,
+		&i.MiddleName,
 		&i.Dob,
 		&i.Email,
 		&i.Phone,
@@ -71,7 +72,7 @@ func (q *Queries) User_Create(ctx context.Context, arg User_CreateParams) (User,
 }
 
 const user_GetByEmail = `-- name: User_GetByEmail :one
-SELECT id, wallets, first_name, last_name, dob, email, phone, hashed_password, created_at, updated_at FROM users
+SELECT id, wallets, first_name, last_name, middle_name, dob, email, phone, hashed_password, created_at, updated_at FROM users
 WHERE email = $1 LIMIT 1
 `
 
@@ -83,6 +84,7 @@ func (q *Queries) User_GetByEmail(ctx context.Context, email string) (User, erro
 		&i.Wallets,
 		&i.FirstName,
 		&i.LastName,
+		&i.MiddleName,
 		&i.Dob,
 		&i.Email,
 		&i.Phone,
@@ -95,7 +97,7 @@ func (q *Queries) User_GetByEmail(ctx context.Context, email string) (User, erro
 
 const user_GetById = `-- name: User_GetById :one
 
-SELECT id, wallets, first_name, last_name, dob, email, phone, hashed_password, created_at, updated_at FROM users
+SELECT id, wallets, first_name, last_name, middle_name, dob, email, phone, hashed_password, created_at, updated_at FROM users
 WHERE id = $1 LIMIT 1
 `
 
@@ -108,6 +110,7 @@ func (q *Queries) User_GetById(ctx context.Context, id int64) (User, error) {
 		&i.Wallets,
 		&i.FirstName,
 		&i.LastName,
+		&i.MiddleName,
 		&i.Dob,
 		&i.Email,
 		&i.Phone,
@@ -118,19 +121,53 @@ func (q *Queries) User_GetById(ctx context.Context, id int64) (User, error) {
 	return i, err
 }
 
+const user_PhoneNumber = `-- name: User_PhoneNumber :exec
+UPDATE users
+  SET phone = $2
+WHERE id = $1
+`
+
+type User_PhoneNumberParams struct {
+	ID    int64
+	Phone pgtype.Text
+}
+
+func (q *Queries) User_PhoneNumber(ctx context.Context, arg User_PhoneNumberParams) error {
+	_, err := q.db.Exec(ctx, user_PhoneNumber, arg.ID, arg.Phone)
+	return err
+}
+
+const user_ResetPassword = `-- name: User_ResetPassword :exec
+UPDATE users
+  SET hashed_password = $2
+WHERE id = $1
+`
+
+type User_ResetPasswordParams struct {
+	ID             int64
+	HashedPassword string
+}
+
+func (q *Queries) User_ResetPassword(ctx context.Context, arg User_ResetPasswordParams) error {
+	_, err := q.db.Exec(ctx, user_ResetPassword, arg.ID, arg.HashedPassword)
+	return err
+}
+
 const user_Update = `-- name: User_Update :exec
 UPDATE users
   SET first_name = $2,
   last_name = $3,
-  phone = $4
+  middle_name = $4,
+  dob = $5
 WHERE id = $1
 `
 
 type User_UpdateParams struct {
-	ID        int64
-	FirstName pgtype.Text
-	LastName  pgtype.Text
-	Phone     pgtype.Text
+	ID         int64
+	FirstName  pgtype.Text
+	LastName   pgtype.Text
+	MiddleName pgtype.Text
+	Dob        pgtype.Timestamp
 }
 
 func (q *Queries) User_Update(ctx context.Context, arg User_UpdateParams) error {
@@ -138,7 +175,8 @@ func (q *Queries) User_Update(ctx context.Context, arg User_UpdateParams) error 
 		arg.ID,
 		arg.FirstName,
 		arg.LastName,
-		arg.Phone,
+		arg.MiddleName,
+		arg.Dob,
 	)
 	return err
 }

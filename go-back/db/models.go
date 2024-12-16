@@ -475,6 +475,7 @@ type User struct {
 	Wallets        []string
 	FirstName      pgtype.Text
 	LastName       pgtype.Text
+	MiddleName     pgtype.Text
 	Dob            pgtype.Timestamp
 	Email          string
 	Phone          pgtype.Text

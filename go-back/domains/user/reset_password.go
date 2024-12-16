@@ -9,18 +9,12 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-type CreateDto struct {
-	Email string
-}
-
-func Create(ap app.AppState) *graphql.Field {
+func ResetPassword(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "User_CreateResponse",
+			Name: "User_ResetPassword",
 			Fields: graphql.Fields{
 				"message": app.String,
-				"email":   app.String,
-				"userId":  app.String,
 			},
 		}),
 
@@ -28,7 +22,7 @@ func Create(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "CreateUserInput",
+						Name: "ResetPasswordInput",
 						Fields: graphql.InputObjectConfigFieldMap{
 							"email":    app.InputString,
 							"password": app.InputString,
@@ -58,20 +52,23 @@ func Create(ap app.AppState) *graphql.Field {
 				return nil, errors.New("Could not hash password")
 			}
 
-			user, err := ap.DbQueries.User_Create(ap.Ctx, db.User_CreateParams{
-				Email:          email,
+			user, err := ap.DbQueries.User_GetByEmail(ap.Ctx, email)
+			if err != nil {
+				return nil, errors.New("User not found")
+			}
+
+			err = ap.DbQueries.User_ResetPassword(ap.Ctx, db.User_ResetPasswordParams{
+				ID:             user.ID,
 				HashedPassword: hash,
 			})
 
 			if err != nil {
 				println("Errox: " + err.Error())
-				return nil, errors.New("User account could not be created")
+				return nil, errors.New("Could not reset password")
 			}
 
 			return map[string]interface{}{
-				"message": "success ",
-				"email":   user.Email,
-				"userId":  user.ID,
+				"message": "success " + user.Email,
 			}, nil
 
 		},

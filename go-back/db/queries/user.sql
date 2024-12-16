@@ -22,7 +22,18 @@ RETURNING *;
 UPDATE users
   SET first_name = $2,
   last_name = $3,
-  phone = $4
+  middle_name = $4,
+  dob = $5
+WHERE id = $1;
+
+-- name: User_PhoneNumber :exec
+UPDATE users
+  SET phone = $2
+WHERE id = $1;
+
+-- name: User_ResetPassword :exec
+UPDATE users
+  SET hashed_password = $2
 WHERE id = $1;
 
 -- name: Kyc_UpdateCredentials :exec

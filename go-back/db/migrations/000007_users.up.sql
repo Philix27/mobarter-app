@@ -3,6 +3,7 @@ CREATE TABLE users (
   wallets TEXT[],
   first_name TEXT,
   last_name TEXT,
+  middle_name TEXT,
   dob TIMESTAMP,
   email TEXT  UNIQUE  NOT NULL,
   phone TEXT  UNIQUE,

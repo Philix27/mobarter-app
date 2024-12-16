@@ -40,7 +40,6 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		//! bank
 		"BankAccount_Create": bank.CreateBankAccount(appState),
 		"BankAccount_Delete": bank.DeleteBankAccount(appState),
-		"User_Create":        user.Create(appState),
 		//! Purchase Data & airtime
 		"PurchaseAirtime": airtime.PurchaseAirtime(appState),
 		"PurchaseData":    airtime.PurchaseData(appState),
@@ -62,6 +61,9 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"Auth_SendEmailOtp": auth.Auth_SendEmailOtp(appState),
 		"Auth_SendPhoneOtp": auth.Auth_SendPhoneOtp(appState),
 		"Auth_VerifyOtp":    auth.Auth_VerifyOtp(appState),
+		// ! User
+		"User_Create":        user.Create(appState),
+		"User_ResetPassword": user.ResetPassword(appState),
 	}
 
 }
