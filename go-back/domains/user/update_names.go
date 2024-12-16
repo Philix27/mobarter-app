@@ -14,7 +14,7 @@ import (
 func UpdatePersonalInfo(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "User_UpdatePersonalInfo",
+			Name: "User_UpdatePersonalInfoResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
 			},
@@ -24,7 +24,7 @@ func UpdatePersonalInfo(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "ResetPasswordInput",
+						Name: "User_UpdatePersonalInfoInput",
 						Fields: graphql.InputObjectConfigFieldMap{
 							"firstName": app.InputString,
 							"lastName":  app.InputString,

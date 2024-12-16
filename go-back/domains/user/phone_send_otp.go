@@ -11,10 +11,10 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-func AddNin(ap app.AppState) *graphql.Field {
+func PhoneSendOtp(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "User_AddNinResponse",
+			Name: "User_PhoneSendOtpResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
 			},
@@ -24,9 +24,9 @@ func AddNin(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "User_AddNinInput",
+						Name: "User_PhoneSendOtpInput",
 						Fields: graphql.InputObjectConfigFieldMap{
-							"nin":   app.InputString,
+							"bvn":   app.InputString,
 							"token": app.InputString,
 						},
 					},

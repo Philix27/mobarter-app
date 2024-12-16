@@ -14,7 +14,7 @@ import (
 func AddBvn(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "User_AddBvn",
+			Name: "User_AddBvnResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
 			},

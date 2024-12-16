@@ -12,7 +12,7 @@ import (
 func ResetPassword(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "User_ResetPassword",
+			Name: "User_ResetPasswordResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
 			},

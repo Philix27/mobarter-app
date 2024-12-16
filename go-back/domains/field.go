@@ -62,10 +62,12 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"Auth_SendPhoneOtp": auth.Auth_SendPhoneOtp(appState),
 		"Auth_VerifyOtp":    auth.Auth_VerifyOtp(appState),
 		// ! User
-		"User_Create":        user.Create(appState),
-		"User_ResetPassword": user.ResetPassword(appState),
-		"UserAddNin":         user.AddNin(appState),
-		"UserAddBvn":         user.AddBvn(appState),
+		"User_Create":         user.Create(appState),
+		"User_ResetPassword":  user.ResetPassword(appState),
+		"User_AddNin":         user.AddNin(appState),
+		"User_AddBvn":         user.AddBvn(appState),
+		"User_PhoneSendOtp":   user.PhoneSendOtp(appState),
+		"User_PhoneVerifyOtp": user.PhoneVerifyOtp(appState),
 	}
 
 }
