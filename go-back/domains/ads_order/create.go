@@ -1,4 +1,4 @@
-package user
+package orders
 
 import (
 	"errors"
@@ -12,7 +12,7 @@ import (
 func CreateAdvert(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "Advert_CreateResponse",
+			Name: "Order_CreateResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
 			},
@@ -22,7 +22,7 @@ func CreateAdvert(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "Advert_CreateInput",
+						Name: "Order_CreateInput",
 						Fields: graphql.InputObjectConfigFieldMap{
 							"token":    app.InputString,
 							"password": app.InputString,

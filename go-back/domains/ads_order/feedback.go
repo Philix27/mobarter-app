@@ -1,4 +1,4 @@
-package user
+package orders
 
 import (
 	"errors"
@@ -11,10 +11,10 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-func OrderFeedback(ap app.AppState) *graphql.Field {
+func Feedback(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "User_UpdatePersonalInfoResponse",
+			Name: "Order_FeedbackResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
 			},
@@ -24,12 +24,11 @@ func OrderFeedback(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "User_UpdatePersonalInfoInput",
+						Name: "Order_FeedbackInput",
 						Fields: graphql.InputObjectConfigFieldMap{
-							"firstName": app.InputString,
-							"lastName":  app.InputString,
-							"dob":       app.InputString,
-							"token":     app.InputString,
+							"token":   app.InputString,
+							"comment": app.InputString,
+							"rating":  app.InputString,
 						},
 					},
 				),

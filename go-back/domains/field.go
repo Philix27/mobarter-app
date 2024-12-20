@@ -3,6 +3,8 @@ package field
 import (
 	"mobarter/app"
 	"mobarter/domains/admin"
+	orders "mobarter/domains/ads_order"
+	"mobarter/domains/advert"
 	"mobarter/domains/airtime"
 	"mobarter/domains/auth"
 	"mobarter/domains/bank"
@@ -25,6 +27,12 @@ func QueryFields(appState app.AppState) graphql.Fields {
 		"Transactions_GetOne":  GetOneTransactions(appState),
 		"Kyc_GetLevel":         kyc.Kyc_GetLevel(appState),
 		"Airtime_GetDataPlans": airtime.GetDataPlans(appState),
+		//! Adverts
+		"Advert_GetAll": advert.GetAllAdvert(appState),
+		"Advert_GetOne": advert.GetOne(appState),
+		//! Orders
+		"Orders_GetAll": orders.GetAll(appState),
+		"Orders_GetOne": orders.GetOne(appState),
 		//! Admin
 		"Admin_GetBlockedAccounts":  admin.GetBlockedAccounts(appState),
 		"Admin_GetUserBankAccounts": admin.GetUserBankAccounts(appState),
@@ -61,6 +69,15 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"Auth_SendEmailOtp": auth.Auth_SendEmailOtp(appState),
 		"Auth_SendPhoneOtp": auth.Auth_SendPhoneOtp(appState),
 		"Auth_VerifyOtp":    auth.Auth_VerifyOtp(appState),
+		// ! Orders
+		"Orders_CreateAdvert": orders.CreateAdvert(appState),
+		"Orders_Feedback":     orders.Feedback(appState),
+		"Orders_Close":        orders.Close(appState),
+		"Orders_UpdateStatus": orders.UpdateStatus(appState),
+		// ! Advert
+		"Advert_Create":       advert.Create(appState),
+		"Advert_Delete":       advert.DeleteAd(appState),
+		"Advert_UpdateStatus": advert.UpdateStatus(appState),
 		// ! User
 		"User_Create":         user.Create(appState),
 		"User_ResetPassword":  user.ResetPassword(appState),

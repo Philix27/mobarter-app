@@ -1,4 +1,4 @@
-package user
+package advert
 
 import (
 	"errors"
@@ -14,7 +14,7 @@ import (
 var advertStatus = &graphql.InputObjectFieldConfig{
 	Type: graphql.NewEnum(
 		graphql.EnumConfig{
-			Name: "AdvertPaymentMethods",
+			Name: "AdvertStatus",
 			Values: graphql.EnumValueConfigMap{
 				"UP": &graphql.EnumValueConfig{
 					Value: "UP",

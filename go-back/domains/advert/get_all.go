@@ -1,4 +1,4 @@
-package user
+package advert
 
 import (
 	"mobarter/app"

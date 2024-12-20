@@ -1,4 +1,4 @@
-package user
+package orders
 
 import (
 	"errors"
@@ -11,10 +11,10 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-func AddNin(ap app.AppState) *graphql.Field {
+func Close(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "User_AddNinResponse",
+			Name: "Order_CloseResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
 			},
@@ -24,10 +24,10 @@ func AddNin(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "User_AddNinInput",
+						Name: "Order_CloseInput",
 						Fields: graphql.InputObjectConfigFieldMap{
-							"nin":   app.InputString,
-							"token": app.InputString,
+							"token":   app.InputString,
+							"orderId": app.InputString,
 						},
 					},
 				),

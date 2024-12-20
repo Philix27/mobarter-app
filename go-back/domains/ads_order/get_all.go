@@ -1,4 +1,4 @@
-package user
+package orders
 
 import (
 	"mobarter/app"
@@ -6,28 +6,40 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-func UserInfo(appState app.AppState) *graphql.Field {
+var orderStatus = &graphql.InputObjectFieldConfig{
+	Type: graphql.NewEnum(
+		graphql.EnumConfig{
+			Name: "OrderStatus",
+			Values: graphql.EnumValueConfigMap{
+				"COMPLETED": &graphql.EnumValueConfig{
+					Value: "COMPLETED",
+				},
+				"PENDING": &graphql.EnumValueConfig{
+					Value: "PENDING",
+				},
+				"APPEAL": &graphql.EnumValueConfig{
+					Value: "APPEAL",
+				},
+			},
+		},
+	),
+}
+
+func GetAll(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "User_GetInfoResponse",
+			Name: "Order_GetAllResponse",
 			Fields: graphql.Fields{
-				"message":       app.String,
-				"walletAddress": app.String,
-				"firstName":     app.String,
-				"lastName":      app.String,
-				"id":            app.String,
+				"message": app.String,
 			},
 		}),
-
 		Args: graphql.FieldConfigArgument{
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "GetUserInput",
+						Name: "Order_GetAllInput",
 						Fields: graphql.InputObjectConfigFieldMap{
-							"walletAddress": &graphql.InputObjectFieldConfig{
-								Type: graphql.NewNonNull(graphql.Int),
-							},
+							"status": orderStatus,
 						},
 					},
 				),

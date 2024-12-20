@@ -1,4 +1,4 @@
-package user
+package advert
 
 import (
 	"errors"
@@ -9,7 +9,7 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-func CreateAdvert(ap app.AppState) *graphql.Field {
+func Create(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
 			Name: "Advert_CreateResponse",

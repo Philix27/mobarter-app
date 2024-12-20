@@ -1,4 +1,4 @@
-package user
+package advert
 
 import (
 	"errors"
@@ -14,7 +14,7 @@ import (
 func DeleteAd(ap app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "Advert_DeleteAdsResponse",
+			Name: "Advert_DeleteResponse",
 			Fields: graphql.Fields{
 				"message": app.String,
 			},
@@ -24,7 +24,7 @@ func DeleteAd(ap app.AppState) *graphql.Field {
 			"input": &graphql.ArgumentConfig{
 				Type: graphql.NewInputObject(
 					graphql.InputObjectConfig{
-						Name: "Advert_DeleteAdInput",
+						Name: "Advert_DeleteInput",
 						Fields: graphql.InputObjectConfigFieldMap{
 							"token":  app.InputString,
 							"adId":   app.InputString,
