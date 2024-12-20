@@ -10,6 +10,7 @@ import (
 	"mobarter/domains/bank"
 	"mobarter/domains/kyc"
 	"mobarter/domains/p2p"
+	"mobarter/domains/transactions"
 	"mobarter/domains/user"
 
 	"github.com/graphql-go/graphql"
@@ -22,11 +23,12 @@ func QueryFields(appState app.AppState) graphql.Fields {
 		"User_GetInfo":         user.UserInfo(appState),
 		"GetBuyers":            p2p.GetBuyers(appState),
 		"GetP2PSellers":        p2p.GetP2PSellers(appState),
-		"CountryList":          CountryList(appState),
-		"Transactions_GetAll":  GetAllTransactions(appState),
-		"Transactions_GetOne":  GetOneTransactions(appState),
 		"Kyc_GetLevel":         kyc.Kyc_GetLevel(appState),
 		"Airtime_GetDataPlans": airtime.GetDataPlans(appState),
+		"CountryList":          CountryList(appState),
+		//! transactions
+		"Transactions_GetAll": transactions.GetAll(appState),
+		"Transactions_GetOne": transactions.GetOne(appState),
 		//! Adverts
 		"Advert_GetAll": advert.GetAllAdvert(appState),
 		"Advert_GetOne": advert.GetOne(appState),
