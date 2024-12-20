@@ -10,12 +10,21 @@ import (
 func CountryList(appState app.AppState) *graphql.Field {
 	return &graphql.Field{
 		Type: graphql.NewObject(graphql.ObjectConfig{
-			Name: "CountryResponse",
+			Name: "User_CreateResponse",
 			Fields: graphql.Fields{
-				"name": String,
-				"flag": String,
+				"name": app.String,
+				"flag": app.String,
 			},
 		}),
+		Args: graphql.FieldConfigArgument{
+			"input": &graphql.ArgumentConfig{
+				Type: graphql.NewInputObject(
+					graphql.InputObjectConfig{
+						Name: "CountryInput",
+					},
+				),
+			},
+		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			fmt.Println("Hit country list")
 			return map[string]interface{}{
