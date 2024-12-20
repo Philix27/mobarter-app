@@ -10,6 +10,7 @@ import (
 	"mobarter/domains/bank"
 	"mobarter/domains/kyc"
 	"mobarter/domains/p2p"
+	"mobarter/domains/support"
 	"mobarter/domains/transactions"
 	"mobarter/domains/user"
 
@@ -32,6 +33,9 @@ func QueryFields(appState app.AppState) graphql.Fields {
 		//! Adverts
 		"Advert_GetAll": advert.GetAllAdvert(appState),
 		"Advert_GetOne": advert.GetOne(appState),
+		// ! Support
+		"Support_GetAllMessages": support.GetAllMessages(appState),
+		"Support_GetIssueTopics": support.GetIssueTopics(appState),
 		//! Orders
 		"Orders_GetAll": orders.GetAll(appState),
 		"Orders_GetOne": orders.GetOne(appState),
@@ -76,6 +80,8 @@ func MutationsFields(appState app.AppState) graphql.Fields {
 		"Orders_Feedback":     orders.Feedback(appState),
 		"Orders_Close":        orders.Close(appState),
 		"Orders_UpdateStatus": orders.UpdateStatus(appState),
+		// ! Support
+		"Support_SendMessage": support.SendMessage(appState),
 		// ! Advert
 		"Advert_Create":       advert.Create(appState),
 		"Advert_Delete":       advert.DeleteAd(appState),
