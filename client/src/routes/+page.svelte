@@ -4,7 +4,7 @@
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { globalStore } from 'lib/store';
-
+	export const prerender = 'auto';
 	$: accountAddress = $account.address;
 	// let accountAddress = $state($account.address);
 	$: isMiniPay = false;

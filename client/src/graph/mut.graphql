@@ -1,81 +1,81 @@
-query getDataPlans($input: GetDataPlansInput) {
-	Airtime_GetDataPlans(input: $input) {
-		dataPlans {
-			plan
-			network
-			amount
-			id
-		}
-	}
-}
+# query getDataPlans($input: GetDataPlansInput) {
+# 	Airtime_GetDataPlans(input: $input) {
+# 		dataPlans {
+# 			plan
+# 			network
+# 			amount
+# 			id
+# 		}
+# 	}
+# }
 
-mutation kycVerifyBvn($input: Kyc_VerifyBvnInput) {
-	Kyc_VerifyBvn(input: $input) {
-		message
-	}
-}
+# mutation kycVerifyBvn($input: Kyc_VerifyBvnInput) {
+# 	Kyc_VerifyBvn(input: $input) {
+# 		message
+# 	}
+# }
 
-mutation kycVerifyNin($input: Kyc_VerifyNinInput) {
-	Kyc_VerifyNin(input: $input) {
-		message
-	}
-}
+# mutation kycVerifyNin($input: Kyc_VerifyNinInput) {
+# 	Kyc_VerifyNin(input: $input) {
+# 		message
+# 	}
+# }
 
-mutation purchaseData($input: PurchaseDataInput) {
-	PurchaseData(input: $input) {
-		message
-	}
-}
+# mutation purchaseData($input: PurchaseDataInput) {
+# 	PurchaseData(input: $input) {
+# 		message
+# 	}
+# }
 
-mutation bankAccountCreate($input: CreateBankAccountInput) {
-	BankAccount_Create(input: $input) {
-		message
-	}
-}
+# mutation bankAccountCreate($input: CreateBankAccountInput) {
+# 	BankAccount_Create(input: $input) {
+# 		message
+# 	}
+# }
 
-mutation bankAccountDelete($input: DeleteBankAccountInput) {
-	BankAccount_Delete(input: $input) {
-		message
-	}
-}
+# mutation bankAccountDelete($input: DeleteBankAccountInput) {
+# 	BankAccount_Delete(input: $input) {
+# 		message
+# 	}
+# }
 
-mutation purchaseAirtime($input: PurchaseAirtimeInput) {
-	PurchaseAirtime(input: $input) {
-		message
-	}
-}
+# mutation purchaseAirtime($input: PurchaseAirtimeInput) {
+# 	PurchaseAirtime(input: $input) {
+# 		message
+# 	}
+# }
 
-query getP2pSellers($input: GetSellersInput) {
-	GetP2PSellers(input: $input) {
-		name
-		amount
-		rate
-	}
-}
+# query getP2pSellers($input: GetSellersInput) {
+# 	GetP2PSellers(input: $input) {
+# 		name
+# 		amount
+# 		rate
+# 	}
+# }
 
-query getP2pBuyers($input: GetBuyersInput) {
-	GetBuyers(input: $input) {
-		accountNo
-		accountName
-	}
-}
+# query getP2pBuyers($input: GetBuyersInput) {
+# 	GetBuyers(input: $input) {
+# 		accountNo
+# 		accountName
+# 	}
+# }
 
-query getUser($input: GetUserInput) {
-	User_GetInfo(input: $input) {
-		message
-		walletAddress
-		firstName
-		lastName
-		id
-	}
-}
+# query getUser($input: GetUserInput) {
+# 	User_GetInfo(input: $input) {
+# 		message
+# 		walletAddress
+# 		firstName
+# 		lastName
+# 		id
+# 	}
+# }
 
-mutation createUser($input: CreateUserInput) {
-	User_Create(input: $input) {
-		message
-		lastName
-		walletAddress
-		firstName
-		id
-	}
-}
+# mutation createUser($input: CreateUserInput) {
+# 	User_Create(input: $input) {
+# 		message
+# 		lastName
+# 		walletAddress
+# 		firstName
+# 		id
+# 	}
+# }
